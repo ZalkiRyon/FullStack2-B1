@@ -1,1 +1,12 @@
-// Página de detalle de producto
+import React from 'react'
+
+function ProductPage() {
+  return (
+    <div>
+      Producto
+    </div>
+  )
+}
+
+export default ProductPage
+
