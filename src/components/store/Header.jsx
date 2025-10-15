@@ -1,5 +1,5 @@
 import Navbar from "./Navbar";
-import CarritoHeader from "./CarritoHeader";
+import CarritoHeader from "../store/CarritoHeader";
 import  icono  from "../../assets/img/icono.png";
 
 const Header = () => {
