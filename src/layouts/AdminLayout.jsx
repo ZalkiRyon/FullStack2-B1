@@ -1,13 +1,15 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import React from "react";
+import { Outlet } from "react-router-dom";
 
 const AdminLayout = () => {
   return (
     <>
-    {/* Sidebar aqui */}
-      <Outlet />
+      {/* Sidebar aqui */}
+      <main>
+        <Outlet />
+      </main>
     </>
-  )
-}
+  );
+};
 
-export default AdminLayout
+export default AdminLayout;
