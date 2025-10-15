@@ -3,7 +3,7 @@ import  carrito  from "../../assets/img/cart-icon.svg";
 
 const CarritoHeader = ({ itemCount }) => {
   return (
-    <Link to="/carrito" className="carrito-container d-flex align-items-center">
+    <Link to="/carrito" className="carrito-container nav-link-base d-flex align-items-center">
       <div>
         <img src={carrito} alt="Logo carrito de compras" height="25" />
       </div>

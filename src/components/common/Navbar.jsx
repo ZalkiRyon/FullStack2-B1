@@ -3,21 +3,59 @@ import { NavLink } from "react-router-dom";
 const Navbar = () => {
   return (
     <nav>
-      <ul class="nav justify-content-center">
-        <li class="nav-item">
-          <NavLink to="/">Inicio</NavLink>
+      <ul className="nav justify-content-center">
+        <li className="nav-item">
+          <NavLink
+            to="/"
+            // Se le entrega un parametro que es propio de la libreria
+            // reconoce si se encuentra activo donde estamos posicionados cambia el color
+            // mejorando asi la UX indicandole al usuario donde se encuentra
+            className={({ isActive }) =>
+              isActive ? "nav-link-base active-link" : "nav-link-base"
+            }
+          >
+            Inicio
+          </NavLink>
         </li>
-        <li class="nav-item">
-          <NavLink to="/productos">Productos</NavLink>
+        <li className="nav-item">
+          <NavLink
+            to="/productos"
+            className={({ isActive }) =>
+              isActive ? "nav-link-base active-link" : "nav-link-base"
+            }
+          >
+            Productos
+          </NavLink>
         </li>
-        <li class="nav-item">
-          <NavLink to="/nosotros">Nosotros</NavLink>
+        <li className="nav-item">
+          <NavLink
+            to="/nosotros"
+            className={({ isActive }) =>
+              isActive ? "nav-link-base active-link" : "nav-link-base"
+            }
+          >
+            Nosotros
+          </NavLink>
         </li>
-        <li class="nav-item">
-          <NavLink to="/blogs">Blogs</NavLink>
+        <li className="nav-item">
+          <NavLink
+            to="/blogs"
+            className={({ isActive }) =>
+              isActive ? "nav-link-base active-link" : "nav-link-base"
+            }
+          >
+            Blogs
+          </NavLink>
         </li>
-        <li class="nav-item">
-          <NavLink to="/contacto">Contacto</NavLink>
+        <li className="nav-item">
+          <NavLink
+            to="/contacto"
+            className={({ isActive }) =>
+              isActive ? "nav-link-base active-link" : "nav-link-base"
+            }
+          >
+            Contacto
+          </NavLink>
         </li>
       </ul>
     </nav>

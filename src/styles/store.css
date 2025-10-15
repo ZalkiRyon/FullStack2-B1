@@ -1,1 +1,43 @@
 /* Estilos para la sección de tienda */
+
+/* Header específico de tienda */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Navegación de sesión */
+.header > nav > ul > li > .nav-link-base,
+.carrito-container,
+.navSesion > ul > li > .nav-link-base,
+.breadcrumbProductoDetalle > ul > li > .nav-link-base {
+  color: var(--primary-text);
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.navSesion > ul > li > .nav-link-base,
+.breadcrumbProductoDetalle > ul > li > .nav-link-base {
+  font-weight: 500;
+  margin: 10px -15px -15px 0px;
+}
+.breadcrumbProductoDetalle > ul > li > .nav-link-base {
+  color: var(--secundary-text);
+}
+
+.header > nav > ul > li > .nav-link-base:hover,
+.carrito-container:hover,
+.navSesion > ul > li > .nav-link-base:hover,
+.breadcrumbProductoDetalle > ul > li > .nav-link-base:hover {
+  color: var(--emerald);
+}
+
+.nav-link-base.active-link:visited {
+    color: var(--emerald);
+}

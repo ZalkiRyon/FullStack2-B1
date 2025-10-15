@@ -4,8 +4,8 @@ import  icono  from "../../assets/img/icono.png";
 
 const Header = () => {
   return (
-    <header class="header">
-      <div class="d-flex align-items-center">
+    <header className="header">
+      <div className="d-flex align-items-center">
         <div>
           <img src={icono} alt="Logo de Huerto Hogar" width="150" />
         </div>
