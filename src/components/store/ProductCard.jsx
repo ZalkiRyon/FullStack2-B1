@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { productImages } from "../../utils/dataProductos";
+import PrimaryButton from "../common/PrimaryButton";
 // id -> number
 // name -> string
 // price -> number
@@ -41,7 +42,7 @@ const ProductCard = ({
         <Link
           to={`/producto/${id}`}
           onClick={onClick}
-          className="card-link-wrapper"
+          className="cardLink"
         >
           <div className="containerImgProductos">
             <img
@@ -50,13 +51,11 @@ const ProductCard = ({
               className="imgProductos"
             />
           </div>
-          <h4>{name}</h4>
-          <span>${price}</span>
+          <h4 className="nameCardProductos">{name}</h4>
+          <span className="priceCardProductos">${price}</span>
         </Link>
 
-        <PrimaryButton onClick={onClickButton} className="btnAddProductos">
-          Añadir
-        </PrimaryButton>
+        <PrimaryButton onClick={onClickButton} width="auto" text={"Añadir"} />
       </article>
     );
   }

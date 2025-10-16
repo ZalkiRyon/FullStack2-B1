@@ -18,7 +18,8 @@
 .header > nav > ul > li > .nav-link-base,
 .carrito-container,
 .navSesion > ul > li > .nav-link,
-.breadcrumbProductoDetalle > ul > li > .nav-link-base {
+.breadcrumbProductoDetalle > ul > li > .nav-link-base,
+.cardLink {
   color: var(--primary-text);
   text-decoration: none;
   margin: 0 15px;
@@ -38,7 +39,8 @@
 .header > nav > ul > li > .nav-link-base:hover,
 .carrito-container:hover,
 .navSesion > ul > li > .nav-link:hover,
-.breadcrumbProductoDetalle > ul > li > .nav-link-base:hover {
+.breadcrumbProductoDetalle > ul > li > .nav-link-base:hover,
+.cardLink {
   color: var(--emerald);
 }
 
@@ -205,4 +207,70 @@ footer {
   gap: 30px;
   width: 100%;
   margin-top: 1.5rem;
+}
+
+/* ---------------------------------------------------------------------- */
+/*              Estilos solo para pagina de catalogo                    */
+/* ---------------------------------------------------------------------- */
+.catalogPageContainer {
+  margin-top: 2rem;
+}
+
+.sectionTodosLosProductos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto auto;
+  column-gap: 2rem;
+  row-gap: 2rem;
+}
+.sectionProductos h3 {
+  margin-right: 2rem;
+}
+.sectionProductos label {
+  font-family: var(--fuente-principal);
+  margin-right: 2rem;
+}
+
+.filterProductos {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: var(--fuente-principal);
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+}
+
+.cardProductos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.cardProductos .nameCardProductos {
+  margin: 0.5rem 0;
+}
+
+.cardProductos .priceCardProductos {
+  color: var(--secundary-text);
+  margin: 0.5rem 0;
+}
+.containerImgProductos {
+  background-color: var(--light-bg);
+  width: 100%;
+  height: 150px;
+}
+.containerImgProductos .imgProductos {
+  border-radius: 8px;
+}
+
+.imgProductos {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
