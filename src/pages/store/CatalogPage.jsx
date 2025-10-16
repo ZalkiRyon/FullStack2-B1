@@ -16,7 +16,7 @@ function CatalogPage() {
 
   console.log(productos);
   return (
-    <div className="catalogPageContainer">
+    <div className="mainPage">
       <h3 className="text-center">Productos</h3>
       <label for="filtroCategoria">Filtrar por categoría:</label>
       <select id="filtroCategoria" className="filterProductos"></select>

@@ -6,10 +6,10 @@ import vision from '../../assets/img/vision.jpg';
 
 const AboutPage = () => {
   return (
-    <main className="mainNosotros">
+    <main className="mainPage">
     <h1 className='titleAbout'>Sobre Huerto Hogar</h1>
 
-    <article>
+    <article className='articleAbout'>
       <div className="containerImgNosotros">
         <img
           alt="Imagen Huerto Hogar"
@@ -32,7 +32,7 @@ const AboutPage = () => {
       </div>
     </article>
 
-    <article>
+    <article className='articleAbout'>
       <div>
         <h3 className='subtitleAbout'>Nuestra misión</h3>
         <p>
@@ -54,7 +54,7 @@ const AboutPage = () => {
       </div>
     </article>
 
-    <article>
+    <article className='articleAbout'>
       <div className="containerImgNosotros">
         <img
           alt="Imagen nuestra vision"

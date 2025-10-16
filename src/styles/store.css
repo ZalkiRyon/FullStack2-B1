@@ -212,7 +212,7 @@ footer {
 /* ---------------------------------------------------------------------- */
 /*              Estilos solo para pagina de catalogo                    */
 /* ---------------------------------------------------------------------- */
-.catalogPageContainer, .mainNosotros {
+.mainPage {
   margin-top: 2rem;
 }
 
@@ -279,25 +279,25 @@ footer {
 /* ---------------------------------------------------------------------- */
 
 /* Páginas nosotros y blog */
-.mainNosotros > article,
-.mainBlog > article {
+.mainPage > .articleBlog,
+.mainPage > .articleAbout {
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
 }
 
-.mainNosotros .titleAbout{
+.titleAbout{
   font-size: 2.5rem;
   margin-bottom: 2rem;
   font-weight: 700;
 }
-.mainNosotros .subtitleAbout {
+.subtitleAbout {
   color: var(--primary-text);
   margin-bottom: 1rem;
 }
 
-.mainBlog > article {
+.mainPage > .articleBlog {
   background-color: white;
   padding: 2rem;
   border-radius: 10px;
@@ -308,7 +308,7 @@ footer {
   align-items: center;
 }
 
-.mainNosotros > article > div {
+.mainPage > .articleAbout > div {
   width: 45%;
   text-align: justify;
   color: var(--secundary-text);
