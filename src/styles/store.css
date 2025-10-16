@@ -212,7 +212,7 @@ footer {
 /* ---------------------------------------------------------------------- */
 /*              Estilos solo para pagina de catalogo                    */
 /* ---------------------------------------------------------------------- */
-.catalogPageContainer {
+.catalogPageContainer, .mainNosotros {
   margin-top: 2rem;
 }
 
@@ -273,4 +273,72 @@ footer {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+/* ---------------------------------------------------------------------- */
+/*              Estilos pagina nosotros y blogs                           */
+/* ---------------------------------------------------------------------- */
+
+/* Páginas nosotros y blog */
+.mainNosotros > article,
+.mainBlog > article {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.mainNosotros .titleAbout{
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+.mainNosotros .subtitleAbout {
+  color: var(--primary-text);
+  margin-bottom: 1rem;
+}
+
+.mainBlog > article {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.mainNosotros > article > div {
+  width: 45%;
+  text-align: justify;
+  color: var(--secundary-text);
+}
+
+.containerImgNosotros,
+.containerImgBlogMin {
+  height: 400px;
+  width: max-content;
+  background-color: var(--light-bg);
+}
+
+.imgNosotros,
+.imgBlogMin {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  min-height: 250px;
+  border-radius: 10px;
+}
+
+.imgBlogMax {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+
+.imgAutor {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
 }

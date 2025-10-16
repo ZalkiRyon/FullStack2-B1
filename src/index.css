@@ -35,6 +35,6 @@ main {
 }
 
 .mainContentWrapper {
-  margin: 0 4rem; /* Aplica el margen a los lados */
+  margin: 0 4rem 4rem 4rem; /* Aplica el margen a los lados */
   flex-grow: 1; /* Esto es necesario para que ocupe todo el espacio vertical en el layout */
 }
