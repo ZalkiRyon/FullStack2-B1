@@ -7,9 +7,11 @@ const StoreLayout = () => {
   return (
     <>
       <Header />
+
       <div className='mainContentWrapper'>
         <Outlet />
       </div>
+      
     </>
   )
 }

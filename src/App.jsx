@@ -80,6 +80,7 @@ function App() {
   useEffect(() => {
     initializeDataProductos();
   }, [])
+  
   return <RouterProvider router={router} />;
 }
 
