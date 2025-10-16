@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/store/HomePage";
 import StoreLayout from "./layouts/StoreLayout";
@@ -12,6 +12,7 @@ import RegisterPage from "./pages/store/RegisterPage";
 import AdminLayout from "./layouts/AdminLayout";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import NotFoundPage from "./pages/common/NotFoundPage";
+import { initializeDataProductos } from "./utils/dataProductos";
 
 // Ocuparemos un createBrowserRouter de react-router-dom para mantener un orden dentro del archivo
 const router = createBrowserRouter([
@@ -76,6 +77,9 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  useEffect(() => {
+    initializeDataProductos();
+  }, [])
   return <RouterProvider router={router} />;
 }
 

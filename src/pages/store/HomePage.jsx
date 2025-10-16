@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import principalImg from "../../assets/img/img-principal.jpg";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import Footer from "../../components/store/Footer";
+import { getProductosFromStorage } from "../../utils/dataProductos";
+import ProductCard from "../../components/store/ProductCard";
 
 const HomePage = () => {
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    let productosDestacados = getProductosFromStorage();
+
+    setProductos(productosDestacados.slice(0, 3));
+  }, []);
+
   return (
     <div>
       <nav className="navSesion">
@@ -47,9 +57,24 @@ const HomePage = () => {
       </section>
 
       <section className="seccion-productos">
-        {/* Componente para productos destacados, por ejemplo: */}
         <h2>Productos Destacados</h2>
-        <div>{/* Aquí iría el componente de renderizado de productos */}</div>
+        <div className="productsListContainer">
+          {productos.length > 0 ? (
+            productos.map((produc) => (
+              <ProductCard
+                key={produc.id}
+                id={produc.id}
+                name={produc.nombre}
+                price={produc.precio}
+                category={produc.categoria}
+                image={produc.imagen}
+                variant="default"
+              />
+            ))
+          ) : (
+            <div>No hay productos para mostrar</div>
+          )}
+        </div>
       </section>
 
       <Footer />
