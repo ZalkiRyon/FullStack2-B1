@@ -1,12 +1,15 @@
-import React from 'react'
+import React from "react";
 
 const AdminDashboard = () => {
-  return (
-    <div>
-      ADMINDASHBOARD
-    </div>
-  )
-}
+  // Placeholder para el nombre del usuario
+  const userName = "{Nombre Usuario}";
 
-export default AdminDashboard
+  return (
+    <div className="adminDashboardContainer">
+      <h1 className="adminWelcomeTitle">¡HOLA {userName}!</h1>
+    </div>
+  );
+};
+
+export default AdminDashboard;
 

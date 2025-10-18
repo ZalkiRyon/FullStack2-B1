@@ -13,7 +13,7 @@ const LoginPage = () => {
             className="imgLogoEmpresaLogin"
           />
         </div>
-        <h2 className="nombreEmpresaLogin">{"{Nombre empresa}"}</h2>
+        <h2 className="nombreEmpresaLogin">{"Huerto Hogar"}</h2>
       </section>
 
       <section className="sectionLoginForm">

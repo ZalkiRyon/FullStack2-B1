@@ -11,6 +11,15 @@ import LoginPage from "./pages/store/LoginPage";
 import RegisterPage from "./pages/store/RegisterPage";
 import AdminLayout from "./layouts/AdminLayout";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import OrdenesPage from "./pages/admin/OrdenesPage";
+import InventarioPage from "./pages/admin/InventarioPage";
+import ReportesPage from "./pages/admin/ReportesPage";
+import EmpleadosPage from "./pages/admin/EmpleadosPage";
+import UserManagement from "./pages/admin/UserManagement";
+import ConfiguracionesPage from "./pages/admin/ConfiguracionesPage";
+import PerfilPage from "./pages/admin/PerfilPage";
+import BuscarPage from "./pages/admin/BuscarPage";
+import AyudaPage from "./pages/admin/AyudaPage";
 import NotFoundPage from "./pages/common/NotFoundPage";
 import { initializeDataProductos } from "./utils/dataProductos";
 
@@ -66,6 +75,42 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <AdminDashboard />,
+      },
+      {
+        path: "ordenes",
+        element: <OrdenesPage />,
+      },
+      {
+        path: "inventario",
+        element: <InventarioPage />,
+      },
+      {
+        path: "reportes",
+        element: <ReportesPage />,
+      },
+      {
+        path: "empleados",
+        element: <EmpleadosPage />,
+      },
+      {
+        path: "usuarios",
+        element: <UserManagement />,
+      },
+      {
+        path: "configuraciones",
+        element: <ConfiguracionesPage />,
+      },
+      {
+        path: "perfil",
+        element: <PerfilPage />,
+      },
+      {
+        path: "buscar",
+        element: <BuscarPage />,
+      },
+      {
+        path: "ayuda",
+        element: <AyudaPage />,
       },
     ],
   },
