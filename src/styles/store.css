@@ -401,3 +401,95 @@ footer {
   font-family: var(--fuente-principal);
   font-size: 1rem;
 }
+
+/* ---------------------------------------------------------------------- */
+/*              Estilos para la pagina de Login                           */
+/* ---------------------------------------------------------------------- */
+.loginPageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 2rem;
+}
+
+.sectionEmpresaLogin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 2rem;
+}
+
+.divLogoEmpresaLogin {
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.imgLogoEmpresaLogin {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nombreEmpresaLogin {
+  font-family: var(--fuente-encabezado);
+  font-size: 2rem;
+  color: var(--primary-text);
+  margin: 0;
+}
+
+.sectionLoginForm {
+  background-color: white;
+  padding: 2.5rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
+}
+
+.titleFormLogin {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  text-align: center;
+  color: var(--primary-text);
+}
+
+.formLogin {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.labelFormLogin {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--secundary-text);
+  font-size: 0.95rem;
+}
+
+.formInputLogin {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-family: var(--fuente-principal);
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.formInputLogin:focus {
+  outline: none;
+  border-color: var(--emerald);
+}
