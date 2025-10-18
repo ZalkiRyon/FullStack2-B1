@@ -195,3 +195,288 @@
   font-size: 1.1rem;
   line-height: 1.6;
 }
+
+/* ---------------------------------------------------------------------- */
+/*              Página de Inventario                                      */
+/* ---------------------------------------------------------------------- */
+.inventarioContainer {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Header del inventario */
+.inventarioHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--emerald);
+}
+
+.inventarioTitleSection {
+  flex: 1;
+}
+
+.inventarioTitle {
+  font-family: var(--fuente-encabezado);
+  font-size: 2rem;
+  color: var(--brown);
+  margin: 0 0 0.5rem 0;
+}
+
+.inventarioSubtitle {
+  color: var(--secundary-text);
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Sección de la tabla */
+.inventarioTableSection {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+.tableTitle {
+  font-family: var(--fuente-encabezado);
+  font-size: 1.5rem;
+  color: var(--primary-text);
+  margin: 0 0 1.5rem 0;
+}
+
+/* Filtros */
+.inventarioFilters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.searchBox {
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: var(--fuente-principal);
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--emerald);
+}
+
+.searchIcon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+.filterSelect {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: var(--fuente-principal);
+  font-size: 0.95rem;
+  background-color: white;
+  cursor: pointer;
+  min-width: 180px;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: var(--emerald);
+}
+
+.btnLimpiar {
+  padding: 0.75rem 1.5rem;
+  background-color: white;
+  color: var(--secundary-text);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: var(--fuente-principal);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btnLimpiar:hover {
+  background-color: var(--light-bg);
+  border-color: var(--secundary-text);
+}
+
+/* Tabla */
+.tableContainer {
+  overflow-x: auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.productosTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.productosTable thead {
+  background-color: var(--light-bg);
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.productosTable th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 700;
+  color: var(--primary-text);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.productosTable tbody tr {
+  border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.2s ease;
+}
+
+.productosTable tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.productosTable td {
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+/* Imagen del producto */
+.productoImagen {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+}
+
+/* Código */
+.productoCodigo {
+  font-weight: 600;
+  color: var(--primary-text);
+}
+
+/* Nombre */
+.productoNombre {
+  font-weight: 500;
+  color: var(--primary-text);
+}
+
+/* Precio */
+.productoPrecio {
+  font-weight: 700;
+  color: var(--emerald);
+  font-size: 1.05rem;
+}
+
+/* Badges */
+.categoriaBadge {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  background-color: #6c757d;
+  color: white;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.stockBadge {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+}
+
+.stockBajo {
+  background-color: #dc3545;
+}
+
+.stockMedio {
+  background-color: #ffc107;
+}
+
+.stockAlto {
+  background-color: #28a745;
+}
+
+/* Botones de acciones */
+.accionesButtons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.btnAccion {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btnVer {
+  border-color: #17a2b8;
+}
+
+.btnVer:hover {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btnEditar {
+  border-color: #ffc107;
+}
+
+.btnEditar:hover {
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.btnEliminar {
+  border-color: #dc3545;
+}
+
+.btnEliminar:hover {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+/* No resultados */
+.noResultados {
+  text-align: center;
+  padding: 2rem !important;
+  color: var(--secundary-text);
+  font-style: italic;
+}
