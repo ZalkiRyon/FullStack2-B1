@@ -12,11 +12,34 @@ const UserManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [rolFilter, setRolFilter] = useState("todos");
 
-  // Cargar usuarios al montar el componente
-  useEffect(() => {
+  // Función para cargar usuarios
+  const cargarUsuarios = () => {
     const usuariosStorage = getUsuariosFromStorage();
     setUsuarios(usuariosStorage);
     setFilteredUsuarios(usuariosStorage);
+  };
+
+  // Cargar usuarios al montar el componente
+  useEffect(() => {
+    cargarUsuarios();
+  }, []);
+
+  // Recargar usuarios cuando la página vuelva a estar visible
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        cargarUsuarios();
+      }
+    };
+
+    // Escuchar cuando volvemos a esta página
+    window.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('focus', cargarUsuarios);
+
+    return () => {
+      window.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('focus', cargarUsuarios);
+    };
   }, []);
 
   // Aplicar filtros
@@ -52,7 +75,7 @@ const UserManagement = () => {
 
   // Funciones placeholder para acciones
   const handleVer = (id) => {
-    console.log("Ver usuario:", id);
+    navigate(`/admin/usuario/${id}`);
   };
 
   const handleEditar = (id) => {
@@ -60,7 +83,7 @@ const UserManagement = () => {
   };
 
   const handleEliminar = (id) => {
-    console.log("Eliminar usuario:", id);
+    navigate(`/admin/eliminar-usuario/${id}`);
   };
 
   return (

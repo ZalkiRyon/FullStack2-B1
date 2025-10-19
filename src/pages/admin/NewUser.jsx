@@ -77,7 +77,7 @@ const NewUser = () => {
     const resultado = saveUsuarioToStorage(formData);
     
     if (resultado.success) {
-      alert(`Usuario creado exitosamente con ID: ${resultado.usuario.id}`);
+      alert(`Usuario creado exitosamente`);
       navigate("/admin/usuarios");
     } else {
       alert(`Error al crear usuario: ${resultado.error}`);
