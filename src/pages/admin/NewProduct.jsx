@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/common/PrimaryButton";
-import { getProductosFromStorage } from "../../utils/dataProductos";
+import { getProductosFromStorage, saveProductoToStorage } from "../../utils/dataProductos";
 import { PREFIJOS_CATEGORIA } from "../../utils/data";
 
 const NewProduct = () => {
@@ -32,10 +32,37 @@ const NewProduct = () => {
   // Manejar envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Datos del nuevo producto:", formData);
-    // Aquí se implementará la lógica para guardar en localStorage
-    // Por ahora, solo navegar de vuelta
-    // navigate("/admin/inventario");
+
+    // Validaciones
+    if (!formData.nombre.trim()) {
+      alert("El nombre del producto es obligatorio");
+      return;
+    }
+
+    if (!formData.categoria) {
+      alert("Debe seleccionar una categoría");
+      return;
+    }
+
+    if (parseInt(formData.precio) <= 0) {
+      alert("El precio debe ser mayor a 0");
+      return;
+    }
+
+    if (parseInt(formData.stock) < 0) {
+      alert("El stock no puede ser negativo");
+      return;
+    }
+
+    // Guardar producto
+    const resultado = saveProductoToStorage(formData);
+    
+    if (resultado.success) {
+      alert(`Producto creado exitosamente:\n${resultado.producto.nombre}\nID: ${resultado.producto.id}`);
+      navigate("/admin/inventario");
+    } else {
+      alert(`Error al crear producto: ${resultado.error}`);
+    }
   };
 
   return (
