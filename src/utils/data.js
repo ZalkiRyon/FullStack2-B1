@@ -142,64 +142,6 @@ export const usuarios = [
   },
 ];
 
-export const regionesComunas = {
-  "region-metropolitana": {
-    nombre: "Región Metropolitana",
-    comunas: [
-      { value: "santiago", text: "Santiago" },
-      { value: "las-condes", text: "Las Condes" },
-      { value: "maipu", text: "Maipú" },
-      { value: "providencia", text: "Providencia" },
-      { value: "vitacura", text: "Vitacura" },
-    ],
-  },
-  "region-valparaiso": {
-    nombre: "Región de Valparaíso",
-    comunas: [
-      { value: "valparaiso", text: "Valparaíso" },
-      { value: "vina-del-mar", text: "Viña del Mar" },
-      { value: "quilpue", text: "Quilpué" },
-      { value: "villa-alemana", text: "Villa Alemana" },
-    ],
-  },
-  "region-biobio": {
-    nombre: "Región del Biobío",
-    comunas: [
-      { value: "concepcion", text: "Concepción" },
-      { value: "talcahuano", text: "Talcahuano" },
-      { value: "chiguayante", text: "Chiguayante" },
-      { value: "san-pedro", text: "San Pedro de la Paz" },
-    ],
-  },
-  "region-maule": {
-    nombre: "Región del Maule",
-    comunas: [
-      { value: "talca", text: "Talca" },
-      { value: "curico", text: "Curicó" },
-      { value: "linares", text: "Linares" },
-      { value: "molina", text: "Molina" },
-    ],
-  },
-  "region-ohiggins": {
-    nombre: "Región de O'Higgins",
-    comunas: [
-      { value: "rancagua", text: "Rancagua" },
-      { value: "san-fernando", text: "San Fernando" },
-      { value: "rengo", text: "Rengo" },
-      { value: "machali", text: "Machalí" },
-    ],
-  },
-  "region-araucania": {
-    nombre: "Región de La Araucanía",
-    comunas: [
-      { value: "temuco", text: "Temuco" },
-      { value: "angol", text: "Angol" },
-      { value: "villarrica", text: "Villarrica" },
-      { value: "pucon", text: "Pucón" },
-    ],
-  },
-};
-
 export const regionesYComunas = {
   XV: {
     nombre: "Región de Arica y Parinacota",
