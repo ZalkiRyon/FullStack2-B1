@@ -425,6 +425,19 @@
   background-color: #28a745;
 }
 
+/* Badges de roles para usuarios */
+.rolAdmin {
+  background-color: #dc3545;
+}
+
+.rolVendedor {
+  background-color: #17a2b8;
+}
+
+.rolCliente {
+  background-color: #28a745;
+}
+
 /* Botones de acciones */
 .accionesButtons {
   display: flex;

@@ -19,6 +19,7 @@ import BuscarPage from "./pages/admin/BuscarPage";
 import AyudaPage from "./pages/admin/AyudaPage";
 import NotFoundPage from "./pages/common/NotFoundPage";
 import { initializeDataProductos } from "./utils/dataProductos";
+import { initializeDataUsuarios } from "./utils/data";
 
 // Ocuparemos un createBrowserRouter de react-router-dom para mantener un orden dentro del archivo
 const router = createBrowserRouter([
@@ -109,6 +110,7 @@ const router = createBrowserRouter([
 function App() {
   useEffect(() => {
     initializeDataProductos();
+    initializeDataUsuarios();
   }, [])
   
   return <RouterProvider router={router} />;

@@ -638,3 +638,19 @@ export const PREFIJOS_CATEGORIA = {
   Panadería: "PA",
   Snacks: "SN",
 };
+
+// Funciones helper para gestión de usuarios
+export const initializeDataUsuarios = () => {
+  if (!localStorage.getItem("ListaUsuarios")) {
+    console.log("Inicializando usuarios en localStorage...");
+    localStorage.setItem("ListaUsuarios", JSON.stringify(usuarios));
+  }
+};
+
+export const getUsuariosFromStorage = () => {
+  const storedUsers = localStorage.getItem("ListaUsuarios");
+  if (storedUsers) {
+    return JSON.parse(storedUsers);
+  }
+  return [];
+};
