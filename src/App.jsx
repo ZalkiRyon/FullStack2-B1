@@ -13,6 +13,7 @@ import AdminLayout from "./layouts/AdminLayout";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import InventarioPage from "./pages/admin/InventarioPage";
 import UserManagement from "./pages/admin/UserManagement";
+import NewUser from "./pages/admin/NewUser";
 import ConfiguracionesPage from "./pages/admin/ConfiguracionesPage";
 import PerfilPage from "./pages/admin/PerfilPage";
 import BuscarPage from "./pages/admin/BuscarPage";
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: "usuarios",
         element: <UserManagement />,
+      },
+      {
+        path: "nuevo-usuario",
+        element: <NewUser />,
       },
       {
         path: "configuraciones",

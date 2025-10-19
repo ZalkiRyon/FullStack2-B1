@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getUsuariosFromStorage } from "../../utils/data";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import UserFilters from "../../components/admin/UserFilters";
 import UserTable from "../../components/admin/UserTable";
 
 const UserManagement = () => {
+  const navigate = useNavigate();
   const [usuarios, setUsuarios] = useState([]);
   const [filteredUsuarios, setFilteredUsuarios] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -74,7 +76,7 @@ const UserManagement = () => {
         <PrimaryButton
           text="NUEVO USUARIO"
           width="auto"
-          onClick={() => console.log("Nuevo usuario")}
+          onClick={() => navigate("/admin/nuevo-usuario")}
         />
       </div>
 
