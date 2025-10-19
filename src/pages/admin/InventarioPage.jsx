@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { getProductosFromStorage } from "../../utils/dataProductos";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import ProductFilters from "../../components/admin/ProductFilters";
 import ProductTable from "../../components/admin/ProductTable";
 
 const InventarioPage = () => {
+  const navigate = useNavigate();
   const [productos, setProductos] = useState([]);
   const [filteredProductos, setFilteredProductos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -88,7 +90,7 @@ const InventarioPage = () => {
         <PrimaryButton
           text="NUEVO PRODUCTO"
           width="auto"
-          onClick={() => console.log("Nuevo producto")}
+          onClick={() => navigate("/admin/nuevo-producto")}
         />
       </div>
 

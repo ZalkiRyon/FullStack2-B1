@@ -12,6 +12,7 @@ import RegisterPage from "./pages/store/RegisterPage";
 import AdminLayout from "./layouts/AdminLayout";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import InventarioPage from "./pages/admin/InventarioPage";
+import NewProduct from "./pages/admin/NewProduct";
 import UserManagement from "./pages/admin/UserManagement";
 import NewUser from "./pages/admin/NewUser";
 import ConfiguracionesPage from "./pages/admin/ConfiguracionesPage";
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: "inventario",
         element: <InventarioPage />,
+      },
+      {
+        path: "nuevo-producto",
+        element: <NewProduct />,
       },
       {
         path: "usuarios",
