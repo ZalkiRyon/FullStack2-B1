@@ -293,7 +293,7 @@ const RegisterPage = () => {
           </div>
 
           {/* Botón de registro */}
-          <PrimaryButton text={"REGISTRAR"} />
+          <PrimaryButton text={"REGISTRAR"} type="submit" />
         </form>
       </section>
     </main>
