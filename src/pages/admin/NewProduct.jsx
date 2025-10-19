@@ -58,10 +58,17 @@ const NewProduct = () => {
     const resultado = saveProductoToStorage(formData);
     
     if (resultado.success) {
-      alert(`Producto creado exitosamente:\n${resultado.producto.nombre}\nID: ${resultado.producto.id}`);
+      const mensaje = `✓ Producto creado exitosamente\n\n` +
+                     `Nombre: ${resultado.producto.nombre}\n` +
+                     `ID: ${resultado.producto.id}\n` +
+                     `Categoría: ${resultado.producto.categoria}\n` +
+                     `Precio: $${resultado.producto.precio}\n` +
+                     `Stock: ${resultado.producto.stock} unidades\n\n` +
+                     `El producto ya está disponible en el inventario.`;
+      alert(mensaje);
       navigate("/admin/inventario");
     } else {
-      alert(`Error al crear producto: ${resultado.error}`);
+      alert(`✗ Error al crear producto\n\nDetalle: ${resultado.error}\n\nPor favor, intente nuevamente.`);
     }
   };
 

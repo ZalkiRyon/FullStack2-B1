@@ -146,14 +146,6 @@ export const saveProductoToStorage = (nuevoProducto) => {
       "Verduras organicas": "VR",
       "Productos organicos": "PO",
       "Productos lacteos": "PL",
-      "Cereales": "CE",
-      "Bebidas": "BE",
-      "Condimentos": "CO",
-      "Frutos secos": "FS",
-      "Carnes": "CA",
-      "Pescados": "PE",
-      "Panadería": "PA",
-      "Snacks": "SN",
     };
     
     // Contar cuántos productos hay de esta categoría

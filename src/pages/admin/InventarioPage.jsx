@@ -13,11 +13,34 @@ const InventarioPage = () => {
   const [categoriaFilter, setCategoriaFilter] = useState("todas");
   const [stockFilter, setStockFilter] = useState("todos");
 
-  // Cargar productos al montar el componente
-  useEffect(() => {
+  // Función para cargar productos
+  const cargarProductos = () => {
     const productosStorage = getProductosFromStorage();
     setProductos(productosStorage);
     setFilteredProductos(productosStorage);
+  };
+
+  // Cargar productos al montar el componente
+  useEffect(() => {
+    cargarProductos();
+  }, []);
+
+  // Recargar productos cuando la página vuelva a estar visible
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        cargarProductos();
+      }
+    };
+
+    // Escuchar cuando volvemos a esta página
+    window.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('focus', cargarProductos);
+
+    return () => {
+      window.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('focus', cargarProductos);
+    };
   }, []);
 
   // Aplicar filtros
