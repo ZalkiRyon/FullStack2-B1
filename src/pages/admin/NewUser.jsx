@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/common/PrimaryButton";
-import { regionesYComunas } from "../../utils/data";
+import { regionesYComunas, saveUsuarioToStorage, validarEmailUnico, validarRunUnico } from "../../utils/data";
 
 const NewUser = () => {
   const navigate = useNavigate();
@@ -38,10 +38,50 @@ const NewUser = () => {
   // Manejar envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Datos del nuevo usuario:", formData);
-    // Aquí se implementará la lógica para guardar en localStorage
-    // Por ahora, solo navegar de vuelta
-    // navigate("/admin/usuarios");
+
+    // Validaciones
+    if (formData.password !== formData.confirmarPassword) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
+
+    if (formData.password.length < 4 || formData.password.length > 10) {
+      alert("La contraseña debe tener entre 4 y 10 caracteres");
+      return;
+    }
+
+    // Validar dominio del correo
+    const dominiosPermitidos = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
+    const emailValido = dominiosPermitidos.some(dominio => 
+      formData.correo.toLowerCase().endsWith(dominio)
+    );
+    
+    if (!emailValido) {
+      alert("El correo debe terminar en @duoc.cl, @profesor.duoc.cl o @gmail.com");
+      return;
+    }
+
+    // Validar que el email sea único
+    if (!validarEmailUnico(formData.correo)) {
+      alert("Este correo ya está registrado");
+      return;
+    }
+
+    // Validar que el RUN sea único
+    if (!validarRunUnico(formData.run)) {
+      alert("Este RUN ya está registrado");
+      return;
+    }
+
+    // Guardar usuario
+    const resultado = saveUsuarioToStorage(formData);
+    
+    if (resultado.success) {
+      alert(`Usuario creado exitosamente con ID: ${resultado.usuario.id}`);
+      navigate("/admin/usuarios");
+    } else {
+      alert(`Error al crear usuario: ${resultado.error}`);
+    }
   };
 
   // Obtener comunas de la región seleccionada
