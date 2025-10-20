@@ -18,6 +18,9 @@ import NewUser from "./pages/admin/NewUser";
 import ShowUser from "./pages/admin/ShowUser";
 import EditUser from "./pages/admin/EditUser";
 import DeleteUser from "./pages/admin/DeleteUser";
+import ShowProduct from "./pages/admin/ShowProduct";
+import EditProduct from "./pages/admin/EditProduct";
+import DeleteProduct from "./pages/admin/DeleteProduct";
 import ConfiguracionesPage from "./pages/admin/ConfiguracionesPage";
 import PerfilPage from "./pages/admin/PerfilPage";
 import BuscarPage from "./pages/admin/BuscarPage";
@@ -86,6 +89,18 @@ const router = createBrowserRouter([
       {
         path: "nuevo-producto",
         element: <NewProduct />,
+      },
+      {
+        path: "producto/:id",
+        element: <ShowProduct />,
+      },
+      {
+        path: "editar-producto/:id",
+        element: <EditProduct />,
+      },
+      {
+        path: "eliminar-producto/:id",
+        element: <DeleteProduct />,
       },
       {
         path: "usuarios",

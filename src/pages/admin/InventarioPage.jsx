@@ -87,17 +87,17 @@ const InventarioPage = () => {
     setStockFilter("todos");
   };
 
-  // Funciones placeholder para acciones
+  // Funciones para acciones de productos
   const handleVer = (id) => {
-    console.log("Ver producto:", id);
+    navigate(`/admin/producto/${id}`);
   };
 
   const handleEditar = (id) => {
-    console.log("Editar producto:", id);
+    navigate(`/admin/editar-producto/${id}`);
   };
 
   const handleEliminar = (id) => {
-    console.log("Eliminar producto:", id);
+    navigate(`/admin/eliminar-producto/${id}`);
   };
 
   return (
