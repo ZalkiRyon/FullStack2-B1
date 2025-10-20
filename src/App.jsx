@@ -1,6 +1,6 @@
-import React from "react";
-import "./App.css";
+import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 import HomePage from "./pages/store/HomePage";
 import StoreLayout from "./layouts/StoreLayout";
 import CatalogPage from "./pages/store/CatalogPage";
@@ -12,7 +12,23 @@ import LoginPage from "./pages/store/LoginPage";
 import RegisterPage from "./pages/store/RegisterPage";
 import AdminLayout from "./layouts/AdminLayout";
 import AdminDashboard from "./pages/admin/AdminDashboard";
+import InventarioPage from "./pages/admin/InventarioPage";
+import NewProduct from "./pages/admin/NewProduct";
+import UserManagement from "./pages/admin/UserManagement";
+import NewUser from "./pages/admin/NewUser";
+import ShowUser from "./pages/admin/ShowUser";
+import EditUser from "./pages/admin/EditUser";
+import DeleteUser from "./pages/admin/DeleteUser";
+import ShowProduct from "./pages/admin/ShowProduct";
+import EditProduct from "./pages/admin/EditProduct";
+import DeleteProduct from "./pages/admin/DeleteProduct";
+import ConfiguracionesPage from "./pages/admin/ConfiguracionesPage";
+import PerfilPage from "./pages/admin/PerfilPage";
+import BuscarPage from "./pages/admin/BuscarPage";
+import AyudaPage from "./pages/admin/AyudaPage";
 import NotFoundPage from "./pages/common/NotFoundPage";
+import { initializeDataProductos } from "./utils/dataProductos";
+import { initializeDataUsuarios } from "./utils/data";
 
 // Ocuparemos un createBrowserRouter de react-router-dom para mantener un orden dentro del archivo
 const router = createBrowserRouter([
@@ -67,6 +83,62 @@ const router = createBrowserRouter([
         index: true,
         element: <AdminDashboard />,
       },
+      {
+        path: "inventario",
+        element: <InventarioPage />,
+      },
+      {
+        path: "nuevo-producto",
+        element: <NewProduct />,
+      },
+      {
+        path: "producto/:id",
+        element: <ShowProduct />,
+      },
+      {
+        path: "editar-producto/:id",
+        element: <EditProduct />,
+      },
+      {
+        path: "eliminar-producto/:id",
+        element: <DeleteProduct />,
+      },
+      {
+        path: "usuarios",
+        element: <UserManagement />,
+      },
+      {
+        path: "usuario/:id",
+        element: <ShowUser />,
+      },
+      {
+        path: "editar-usuario/:id",
+        element: <EditUser />,
+      },
+      {
+        path: "eliminar-usuario/:id",
+        element: <DeleteUser />,
+      },
+      {
+        path: "nuevo-usuario",
+        element: <NewUser />,
+      },
+      {
+        path: "configuraciones",
+        element: <ConfiguracionesPage />,
+      },
+      {
+        path: "perfil",
+        element: <PerfilPage />,
+      },
+      {
+        path: "buscar",
+        element: <BuscarPage />,
+      },
+      {
+        path: "ayuda",
+        element: <AyudaPage />,
+      },
     ],
   },
   // Para errores de ruta
@@ -77,7 +149,16 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  useEffect(() => {
+    initializeDataProductos();
+    initializeDataUsuarios();
+  }, [])
+  
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }
 
 export default App;

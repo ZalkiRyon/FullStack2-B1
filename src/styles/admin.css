@@ -1,1 +1,661 @@
 /* Estilos para la sección de administración */
+
+/* ---------------------------------------------------------------------- */
+/*              Layout principal del admin                                */
+/* ---------------------------------------------------------------------- */
+.adminLayoutContainer {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--light-bg);
+}
+
+/* ---------------------------------------------------------------------- */
+/*              Sidebar                                                   */
+/* ---------------------------------------------------------------------- */
+.adminSidebar {
+  width: 250px;
+  background-color: white;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebarHeader {
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+.sidebarLogo {
+  width: 80px;
+  height: auto;
+  margin-bottom: 0.5rem;
+}
+
+.sidebarTitle {
+  font-family: var(--fuente-encabezado);
+  font-size: 1.3rem;
+  color: var(--primary-text);
+  margin: 0;
+}
+
+/* Navegación del sidebar */
+.sidebarNav {
+  flex: 1;
+  padding: 1rem 0;
+}
+
+.sidebarMenu,
+.sidebarMenuFooter {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebarMenuItem {
+  margin-bottom: 0.25rem;
+}
+
+.sidebarLink {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  color: var(--secundary-text);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.sidebarLink:hover {
+  background-color: var(--light-bg);
+  color: var(--emerald);
+}
+
+.sidebarLinkActive {
+  background-color: rgba(46, 139, 87, 0.1);
+  color: var(--emerald);
+  border-right: 3px solid var(--emerald);
+}
+
+.sidebarText {
+  font-size: 0.95rem;
+}
+
+/* Footer del sidebar */
+.sidebarFooter {
+  border-top: 1px solid #e0e0e0;
+  padding: 1rem 0;
+}
+
+.sidebarMenuFooter {
+  margin-bottom: 1rem;
+}
+
+/* Usuario conectado */
+.sidebarUser {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.sidebarUserInfo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.sidebarUserDetails {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+}
+
+.sidebarUserRole {
+  font-weight: 700;
+  color: var(--primary-text);
+  margin-bottom: 0.1rem;
+}
+
+.sidebarUserName {
+  color: var(--secundary-text);
+  font-size: 0.85rem;
+}
+
+/* Botón cerrar sesión */
+.btnCerrarSesion {
+  width: 100%;
+  padding: 0.6rem;
+  background-color: white;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--fuente-principal);
+  font-size: 0.9rem;
+}
+
+.btnCerrarSesion:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* ---------------------------------------------------------------------- */
+/*              Contenido principal del admin                             */
+/* ---------------------------------------------------------------------- */
+.adminMainContent {
+  margin-left: 250px;
+  flex: 1;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+/* ---------------------------------------------------------------------- */
+/*              Dashboard                                                 */
+/* ---------------------------------------------------------------------- */
+.adminDashboardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+}
+
+.adminWelcomeTitle {
+  font-family: var(--fuente-encabezado);
+  font-size: 3rem;
+  color: var(--brown);
+  text-align: center;
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------------- */
+/*              Páginas administrativas                                   */
+/* ---------------------------------------------------------------------- */
+.adminPageContainer {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.adminPageTitle {
+  font-family: var(--fuente-encabezado);
+  font-size: 2rem;
+  color: var(--primary-text);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--emerald);
+}
+
+.adminPageContainer p {
+  color: var(--secundary-text);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+/* ---------------------------------------------------------------------- */
+/*              Página de Inventario                                      */
+/* ---------------------------------------------------------------------- */
+.inventarioContainer {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Header del inventario */
+.inventarioHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--emerald);
+}
+
+.inventarioTitleSection {
+  flex: 1;
+}
+
+.inventarioTitle {
+  font-family: var(--fuente-encabezado);
+  font-size: 2rem;
+  color: var(--brown);
+  margin: 0 0 0.5rem 0;
+}
+
+.inventarioSubtitle {
+  color: var(--secundary-text);
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* Sección de la tabla */
+.inventarioTableSection {
+  background-color: #f8f9fa;
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+.tableTitle {
+  font-family: var(--fuente-encabezado);
+  font-size: 1.5rem;
+  color: var(--primary-text);
+  margin: 0 0 1.5rem 0;
+}
+
+/* Filtros */
+.inventarioFilters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.searchBox {
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: var(--fuente-principal);
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--emerald);
+}
+
+.searchIcon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+.filterSelect {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: var(--fuente-principal);
+  font-size: 0.95rem;
+  background-color: white;
+  cursor: pointer;
+  min-width: 180px;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: var(--emerald);
+}
+
+.btnLimpiar {
+  padding: 0.75rem 1.5rem;
+  background-color: white;
+  color: var(--secundary-text);
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: var(--fuente-principal);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btnLimpiar:hover {
+  background-color: var(--light-bg);
+  border-color: var(--secundary-text);
+}
+
+/* Tabla */
+.tableContainer {
+  overflow-x: auto;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.productosTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.productosTable thead {
+  background-color: var(--light-bg);
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.productosTable th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 700;
+  color: var(--primary-text);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.productosTable tbody tr {
+  border-bottom: 1px solid #e0e0e0;
+  transition: background-color 0.2s ease;
+}
+
+.productosTable tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.productosTable td {
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+/* Imagen del producto */
+.productoImagen {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid #e0e0e0;
+}
+
+/* Código */
+.productoCodigo {
+  font-weight: 600;
+  color: var(--primary-text);
+}
+
+/* Nombre */
+.productoNombre {
+  font-weight: 500;
+  color: var(--primary-text);
+}
+
+/* Precio */
+.productoPrecio {
+  font-weight: 700;
+  color: var(--emerald);
+  font-size: 1.05rem;
+}
+
+/* Badges */
+.categoriaBadge {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  background-color: #6c757d;
+  color: white;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.stockBadge {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+}
+
+.stockBajo {
+  background-color: #dc3545;
+}
+
+.stockMedio {
+  background-color: #ffc107;
+}
+
+.stockAlto {
+  background-color: #28a745;
+}
+
+/* Badges de roles para usuarios */
+.rolAdmin {
+  background-color: #dc3545;
+}
+
+.rolVendedor {
+  background-color: #17a2b8;
+}
+
+.rolCliente {
+  background-color: #28a745;
+}
+
+/* Botones de acciones */
+.accionesButtons {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.btnAccion {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btnVer {
+  border-color: #17a2b8;
+}
+
+.btnVer:hover {
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btnEditar {
+  border-color: #ffc107;
+}
+
+.btnEditar:hover {
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.btnEliminar {
+  border-color: #dc3545;
+}
+
+.btnEliminar:hover {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+/* No resultados */
+.noResultados {
+  text-align: center;
+  padding: 2rem !important;
+  color: var(--secundary-text);
+  font-style: italic;
+}
+
+/* ---------------------------------------------------------------------- */
+/*              Formulario de Admin (Nuevo Usuario)                      */
+/* ---------------------------------------------------------------------- */
+
+.formHeader {
+  background-color: var(--brown);
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4px 4px 0 0;
+}
+
+.formSectionTitle {
+  font-family: var(--fuente-encabezado);
+  font-size: 1.2rem;
+  color: white;
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.formAdmin {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0 0 4px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.formGroupAdmin {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.formGroupRow {
+  display: flex;
+  gap: 1rem;
+}
+
+.formGroupHalf {
+  flex: 1;
+}
+
+.labelFormAdmin {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--brown);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.formInputAdmin {
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  font-family: var(--fuente-principal);
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.formInputAdmin:focus {
+  outline: none;
+  border-color: var(--emerald);
+  box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.1);
+}
+
+.formInputAdmin:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+  color: #4b5563;
+  opacity: 1;
+}
+
+.formInputAdmin::placeholder {
+  color: #9ca3af;
+  font-size: 0.9rem;
+}
+
+.formSelectAdmin {
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1.2rem;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+.formSelectAdmin:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+  color: #9ca3af;
+}
+
+.formTextareaAdmin {
+  resize: vertical;
+  min-height: 100px;
+  font-family: var(--fuente-principal);
+}
+
+.formTextareaAdmin:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+  color: #4b5563;
+  opacity: 1;
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 1rem;
+}
+
+.formActionsGroup {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  align-items: center;
+}
+
+.btnEliminarUsuario {
+  padding: 0.75rem 2rem;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--fuente-principal);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btnEliminarUsuario:hover {
+  background-color: #c82333;
+  box-shadow: 0 4px 6px rgba(220, 53, 69, 0.3);
+  transform: translateY(-1px);
+}
+
+.btnGuardarCambios {
+  padding: 0.75rem 2rem;
+  background-color: #ffc107;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--fuente-principal);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.formHelperText {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-style: italic;
+}

@@ -1,12 +1,20 @@
-import React from 'react'
+import React from "react";
+import { useAuth } from "../../context/AuthContext";
 
 const AdminDashboard = () => {
-  return (
-    <div>
-      ADMINDASHBOARD
-    </div>
-  )
-}
+  const { usuario } = useAuth();
 
-export default AdminDashboard
+  // Obtener el nombre completo del usuario o usar placeholder
+  const userName = usuario 
+    ? `${usuario.nombre} ${usuario.apellido}` 
+    : "{Nombre Usuario}";
+
+  return (
+    <div className="adminDashboardContainer">
+      <h1 className="adminWelcomeTitle">¡HOLA {userName.toUpperCase()}!</h1>
+    </div>
+  );
+};
+
+export default AdminDashboard;
 

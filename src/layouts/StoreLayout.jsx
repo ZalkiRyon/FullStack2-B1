@@ -1,14 +1,17 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import Header from '../components/store/Header'
+import '../styles/store.css'
 
 const StoreLayout = () => {
   return (
     <>
-      {/* NavBar Aqui */}
-      <main>
+      <Header />
+
+      <div className='mainContentWrapper'>
         <Outlet />
-      </main>
-      {/* Footer Aqui */}
+      </div>
+      
     </>
   )
 }

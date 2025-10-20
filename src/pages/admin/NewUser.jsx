@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import { regionesYComunas, saveUsuarioToStorage, validarEmailUnico, validarRunUnico } from "../../utils/data";
 
-const RegisterPage = () => {
+const NewUser = () => {
   const navigate = useNavigate();
   const [selectedRegion, setSelectedRegion] = useState("");
   const [formData, setFormData] = useState({
@@ -11,6 +11,7 @@ const RegisterPage = () => {
     apellido: "",
     run: "",
     fechaNacimiento: "",
+    tipoUsuario: "",
     correo: "",
     telefono: "",
     password: "",
@@ -18,6 +19,7 @@ const RegisterPage = () => {
     region: "",
     comuna: "",
     direccion: "",
+    comentario: "",
   });
 
   // Manejar cambio de región para actualizar comunas
@@ -71,20 +73,14 @@ const RegisterPage = () => {
       return;
     }
 
-    // Preparar datos del usuario (siempre como cliente)
-    const datosUsuario = {
-      ...formData,
-      tipoUsuario: "cliente", // Siempre crear como cliente
-    };
-
     // Guardar usuario
-    const resultado = saveUsuarioToStorage(datosUsuario);
+    const resultado = saveUsuarioToStorage(formData);
     
     if (resultado.success) {
-      alert(`¡Registro exitoso! Bienvenido ${resultado.usuario.nombre}`);
-      navigate("/inicio-sesion");
+      alert(`Usuario creado exitosamente`);
+      navigate("/admin/usuarios");
     } else {
-      alert(`Error al registrar usuario: ${resultado.error}`);
+      alert(`Error al crear usuario: ${resultado.error}`);
     }
   };
 
@@ -94,18 +90,29 @@ const RegisterPage = () => {
     : [];
 
   return (
-    <main className="mainPage registerPageContainer">
-      <section className="sectionRegisterForm">
-        <h3 className="titleFormRegister">Registro de Usuario</h3>
-        <form className="formRegister" onSubmit={handleSubmit}>
+    <div className="inventarioContainer">
+      {/* Header */}
+      <div className="inventarioHeader">
+        <div className="inventarioTitleSection">
+          <h1 className="inventarioTitle">Nuevo Usuario</h1>
+        </div>
+      </div>
+
+      {/* Formulario */}
+      <div className="inventarioTableSection">
+        <div className="formHeader">
+          <h2 className="formSectionTitle">REGISTRO DE USUARIO</h2>
+        </div>
+
+        <form className="formAdmin" onSubmit={handleSubmit}>
           {/* Nombre */}
-          <div className="formGroup">
-            <label className="labelFormRegister" htmlFor="nombre">
+          <div className="formGroupAdmin">
+            <label className="labelFormAdmin" htmlFor="nombre">
               NOMBRE
             </label>
             <input
               type="text"
-              className="formInputRegister"
+              className="formInputAdmin"
               id="nombre"
               name="nombre"
               value={formData.nombre}
@@ -115,13 +122,13 @@ const RegisterPage = () => {
           </div>
 
           {/* Apellido */}
-          <div className="formGroup">
-            <label className="labelFormRegister" htmlFor="apellido">
+          <div className="formGroupAdmin">
+            <label className="labelFormAdmin" htmlFor="apellido">
               APELLIDO
             </label>
             <input
               type="text"
-              className="formInputRegister"
+              className="formInputAdmin"
               id="apellido"
               name="apellido"
               value={formData.apellido}
@@ -131,13 +138,13 @@ const RegisterPage = () => {
           </div>
 
           {/* RUN */}
-          <div className="formGroup">
-            <label className="labelFormRegister" htmlFor="run">
+          <div className="formGroupAdmin">
+            <label className="labelFormAdmin" htmlFor="run">
               RUN
             </label>
             <input
               type="text"
-              className="formInputRegister"
+              className="formInputAdmin"
               id="run"
               name="run"
               placeholder="Ej: 12.345.678-9"
@@ -148,13 +155,13 @@ const RegisterPage = () => {
           </div>
 
           {/* Fecha de Nacimiento */}
-          <div className="formGroup">
-            <label className="labelFormRegister" htmlFor="fechaNacimiento">
-              FECHA DE NACIMIENTO (opcional)
+          <div className="formGroupAdmin">
+            <label className="labelFormAdmin" htmlFor="fechaNacimiento">
+              FECHA DE NACIMIENTO (OPCIONAL)
             </label>
             <input
               type="date"
-              className="formInputRegister"
+              className="formInputAdmin"
               id="fechaNacimiento"
               name="fechaNacimiento"
               value={formData.fechaNacimiento}
@@ -162,14 +169,34 @@ const RegisterPage = () => {
             />
           </div>
 
+          {/* Tipo de Usuario */}
+          <div className="formGroupAdmin">
+            <label className="labelFormAdmin" htmlFor="tipoUsuario">
+              TIPO DE USUARIO
+            </label>
+            <select
+              className="formInputAdmin formSelectAdmin"
+              id="tipoUsuario"
+              name="tipoUsuario"
+              value={formData.tipoUsuario}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="">Seleccionar tipo de usuario...</option>
+              <option value="admin">Admin</option>
+              <option value="vendedor">Vendedor</option>
+              <option value="cliente">Cliente</option>
+            </select>
+          </div>
+
           {/* Correo */}
-          <div className="formGroup">
-            <label className="labelFormRegister" htmlFor="correo">
+          <div className="formGroupAdmin">
+            <label className="labelFormAdmin" htmlFor="correo">
               CORREO
             </label>
             <input
               type="email"
-              className="formInputRegister"
+              className="formInputAdmin"
               id="correo"
               name="correo"
               placeholder="Solo correos con @duoc.cl, @profesor.duoc.cl y @gmail.com"
@@ -180,13 +207,13 @@ const RegisterPage = () => {
           </div>
 
           {/* Teléfono */}
-          <div className="formGroup">
-            <label className="labelFormRegister" htmlFor="telefono">
-              TELEFONO (opcional)
+          <div className="formGroupAdmin">
+            <label className="labelFormAdmin" htmlFor="telefono">
+              TELEFONO (OPCIONAL)
             </label>
             <input
               type="tel"
-              className="formInputRegister"
+              className="formInputAdmin"
               id="telefono"
               name="telefono"
               placeholder="Solo números, máximo 10 dígitos"
@@ -197,16 +224,16 @@ const RegisterPage = () => {
           </div>
 
           {/* Contraseña */}
-          <div className="formGroup">
-            <label className="labelFormRegister" htmlFor="password">
+          <div className="formGroupAdmin">
+            <label className="labelFormAdmin" htmlFor="password">
               CONTRASEÑA
             </label>
             <input
               type="password"
-              className="formInputRegister"
+              className="formInputAdmin"
               id="password"
               name="password"
-              placeholder="........"
+              placeholder="Entre 4 a 10 caracteres"
               value={formData.password}
               onChange={handleInputChange}
               required
@@ -214,13 +241,13 @@ const RegisterPage = () => {
           </div>
 
           {/* Confirmar Contraseña */}
-          <div className="formGroup">
-            <label className="labelFormRegister" htmlFor="confirmarPassword">
+          <div className="formGroupAdmin">
+            <label className="labelFormAdmin" htmlFor="confirmarPassword">
               CONFIRMAR CONTRASEÑA
             </label>
             <input
               type="password"
-              className="formInputRegister"
+              className="formInputAdmin"
               id="confirmarPassword"
               name="confirmarPassword"
               value={formData.confirmarPassword}
@@ -231,12 +258,12 @@ const RegisterPage = () => {
 
           {/* Región y Comuna en la misma fila */}
           <div className="formGroupRow">
-            <div className="formGroup formGroupHalf">
-              <label className="labelFormRegister" htmlFor="region">
+            <div className="formGroupAdmin formGroupHalf">
+              <label className="labelFormAdmin" htmlFor="region">
                 REGIÓN
               </label>
               <select
-                className="formInputRegister formSelectRegister"
+                className="formInputAdmin formSelectAdmin"
                 id="region"
                 name="region"
                 value={formData.region}
@@ -252,12 +279,12 @@ const RegisterPage = () => {
               </select>
             </div>
 
-            <div className="formGroup formGroupHalf">
-              <label className="labelFormRegister" htmlFor="comuna">
+            <div className="formGroupAdmin formGroupHalf">
+              <label className="labelFormAdmin" htmlFor="comuna">
                 COMUNA
               </label>
               <select
-                className="formInputRegister formSelectRegister"
+                className="formInputAdmin formSelectAdmin"
                 id="comuna"
                 name="comuna"
                 value={formData.comuna}
@@ -276,13 +303,13 @@ const RegisterPage = () => {
           </div>
 
           {/* Dirección */}
-          <div className="formGroup">
-            <label className="labelFormRegister" htmlFor="direccion">
+          <div className="formGroupAdmin">
+            <label className="labelFormAdmin" htmlFor="direccion">
               DIRECCIÓN
             </label>
             <input
               type="text"
-              className="formInputRegister"
+              className="formInputAdmin"
               id="direccion"
               name="direccion"
               placeholder="Ej: Av. Providencia 1234, Depto 56"
@@ -292,12 +319,30 @@ const RegisterPage = () => {
             />
           </div>
 
+          {/* Comentario */}
+          <div className="formGroupAdmin">
+            <label className="labelFormAdmin" htmlFor="comentario">
+              COMENTARIO
+            </label>
+            <textarea
+              className="formInputAdmin formTextareaAdmin"
+              id="comentario"
+              name="comentario"
+              rows="4"
+              placeholder="Ingrese comentarios adicionales sobre el usuario..."
+              value={formData.comentario}
+              onChange={handleInputChange}
+            />
+          </div>
+
           {/* Botón de registro */}
-          <PrimaryButton text={"REGISTRAR"} type="submit" />
+          <div className="formActions">
+            <PrimaryButton text={"REGISTRAR"} type="submit" />
+          </div>
         </form>
-      </section>
-    </main>
+      </div>
+    </div>
   );
 };
 
-export default RegisterPage;
+export default NewUser;
