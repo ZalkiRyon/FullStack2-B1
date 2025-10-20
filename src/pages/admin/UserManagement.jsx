@@ -79,7 +79,7 @@ const UserManagement = () => {
   };
 
   const handleEditar = (id) => {
-    console.log("Editar usuario:", id);
+    navigate(`/admin/editar-usuario/${id}`);
   };
 
   const handleEliminar = (id) => {

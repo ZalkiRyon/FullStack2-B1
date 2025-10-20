@@ -16,6 +16,7 @@ import NewProduct from "./pages/admin/NewProduct";
 import UserManagement from "./pages/admin/UserManagement";
 import NewUser from "./pages/admin/NewUser";
 import ShowUser from "./pages/admin/ShowUser";
+import EditUser from "./pages/admin/EditUser";
 import DeleteUser from "./pages/admin/DeleteUser";
 import ConfiguracionesPage from "./pages/admin/ConfiguracionesPage";
 import PerfilPage from "./pages/admin/PerfilPage";
@@ -93,6 +94,10 @@ const router = createBrowserRouter([
       {
         path: "usuario/:id",
         element: <ShowUser />,
+      },
+      {
+        path: "editar-usuario/:id",
+        element: <EditUser />,
       },
       {
         path: "eliminar-usuario/:id",
