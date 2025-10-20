@@ -631,6 +631,27 @@
   letter-spacing: 0.5px;
 }
 
+.btnEliminarUsuario:hover {
+  background-color: #c82333;
+  box-shadow: 0 4px 6px rgba(220, 53, 69, 0.3);
+  transform: translateY(-1px);
+}
+
+.btnGuardarCambios {
+  padding: 0.75rem 2rem;
+  background-color: #ffc107;
+  color: #000;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--fuente-principal);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 .formHelperText {
   display: block;
   margin-top: 0.25rem;

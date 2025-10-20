@@ -364,10 +364,12 @@ const EditUser = () => {
               text={"Volver"} 
               onClick={() => navigate("/admin/usuarios")}
             />
-            <PrimaryButton 
-              text={"Guardar Cambios"} 
+            <button 
               type="submit"
-            />
+              className="btnGuardarCambios"
+            >
+              Guardar Cambios
+            </button>
           </div>
         </form>
       </div>

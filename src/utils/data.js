@@ -2,7 +2,7 @@ export const usuarios = [
   // ADMINISTRADORES
   {
     id: 1,
-    email: "admin",
+    email: "admin@duoc.cl",
     password: "admin123",
     role: "admin",
     nombre: "Super",

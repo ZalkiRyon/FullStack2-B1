@@ -271,7 +271,12 @@ const EditProduct = () => {
           {/* Botones de acción */}
           <div className="formActionsGroup">
             <PrimaryButton text={"Volver"} onClick={handleVolver} />
-            <PrimaryButton text={"Guardar Cambios"} type="submit" />
+            <button 
+              type="submit"
+              className="btnGuardarCambios"
+            >
+              Guardar Cambios
+            </button>
           </div>
         </form>
       </div>
