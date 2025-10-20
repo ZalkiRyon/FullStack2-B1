@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 import HomePage from "./pages/store/HomePage";
 import StoreLayout from "./layouts/StoreLayout";
 import CatalogPage from "./pages/store/CatalogPage";
@@ -15,6 +16,12 @@ import InventarioPage from "./pages/admin/InventarioPage";
 import NewProduct from "./pages/admin/NewProduct";
 import UserManagement from "./pages/admin/UserManagement";
 import NewUser from "./pages/admin/NewUser";
+import ShowUser from "./pages/admin/ShowUser";
+import EditUser from "./pages/admin/EditUser";
+import DeleteUser from "./pages/admin/DeleteUser";
+import ShowProduct from "./pages/admin/ShowProduct";
+import EditProduct from "./pages/admin/EditProduct";
+import DeleteProduct from "./pages/admin/DeleteProduct";
 import ConfiguracionesPage from "./pages/admin/ConfiguracionesPage";
 import PerfilPage from "./pages/admin/PerfilPage";
 import BuscarPage from "./pages/admin/BuscarPage";
@@ -85,8 +92,32 @@ const router = createBrowserRouter([
         element: <NewProduct />,
       },
       {
+        path: "producto/:id",
+        element: <ShowProduct />,
+      },
+      {
+        path: "editar-producto/:id",
+        element: <EditProduct />,
+      },
+      {
+        path: "eliminar-producto/:id",
+        element: <DeleteProduct />,
+      },
+      {
         path: "usuarios",
         element: <UserManagement />,
+      },
+      {
+        path: "usuario/:id",
+        element: <ShowUser />,
+      },
+      {
+        path: "editar-usuario/:id",
+        element: <EditUser />,
+      },
+      {
+        path: "eliminar-usuario/:id",
+        element: <DeleteUser />,
       },
       {
         path: "nuevo-usuario",
@@ -123,7 +154,11 @@ function App() {
     initializeDataUsuarios();
   }, [])
   
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }
 
 export default App;

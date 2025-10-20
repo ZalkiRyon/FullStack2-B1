@@ -1,87 +1,59 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import PrimaryButton from "../../components/common/PrimaryButton";
-import { getProductosFromStorage, saveProductoToStorage } from "../../utils/dataProductos";
-import { PREFIJOS_CATEGORIA } from "../../utils/data";
+import { getProductosFromStorage } from "../../utils/dataProductos";
 
-const NewProduct = () => {
+const ShowProduct = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+  const [producto, setProducto] = useState(null);
   const [categorias, setCategorias] = useState([]);
-  const [formData, setFormData] = useState({
-    nombre: "",
-    categoria: "",
-    precio: "",
-    stock: "",
-    imagen: "",
-    descripcion: "",
-  });
 
-  // Cargar categorías únicas de productos existentes
+  // Cargar datos del producto
   useEffect(() => {
     const productos = getProductosFromStorage();
+    const productoEncontrado = productos.find((p) => p.id === parseInt(id));
+
+    if (productoEncontrado) {
+      setProducto(productoEncontrado);
+    } else {
+      alert("Producto no encontrado");
+      navigate("/admin/inventario");
+    }
+
+    // Cargar categorías únicas
     const categoriasUnicas = [...new Set(productos.map((p) => p.categoria))];
     setCategorias(categoriasUnicas);
-  }, []);
+  }, [id, navigate]);
 
-  // Manejar cambios en los inputs
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const handleVolver = () => {
+    navigate("/admin/inventario");
   };
 
-  // Manejar envío del formulario
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Validaciones
-    if (!formData.nombre.trim()) {
-      alert("El nombre del producto es obligatorio");
-      return;
-    }
-
-    if (!formData.categoria) {
-      alert("Debe seleccionar una categoría");
-      return;
-    }
-
-    if (parseInt(formData.precio) <= 0) {
-      alert("El precio debe ser mayor a 0");
-      return;
-    }
-
-    if (parseInt(formData.stock) < 0) {
-      alert("El stock no puede ser negativo");
-      return;
-    }
-
-    // Guardar producto
-    const resultado = saveProductoToStorage(formData);
-    
-    if (resultado.success) {
-      const mensaje = `Producto creado exitosamente`;
-      alert(mensaje);
-      navigate("/admin/inventario");
-    } else {
-      alert(`Error al crear producto\n\nDetalle: ${resultado.error}`);
-    }
-  };
+  if (!producto) {
+    return (
+      <div className="inventarioContainer">
+        <p>Cargando...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="inventarioContainer">
       {/* Header */}
       <div className="inventarioHeader">
         <div className="inventarioTitleSection">
-          <h1 className="inventarioTitle">Agregar Nuevo Producto</h1>
+          <h1 className="inventarioTitle">Ver Producto</h1>
         </div>
       </div>
 
-      {/* Formulario */}
+      {/* Formulario de solo lectura */}
       <div className="inventarioTableSection">
         <div className="formHeader">
           <h2 className="formSectionTitle">DATOS DEL PRODUCTO</h2>
         </div>
 
-        <form className="formAdmin" onSubmit={handleSubmit}>
+        <form className="formAdmin">
           {/* Fila 1: Nombre y Categoría */}
           <div className="formGroupRow">
             <div className="formGroupAdmin formGroupHalf">
@@ -93,9 +65,8 @@ const NewProduct = () => {
                 className="formInputAdmin"
                 id="nombre"
                 name="nombre"
-                value={formData.nombre}
-                onChange={handleInputChange}
-                required
+                value={producto.nombre}
+                disabled
               />
             </div>
 
@@ -107,9 +78,8 @@ const NewProduct = () => {
                 className="formInputAdmin formSelectAdmin"
                 id="categoria"
                 name="categoria"
-                value={formData.categoria}
-                onChange={handleInputChange}
-                required
+                value={producto.categoria}
+                disabled
               >
                 <option value="">Seleccionar categoría...</option>
                 {categorias.map((cat) => (
@@ -132,11 +102,8 @@ const NewProduct = () => {
                 className="formInputAdmin"
                 id="precio"
                 name="precio"
-                min="0"
-                step="1"
-                value={formData.precio}
-                onChange={handleInputChange}
-                required
+                value={producto.precio}
+                disabled
               />
             </div>
 
@@ -149,11 +116,8 @@ const NewProduct = () => {
                 className="formInputAdmin"
                 id="stock"
                 name="stock"
-                min="0"
-                step="1"
-                value={formData.stock}
-                onChange={handleInputChange}
-                required
+                value={producto.stock}
+                disabled
               />
             </div>
           </div>
@@ -167,8 +131,8 @@ const NewProduct = () => {
               className="formInputAdmin formSelectAdmin"
               id="imagen"
               name="imagen"
-              value={formData.imagen}
-              onChange={handleInputChange}
+              value={producto.imagen || ""}
+              disabled
             >
               <option value="">Sin imagen</option>
               <option value="manzana.jpg">manzana.jpg</option>
@@ -182,9 +146,6 @@ const NewProduct = () => {
               <option value="leche.jpg">leche.jpg</option>
               <option value="img-principal.jpg">img-principal.jpg</option>
             </select>
-            <small className="formHelperText">
-              Formatos: JPG, PNG, GIF (máx. 2MB)
-            </small>
           </div>
 
           {/* Descripción */}
@@ -197,15 +158,14 @@ const NewProduct = () => {
               id="descripcion"
               name="descripcion"
               rows="5"
-              placeholder="Descripción detallada del producto..."
-              value={formData.descripcion}
-              onChange={handleInputChange}
+              value={producto.descripcion || ""}
+              disabled
             />
           </div>
 
-          {/* Botón de guardar */}
+          {/* Botón de volver */}
           <div className="formActions">
-            <PrimaryButton text={"Guardar Producto"} type="submit" />
+            <PrimaryButton text={"Volver"} onClick={handleVolver} />
           </div>
         </form>
       </div>
@@ -213,4 +173,4 @@ const NewProduct = () => {
   );
 };
 
-export default NewProduct;
+export default ShowProduct;

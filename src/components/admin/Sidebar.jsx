@@ -1,11 +1,28 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import icono from "../../assets/img/icono.png";
 
 const Sidebar = () => {
-  // Placeholder para el usuario conectado
-  const userRole = "Admin";
-  const userName = "{Nombre Usuario}";
+  const navigate = useNavigate();
+  const { usuario, logout } = useAuth();
+
+  // Obtener datos del usuario o usar placeholder
+  const userRole = usuario?.role === "admin" ? "Admin" : "Usuario";
+  const userName = usuario 
+    ? `${usuario.nombre} ${usuario.apellido}` 
+    : "{Nombre Usuario}";
+
+  const handleCerrarSesion = () => {
+    const confirmacion = window.confirm(
+      "¿Está seguro que desea cerrar sesión?"
+    );
+
+    if (confirmacion) {
+      logout();
+      navigate("/");
+    }
+  };
 
   return (
     <aside className="adminSidebar">
@@ -105,7 +122,9 @@ const Sidebar = () => {
               <span className="sidebarUserName">{userName}</span>
             </div>
           </div>
-          <button className="btnCerrarSesion">Cerrar Sesión</button>
+          <button className="btnCerrarSesion" onClick={handleCerrarSesion}>
+            Cerrar Sesión
+          </button>
         </div>
       </div>
     </aside>

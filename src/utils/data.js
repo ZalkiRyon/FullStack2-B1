@@ -2,7 +2,7 @@ export const usuarios = [
   // ADMINISTRADORES
   {
     id: 1,
-    email: "admin",
+    email: "admin@duoc.cl",
     password: "admin123",
     role: "admin",
     nombre: "Super",
@@ -595,4 +595,54 @@ export const getUsuariosFromStorage = () => {
     return JSON.parse(storedUsers);
   }
   return [];
+};
+
+export const saveUsuarioToStorage = (nuevoUsuario) => {
+  try {
+    // Obtener usuarios actuales
+    const usuarios = getUsuariosFromStorage();
+    
+    // Generar nuevo ID (máximo ID + 1)
+    const nuevoId = usuarios.length > 0 
+      ? Math.max(...usuarios.map(u => u.id)) + 1 
+      : 1;
+    
+    // Crear objeto de usuario completo
+    const usuarioCompleto = {
+      id: nuevoId,
+      email: nuevoUsuario.correo,
+      password: nuevoUsuario.password,
+      role: nuevoUsuario.tipoUsuario || nuevoUsuario.role || "cliente",
+      nombre: nuevoUsuario.nombre,
+      apellido: nuevoUsuario.apellido,
+      run: nuevoUsuario.run,
+      telefono: nuevoUsuario.telefono || "",
+      region: nuevoUsuario.region,
+      comuna: nuevoUsuario.comuna,
+      direccion: nuevoUsuario.direccion,
+      comentario: nuevoUsuario.comentario || "",
+      fechaRegistro: new Date().toISOString(),
+    };
+    
+    // Agregar nuevo usuario
+    usuarios.push(usuarioCompleto);
+    
+    // Guardar en localStorage
+    localStorage.setItem("ListaUsuarios", JSON.stringify(usuarios));
+    
+    return { success: true, usuario: usuarioCompleto };
+  } catch (error) {
+    console.error("Error al guardar usuario:", error);
+    return { success: false, error: error.message };
+  }
+};
+
+export const validarEmailUnico = (email) => {
+  const usuarios = getUsuariosFromStorage();
+  return !usuarios.some(u => u.email.toLowerCase() === email.toLowerCase());
+};
+
+export const validarRunUnico = (run) => {
+  const usuarios = getUsuariosFromStorage();
+  return !usuarios.some(u => u.run === run);
 };

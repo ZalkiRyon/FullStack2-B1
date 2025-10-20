@@ -129,3 +129,51 @@ export const getProductosFromStorage = () => {
   }
   return [];
 };
+
+export const saveProductoToStorage = (nuevoProducto) => {
+  try {
+    // Obtener productos actuales
+    const productos = getProductosFromStorage();
+    
+    // Generar nuevo ID (máximo ID + 1)
+    const nuevoId = productos.length > 0 
+      ? Math.max(...productos.map(p => p.id)) + 1 
+      : 1;
+    
+    // Generar código del producto basado en categoría
+    const prefijos = {
+      "Frutas frescas": "FR",
+      "Verduras organicas": "VR",
+      "Productos organicos": "PO",
+      "Productos lacteos": "PL",
+    };
+    
+    // Contar cuántos productos hay de esta categoría
+    const productosCategoria = productos.filter(p => p.categoria === nuevoProducto.categoria);
+    const numeroConsecutivo = String(productosCategoria.length + 1).padStart(3, '0');
+    const prefijo = prefijos[nuevoProducto.categoria] || "XX";
+    const codigoProducto = `${prefijo}${numeroConsecutivo}`;
+    
+    // Crear objeto de producto completo
+    const productoCompleto = {
+      id: nuevoId,
+      nombre: `${codigoProducto} - ${nuevoProducto.nombre}`,
+      categoria: nuevoProducto.categoria,
+      precio: parseInt(nuevoProducto.precio),
+      stock: parseInt(nuevoProducto.stock),
+      descripcion: nuevoProducto.descripcion || "",
+      imagen: nuevoProducto.imagen || "img-principal.jpg",
+    };
+    
+    // Agregar nuevo producto
+    productos.push(productoCompleto);
+    
+    // Guardar en localStorage
+    localStorage.setItem("ListaProductos", JSON.stringify(productos));
+    
+    return { success: true, producto: productoCompleto };
+  } catch (error) {
+    console.error("Error al guardar producto:", error);
+    return { success: false, error: error.message };
+  }
+};

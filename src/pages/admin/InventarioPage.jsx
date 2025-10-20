@@ -13,11 +13,34 @@ const InventarioPage = () => {
   const [categoriaFilter, setCategoriaFilter] = useState("todas");
   const [stockFilter, setStockFilter] = useState("todos");
 
-  // Cargar productos al montar el componente
-  useEffect(() => {
+  // Función para cargar productos
+  const cargarProductos = () => {
     const productosStorage = getProductosFromStorage();
     setProductos(productosStorage);
     setFilteredProductos(productosStorage);
+  };
+
+  // Cargar productos al montar el componente
+  useEffect(() => {
+    cargarProductos();
+  }, []);
+
+  // Recargar productos cuando la página vuelva a estar visible
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!document.hidden) {
+        cargarProductos();
+      }
+    };
+
+    // Escuchar cuando volvemos a esta página
+    window.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('focus', cargarProductos);
+
+    return () => {
+      window.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('focus', cargarProductos);
+    };
   }, []);
 
   // Aplicar filtros
@@ -64,17 +87,17 @@ const InventarioPage = () => {
     setStockFilter("todos");
   };
 
-  // Funciones placeholder para acciones
+  // Funciones para acciones de productos
   const handleVer = (id) => {
-    console.log("Ver producto:", id);
+    navigate(`/admin/producto/${id}`);
   };
 
   const handleEditar = (id) => {
-    console.log("Editar producto:", id);
+    navigate(`/admin/editar-producto/${id}`);
   };
 
   const handleEliminar = (id) => {
-    console.log("Eliminar producto:", id);
+    navigate(`/admin/eliminar-producto/${id}`);
   };
 
   return (

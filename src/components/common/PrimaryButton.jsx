@@ -8,6 +8,7 @@ import "../../styles/common.css";
 // text -> el Texto que tendra el boton
 // width -> en caso que se le quiera dar uno en particular de otra forma sera 100%
 // height -> altura que se le queira dar, de otra forma sera automatico siempre
+// type -> tipo de botón (button, submit, reset) - por defecto "button"
 
 const PrimaryButton = ({
   to,
@@ -15,6 +16,7 @@ const PrimaryButton = ({
   text,
   width = "100%",
   height = "auto",
+  type = "button",
 }) => {
   const dynamicStyles = {
     width: width,
@@ -29,7 +31,7 @@ const PrimaryButton = ({
     );
   }
   return (
-    <button onClick={onClick} type="button" style={dynamicStyles} className="primaryButton">
+    <button onClick={onClick} type={type} style={dynamicStyles} className="primaryButton">
       {text}
     </button>
   );

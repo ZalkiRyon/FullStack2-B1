@@ -1,26 +1,55 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import PrimaryButton from "../../components/common/PrimaryButton";
-import { regionesYComunas, saveUsuarioToStorage, validarEmailUnico, validarRunUnico } from "../../utils/data";
+import { getUsuariosFromStorage, regionesYComunas, validarEmailUnico, validarRunUnico } from "../../utils/data";
 
-const NewUser = () => {
+const EditUser = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
   const [selectedRegion, setSelectedRegion] = useState("");
+  const [emailOriginal, setEmailOriginal] = useState("");
+  const [runOriginal, setRunOriginal] = useState("");
   const [formData, setFormData] = useState({
     nombre: "",
     apellido: "",
     run: "",
     fechaNacimiento: "",
-    tipoUsuario: "",
-    correo: "",
+    role: "",
+    email: "",
     telefono: "",
-    password: "",
-    confirmarPassword: "",
     region: "",
     comuna: "",
     direccion: "",
     comentario: "",
   });
+
+  // Cargar datos del usuario
+  useEffect(() => {
+    const usuarios = getUsuariosFromStorage();
+    const usuarioEncontrado = usuarios.find(u => u.id === parseInt(id));
+    
+    if (usuarioEncontrado) {
+      setFormData({
+        nombre: usuarioEncontrado.nombre,
+        apellido: usuarioEncontrado.apellido,
+        run: usuarioEncontrado.run,
+        fechaNacimiento: usuarioEncontrado.fechaNacimiento || "",
+        role: usuarioEncontrado.role,
+        email: usuarioEncontrado.email,
+        telefono: usuarioEncontrado.telefono || "",
+        region: usuarioEncontrado.region,
+        comuna: usuarioEncontrado.comuna,
+        direccion: usuarioEncontrado.direccion,
+        comentario: usuarioEncontrado.comentario || "",
+      });
+      setSelectedRegion(usuarioEncontrado.region);
+      setEmailOriginal(usuarioEncontrado.email);
+      setRunOriginal(usuarioEncontrado.run);
+    } else {
+      alert("Usuario no encontrado");
+      navigate("/admin/usuarios");
+    }
+  }, [id, navigate]);
 
   // Manejar cambio de región para actualizar comunas
   const handleRegionChange = (e) => {
@@ -40,20 +69,20 @@ const NewUser = () => {
     e.preventDefault();
 
     // Validaciones
-    if (formData.password !== formData.confirmarPassword) {
-      alert("Las contraseñas no coinciden");
+    if (!formData.nombre.trim() || !formData.apellido.trim()) {
+      alert("El nombre y apellido son obligatorios");
       return;
     }
 
-    if (formData.password.length < 4 || formData.password.length > 10) {
-      alert("La contraseña debe tener entre 4 y 10 caracteres");
+    if (!formData.email.trim()) {
+      alert("El correo es obligatorio");
       return;
     }
 
     // Validar dominio del correo
     const dominiosPermitidos = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
     const emailValido = dominiosPermitidos.some(dominio => 
-      formData.correo.toLowerCase().endsWith(dominio)
+      formData.email.toLowerCase().endsWith(dominio)
     );
     
     if (!emailValido) {
@@ -61,26 +90,53 @@ const NewUser = () => {
       return;
     }
 
-    // Validar que el email sea único
-    if (!validarEmailUnico(formData.correo)) {
+    // Validar que el email sea único (excepto si es el mismo)
+    if (formData.email !== emailOriginal && !validarEmailUnico(formData.email)) {
       alert("Este correo ya está registrado");
       return;
     }
 
-    // Validar que el RUN sea único
-    if (!validarRunUnico(formData.run)) {
+    // Validar que el RUN sea único (excepto si es el mismo)
+    if (formData.run !== runOriginal && !validarRunUnico(formData.run)) {
       alert("Este RUN ya está registrado");
       return;
     }
 
-    // Guardar usuario
-    const resultado = saveUsuarioToStorage(formData);
-    
-    if (resultado.success) {
-      alert(`Usuario creado exitosamente`);
+    try {
+      // Obtener usuarios del localStorage
+      const usuarios = getUsuariosFromStorage();
+      
+      // Encontrar el índice del usuario a actualizar
+      const indice = usuarios.findIndex(u => u.id === parseInt(id));
+      
+      if (indice === -1) {
+        alert("Usuario no encontrado");
+        return;
+      }
+
+      // Actualizar el usuario manteniendo id, password y fechaRegistro
+      usuarios[indice] = {
+        ...usuarios[indice],
+        nombre: formData.nombre,
+        apellido: formData.apellido,
+        run: formData.run,
+        fechaNacimiento: formData.fechaNacimiento,
+        role: formData.role,
+        email: formData.email,
+        telefono: formData.telefono,
+        region: formData.region,
+        comuna: formData.comuna,
+        direccion: formData.direccion,
+        comentario: formData.comentario,
+      };
+      
+      // Guardar en localStorage
+      localStorage.setItem("ListaUsuarios", JSON.stringify(usuarios));
+      
+      alert(`✓ Usuario actualizado exitosamente\n\nLos datos de ${formData.nombre} ${formData.apellido} han sido actualizados.`);
       navigate("/admin/usuarios");
-    } else {
-      alert(`Error al crear usuario: ${resultado.error}`);
+    } catch (error) {
+      alert(`✗ Error al actualizar usuario\n\nDetalle: ${error.message}`);
     }
   };
 
@@ -94,14 +150,14 @@ const NewUser = () => {
       {/* Header */}
       <div className="inventarioHeader">
         <div className="inventarioTitleSection">
-          <h1 className="inventarioTitle">Nuevo Usuario</h1>
+          <h1 className="inventarioTitle">Editar Usuario</h1>
         </div>
       </div>
 
       {/* Formulario */}
       <div className="inventarioTableSection">
         <div className="formHeader">
-          <h2 className="formSectionTitle">REGISTRO DE USUARIO</h2>
+          <h2 className="formSectionTitle">MODIFICAR DATOS DEL USUARIO</h2>
         </div>
 
         <form className="formAdmin" onSubmit={handleSubmit}>
@@ -171,14 +227,14 @@ const NewUser = () => {
 
           {/* Tipo de Usuario */}
           <div className="formGroupAdmin">
-            <label className="labelFormAdmin" htmlFor="tipoUsuario">
+            <label className="labelFormAdmin" htmlFor="role">
               TIPO DE USUARIO
             </label>
             <select
               className="formInputAdmin formSelectAdmin"
-              id="tipoUsuario"
-              name="tipoUsuario"
-              value={formData.tipoUsuario}
+              id="role"
+              name="role"
+              value={formData.role}
               onChange={handleInputChange}
               required
             >
@@ -191,16 +247,16 @@ const NewUser = () => {
 
           {/* Correo */}
           <div className="formGroupAdmin">
-            <label className="labelFormAdmin" htmlFor="correo">
+            <label className="labelFormAdmin" htmlFor="email">
               CORREO
             </label>
             <input
               type="email"
               className="formInputAdmin"
-              id="correo"
-              name="correo"
+              id="email"
+              name="email"
               placeholder="Solo correos con @duoc.cl, @profesor.duoc.cl y @gmail.com"
-              value={formData.correo}
+              value={formData.email}
               onChange={handleInputChange}
               required
             />
@@ -220,39 +276,6 @@ const NewUser = () => {
               maxLength="10"
               value={formData.telefono}
               onChange={handleInputChange}
-            />
-          </div>
-
-          {/* Contraseña */}
-          <div className="formGroupAdmin">
-            <label className="labelFormAdmin" htmlFor="password">
-              CONTRASEÑA
-            </label>
-            <input
-              type="password"
-              className="formInputAdmin"
-              id="password"
-              name="password"
-              placeholder="Entre 4 a 10 caracteres"
-              value={formData.password}
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-
-          {/* Confirmar Contraseña */}
-          <div className="formGroupAdmin">
-            <label className="labelFormAdmin" htmlFor="confirmarPassword">
-              CONFIRMAR CONTRASEÑA
-            </label>
-            <input
-              type="password"
-              className="formInputAdmin"
-              id="confirmarPassword"
-              name="confirmarPassword"
-              value={formData.confirmarPassword}
-              onChange={handleInputChange}
-              required
             />
           </div>
 
@@ -335,9 +358,18 @@ const NewUser = () => {
             />
           </div>
 
-          {/* Botón de registro */}
-          <div className="formActions">
-            <PrimaryButton text={"REGISTRAR"} type="submit" />
+          {/* Botones de acción */}
+          <div className="formActionsGroup">
+            <PrimaryButton 
+              text={"Volver"} 
+              onClick={() => navigate("/admin/usuarios")}
+            />
+            <button 
+              type="submit"
+              className="btnGuardarCambios"
+            >
+              Guardar Cambios
+            </button>
           </div>
         </form>
       </div>
@@ -345,4 +377,4 @@ const NewUser = () => {
   );
 };
 
-export default NewUser;
+export default EditUser;
