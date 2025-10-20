@@ -74,6 +74,7 @@ const LoginPage = () => {
       <section className="sectionLoginForm">
         <h3 className="titleFormLogin">Inicio de sesion</h3>
         <form className="formLogin" onSubmit={handleSubmit}>
+          
           {error && (
             <div className="loginError">
               {error}
@@ -82,7 +83,7 @@ const LoginPage = () => {
 
           <div className="formGroup">
             <label className="labelFormLogin" htmlFor="correo">
-              Correo
+              CORREO
             </label>
             <input
               type="email"
@@ -97,7 +98,7 @@ const LoginPage = () => {
 
           <div className="formGroup">
             <label htmlFor="password" className="labelFormLogin">
-              Contraseña
+              CONTRASEÑA
             </label>
             <input
               type="password"

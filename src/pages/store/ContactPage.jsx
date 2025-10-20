@@ -4,7 +4,7 @@ import PrimaryButton from "../../components/common/PrimaryButton";
 
 const ContactPage = () => {
   return (
-    <main className="mainPage">
+    <main className="mainPage loginPageContainer">
       <section className="sectionEmpresaContacto">
         <div className="divLogoEmpresa">
           <img
@@ -19,8 +19,8 @@ const ContactPage = () => {
         <h3 className="titleForm">Formulario de contactos</h3>
         <form className="formContacto" action="#" method="POST">
           <div className="mb-3">
-            <label className="labelForm" for="name" >
-              Nombre completo
+            <label className="labelForm" for="name">
+              NOMBRE COMPLETO
             </label>
             <input
               type="text"
@@ -32,12 +32,12 @@ const ContactPage = () => {
           </div>
 
           <div className="mb-3">
-            <label for="username" className="labelForm" >
-              Correo
+            <label for="username" className="labelForm">
+              CORREO
             </label>
             <input
               type="text"
-               className="formInput"
+              className="formInput"
               id="username"
               name="username"
               required
@@ -45,8 +45,8 @@ const ContactPage = () => {
           </div>
 
           <div className="mb-3">
-            <label for="password" className="labelForm" >
-              Contenido
+            <label for="password" className="labelForm">
+              CONTENIDO
             </label>
             <input
               type="password"

@@ -287,7 +287,7 @@ footer {
   width: 100%;
 }
 
-.titleAbout{
+.titleAbout {
   font-size: 2.5rem;
   margin-bottom: 2rem;
   font-weight: 700;
@@ -334,6 +334,10 @@ footer {
   width: 100%;
   height: 100px;
   object-fit: cover;
+  padding: 0rem 1.5rem;
+}
+.imgBlogMaxContainer {
+  border-radius: 20px;
 }
 
 .imgAutor {
@@ -341,6 +345,98 @@ footer {
   height: 50px;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.newsModalContent {
+  background: #fff;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+}
+
+.newsHeaderTitle {
+  padding: 1.5rem 2rem;
+}
+
+.newsHeaderTitle h1 {
+  font-size: 1.8rem;
+  color: var(--brown);
+  margin: 0;
+}
+
+.newsBodyWrapper {
+  padding: 2rem;
+  flex-grow: 1;
+}
+
+.newsTags {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.tagItem {
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.newsAuthorInfo {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  padding: 15px;
+}
+
+.authorAvatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.authorDetails p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+.authorName {
+  font-weight: bold;
+  color: var(--brown);
+}
+
+.publishDate {
+  color: #666;
+}
+
+.newsFooter {
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: flex-end; /* Lo mueve a la derecha */
+  border-top: 1px solid #e0e0e0;
 }
 
 /* ---------------------------------------------------------------------- */
@@ -380,7 +476,7 @@ footer {
   width: 40%;
 }
 
-.titleForm{
+.titleForm {
   margin-bottom: 1.5rem;
 }
 .formContacto {
@@ -604,7 +700,7 @@ footer {
   .formGroupRow {
     flex-direction: column;
   }
-  
+
   .sectionRegisterForm {
     padding: 1.5rem;
   }
