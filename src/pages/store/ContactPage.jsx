@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import logoEmpresa from "../../assets/img/logoEmpresa.jpg";
 import PrimaryButton from "../../components/common/PrimaryButton";
+import Modal from "../../components/common/Modal";
 
 const ContactPage = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpenModal = () => setIsOpen(true);
+  const handleCloseModal = () => setIsOpen(false);
+
   return (
     <main className="mainPage loginPageContainer">
       <section className="sectionEmpresaContacto">
@@ -56,9 +62,18 @@ const ContactPage = () => {
               required
             />
           </div>
-          <PrimaryButton text={"Enviar mensaje"} />
+          <PrimaryButton text={"Enviar mensaje"} onClick={handleOpenModal} />
         </form>
       </section>
+      <Modal
+        isOpen={isOpen}
+        title="Enviado"
+        message="Mensaje enviado exitosamente."
+        onClose={handleCloseModal}
+        onConfirm={handleCloseModal}
+        confirmText="Cerrar"
+        showCancelButton={false}
+      />
     </main>
   );
 };

@@ -47,7 +47,9 @@
 .nav-link-base.active-link:visited {
   color: var(--emerald);
 }
-
+.grettingUser{
+  margin-top: 1.4rem;
+}
 /* Carrito en header */
 #carritoTexto {
   margin: 5px;

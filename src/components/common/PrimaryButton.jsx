@@ -25,7 +25,7 @@ const PrimaryButton = ({
 
   if (to) {
     return (
-      <Link to={to} onClick={onClick} style={dynamicStyles} className="primaryButton">
+      <Link to={to} type={type} onClick={onClick} style={dynamicStyles} className="primaryButton">
         {text}
       </Link>
     );

@@ -4,6 +4,7 @@ import principalImg from "../../assets/img/img-principal.jpg";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import Footer from "../../components/store/Footer";
 import { getProductosFromStorage } from "../../utils/dataProductos";
+import { useAuth } from "../../context/AuthContext";
 import ProductCard from "../../components/store/ProductCard";
 
 const HomePage = () => {
@@ -15,20 +16,29 @@ const HomePage = () => {
     setProductos(productosDestacados.slice(0, 3));
   }, []);
 
+  const { usuario } = useAuth();
+  const isLoggedIn = !!usuario;
+
   return (
     <div>
       <nav className="navSesion">
         <ul className="nav justify-content-end">
-          <li className="nav-item">
-            <Link className="nav-link" to="/inicio-sesion">
-              Iniciar sesión
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/registro">
-              Registrar usuario
-            </Link>
-          </li>
+          {isLoggedIn ? (
+            <h4 className="grettingUser">Hola, {usuario.nombre}</h4>
+          ) : (
+            <>
+              <li className="nav-item">
+                <Link className="nav-link" to="/inicio-sesion">
+                  Iniciar sesión
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/registro">
+                  Registrar usuario
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </nav>
 

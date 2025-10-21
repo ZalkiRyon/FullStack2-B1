@@ -8,6 +8,8 @@ const Modal = ({
   onConfirm,
   title = "Confirmación",
   confirmText = "Aceptar",
+  showCancelButton = true,
+  to,
 }) => {
   if (!isOpen) {
     return null;
@@ -37,11 +39,13 @@ const Modal = ({
         </div>
 
         <div className="modalFooter">
-          <button className="btnCancel" onClick={handleCancel}>
-            Cancelar
-          </button>
+          {showCancelButton && (
+            <button className="btn-cancel" onClick={handleCancel}>
+              Cancelar
+            </button>
+          )}
 
-          <PrimaryButton onClick={handleConfirm} text={confirmText} />
+          <PrimaryButton onClick={handleConfirm} text={confirmText} to={to} />
         </div>
       </div>
     </div>

@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/common/PrimaryButton";
-import { regionesYComunas, saveUsuarioToStorage, validarEmailUnico, validarRunUnico } from "../../utils/data";
+import {
+  regionesYComunas,
+  saveUsuarioToStorage,
+  validarEmailUnico,
+  validarRunUnico,
+} from "../../utils/data";
+import Modal from "../../components/common/Modal";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -19,6 +25,11 @@ const RegisterPage = () => {
     comuna: "",
     direccion: "",
   });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalSucessOpen, setIsModalSucessOpen] = useState(false);
+  const [modalText, setModalText] = useState("");
+  const [modalSucessText, setModalSucessText] = useState("");
 
   // Manejar cambio de región para actualizar comunas
   const handleRegionChange = (e) => {
@@ -39,35 +50,42 @@ const RegisterPage = () => {
 
     // Validaciones
     if (formData.password !== formData.confirmarPassword) {
-      alert("Las contraseñas no coinciden");
+      setModalText("Las contraseñas no coinciden");
+      setIsModalOpen(true);
       return;
     }
 
     if (formData.password.length < 4 || formData.password.length > 10) {
-      alert("La contraseña debe tener entre 4 y 10 caracteres");
+      setModalText("La contraseña debe tener entre 4 y 10 caracteres");
+      setIsModalOpen(true);
       return;
     }
 
     // Validar dominio del correo
     const dominiosPermitidos = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
-    const emailValido = dominiosPermitidos.some(dominio => 
+    const emailValido = dominiosPermitidos.some((dominio) =>
       formData.correo.toLowerCase().endsWith(dominio)
     );
-    
+
     if (!emailValido) {
-      alert("El correo debe terminar en @duoc.cl, @profesor.duoc.cl o @gmail.com");
+      setModalText(
+        "El correo debe terminar en @duoc.cl, @profesor.duoc.cl o @gmail.com"
+      );
+      setIsModalOpen(true);
       return;
     }
 
     // Validar que el email sea único
     if (!validarEmailUnico(formData.correo)) {
-      alert("Este correo ya está registrado");
+      setModalText("Este correo ya está registrado");
+      setIsModalOpen(true);
       return;
     }
 
     // Validar que el RUN sea único
     if (!validarRunUnico(formData.run)) {
-      alert("Este RUN ya está registrado");
+      setModalText("Este RUN ya está registrado");
+      setIsModalOpen(true);
       return;
     }
 
@@ -79,12 +97,15 @@ const RegisterPage = () => {
 
     // Guardar usuario
     const resultado = saveUsuarioToStorage(datosUsuario);
-    
+
     if (resultado.success) {
-      alert(`¡Registro exitoso! Bienvenido ${resultado.usuario.nombre}`);
-      navigate("/inicio-sesion");
+      setModalSucessText(
+        `¡Registro exitoso! Bienvenido ${resultado.usuario.nombre}`
+      );
+      setIsModalSucessOpen(true);
     } else {
-      alert(`Error al registrar usuario: ${resultado.error}`);
+      setModalText(`Error al registrar usuario: ${resultado.error}`);
+      setIsModalOpen(true);
     }
   };
 
@@ -294,6 +315,25 @@ const RegisterPage = () => {
 
           {/* Botón de registro */}
           <PrimaryButton text={"REGISTRAR"} type="submit" />
+          <Modal
+            isOpen={isModalOpen}
+            title="Error"
+            message={modalText}
+            onClose={() => setIsModalOpen(false)}
+            onConfirm={() => setIsModalOpen(false)}
+            confirmText="Cerrar"
+            showCancelButton={false}
+          />
+
+          <Modal
+            isOpen={isModalSucessOpen}
+            message={modalSucessText}
+            onClose={() => setIsModalSucessOpen(false)}
+            onConfirm={() => setIsModalSucessOpen(false)}
+            confirmText="Iniciar sesion"
+            to={"/inicio-sesion"}
+            showCancelButton={false}
+          />
         </form>
       </section>
     </main>
