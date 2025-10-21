@@ -30,6 +30,7 @@ import { initializeDataProductos } from "./utils/dataProductos";
 import { initializeDataUsuarios } from "./utils/data";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
+import { ToastProvider } from "./context/ToastContext";
 
 // Ocuparemos un createBrowserRouter de react-router-dom para mantener un orden dentro del archivo
 const router = createBrowserRouter([
@@ -158,7 +159,9 @@ function App() {
   return (
     <AuthProvider>
       <CartProvider>
-        <RouterProvider router={router} />
+        <ToastProvider>
+          <RouterProvider router={router} />
+        </ToastProvider>
       </CartProvider>
     </AuthProvider>
   );

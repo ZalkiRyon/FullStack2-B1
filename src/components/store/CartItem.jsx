@@ -11,7 +11,7 @@ const CartItem = ({
   onDecrement,
 }) => {
   const imagenSrc = productImages[image] || productImages["default"];
-  console.log(image)
+
 
   return (
     <article className="cart-item-card" data-product-id={id}>

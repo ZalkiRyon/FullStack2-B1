@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { getProductosFromStorage } from "../../utils/dataProductos";
 import ProductCard from "../../components/store/ProductCard";
 import ProductFilters from "../../components/common/ProductFilters";
-import Modal from "../../components/common/Modal";
 import { useCart } from "../../context/CartContext";
+import { useToast } from "../../context/ToastContext";
 
 function CatalogPage() {
   const [productos, setProductos] = useState([]);
@@ -11,9 +11,8 @@ function CatalogPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [categoriaFilter, setCategoriaFilter] = useState("todas");
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   const { addItem } = useCart();
+  const { showToast } = useToast();
 
   useEffect(() => {
     let productosStorage = getProductosFromStorage();
@@ -22,8 +21,9 @@ function CatalogPage() {
   }, []);
 
   const handleAddCart = (produ) => {
-    setIsModalOpen(true);
     addItem(produ, 1);
+
+    showToast(`Se agregó ${produ.nombre} al carrito.`, "success");
     console.log(produ);
   };
 
@@ -85,14 +85,6 @@ function CatalogPage() {
           <div>No se encontraron productos... </div>
         )}
       </div>
-
-      <Modal
-        isOpen={isModalOpen}
-        title="Producto agregado con exito"
-        onClose={() => setIsModalOpen(false)}
-        onConfirm={() => setIsModalOpen(false)}
-        showCancelButton={false}
-      />
     </div>
   );
 }

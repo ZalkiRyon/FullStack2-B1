@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { close } from "../../assets/img/close.svg";
-
+import close from "../../assets/img/close.svg";
 
 // Existen 3 tipos, success (verde), error(rojo), info(azul)
 
@@ -22,8 +21,6 @@ const Toast = ({ id, message, type = "success", duration = 3000, onClose }) => {
     `toast-${type}`,
     isVisible ? "toastShow" : "toastHide",
   ].join(" ");
-
-  
 
   return (
     <div className={toastClasses}>
