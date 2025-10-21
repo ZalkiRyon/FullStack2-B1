@@ -27,10 +27,11 @@ const Modal = ({
   return (
     <div className="modalOverlay" onClick={handleCancel}>
       <div className="modalContent" onClick={(e) => e.stopPropagation()}>
+        
         <div className="modalHeader">
           <h3>{title}</h3>
           <button className="modalCloseBtn" onClick={handleCancel}>
-            <img src={close} alt="icon-close" />
+            <img src={close} alt="icon-close" className="closeModal"/>
           </button>
         </div>
 

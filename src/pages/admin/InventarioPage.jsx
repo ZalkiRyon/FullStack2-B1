@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getProductosFromStorage } from "../../utils/dataProductos";
 import PrimaryButton from "../../components/common/PrimaryButton";
-import ProductFilters from "../../components/admin/ProductFilters";
+import ProductFilters from "../../components/common/ProductFilters";
 import ProductTable from "../../components/admin/ProductTable";
 
 const InventarioPage = () => {

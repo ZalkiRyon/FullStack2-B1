@@ -1,5 +1,3 @@
-import React from "react";
-
 const ProductFilters = ({
   searchTerm,
   onSearchChange,
@@ -9,6 +7,7 @@ const ProductFilters = ({
   onStockChange,
   categorias,
   onLimpiar,
+  showStockFilter = true,
 }) => {
   return (
     <div className="inventarioFilters">
@@ -39,16 +38,18 @@ const ProductFilters = ({
       </select>
 
       {/* Filtro de stock */}
-      <select
-        value={stockFilter}
-        onChange={(e) => onStockChange(e.target.value)}
-        className="filterSelect"
-      >
-        <option value="todos">Todos los stocks</option>
-        <option value="bajo">Stock bajo (&lt; 100)</option>
-        <option value="medio">Stock medio (100-200)</option>
-        <option value="alto">Stock alto (&gt; 200)</option>
-      </select>
+      {showStockFilter && (
+        <select
+          value={stockFilter}
+          onChange={(e) => onStockChange(e.target.value)}
+          className="filterSelect"
+        >
+          <option value="todos">Todos los stocks</option>
+          <option value="bajo">Stock bajo (&lt; 100)</option>
+          <option value="medio">Stock medio (100-200)</option>
+          <option value="alto">Stock alto (&gt; 200)</option>
+        </select>
+      )}
 
       {/* Botón limpiar */}
       <button onClick={onLimpiar} className="btnLimpiar">

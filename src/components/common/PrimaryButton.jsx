@@ -25,13 +25,24 @@ const PrimaryButton = ({
 
   if (to) {
     return (
-      <Link to={to} type={type} onClick={onClick} style={dynamicStyles} className="primaryButton">
+      <Link
+        to={to}
+        type={type}
+        onClick={onClick}
+        style={dynamicStyles}
+        className="primaryButton"
+      >
         {text}
       </Link>
     );
   }
   return (
-    <button onClick={onClick} type={type} style={dynamicStyles} className="primaryButton">
+    <button
+      onClick={onClick}
+      type={type}
+      style={dynamicStyles}
+      className="primaryButton"
+    >
       {text}
     </button>
   );
