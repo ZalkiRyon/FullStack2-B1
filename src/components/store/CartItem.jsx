@@ -12,32 +12,30 @@ const CartItem = ({
 }) => {
   const imagenSrc = productImages[image] || productImages["default"];
 
-
   return (
-    <article className="cart-item-card" data-product-id={id}>
-      <div className="cart-item-image-container">
-        <img
-          src={imagenSrc}
-          alt={`Imagen de ${name}`}
-          className="cart-item-image"
-        />
+    <article className="productoCarrito" data-product-id={id}>
+      <div className="leftSideCartItem">
+        <div className="containerImgProductoCarrito">
+          <img
+            src={imagenSrc}
+            alt={`Imagen de ${name}`}
+            className="imgProductoCarrito"
+          />
+        </div>
+        <div className="infoProductoCarrito">
+          <h4 className="infoProductoCarritoNombre">{name}</h4>
+          <p className="infoProductoCarritoDescription">
+            {description.substring(0, 100)}...
+          </p>
+        </div>
       </div>
 
-      <div className="cart-item-details">
-        <h4 className="cart-item-name">{name}</h4>
-        <p className="cart-item-description">
-          {description.substring(0, 100)}...
-        </p>
-      </div>
+      <div className="productoCarritoControls">
+        <span className="precioItem">Subtotal: ${price.toLocaleString() * quantity}</span>
 
-      <div className="cart-item-controls">
-        <span className="cart-item-price">
-          ${price.toLocaleString() * quantity}
-        </span>
-
-        <div className="quantity-control">
+        <div className="controlQuantity">
           <button
-            className="quantity-btn decrement"
+            className="btnQuantity"
             onClick={() => onDecrement(id)}
             disabled={quantity < 1}
           >
@@ -48,13 +46,10 @@ const CartItem = ({
             type="number"
             readOnly
             value={quantity}
-            className="quantity-input"
+            className="inputQuantity"
           />
 
-          <button
-            className="quantity-btn increment"
-            onClick={() => onIncrement(id)}
-          >
+          <button className="btnQuantity" onClick={() => onIncrement(id)}>
             +
           </button>
         </div>

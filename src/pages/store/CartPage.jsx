@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useCart } from "../../context/CartContext";
 import CartItem from "../../components/store/CartItem";
 import Modal from "../../components/common/Modal";
+import PrimaryButton from "../../components/common/PrimaryButton";
 
 function CartPage() {
   const { cartItems, addItem, deleteItem, cleanCart, totalPrice } = useCart();
@@ -17,10 +18,10 @@ function CartPage() {
   };
 
   return (
-    <div className="mainPage">
+    <div className="mainPage d-flex">
       <section className="izqCarrito">
         <h1>Mi carrito de compras</h1>
-        <div id="cart-list">
+        <div className="cartList">
           {cartItems.length > 0 ? (
             cartItems.map((produc) => (
               <CartItem
@@ -61,19 +62,20 @@ function CartPage() {
               placeholder="Ingrese cupon de descuento"
               className="cuponDescuento"
             />
-            <button className="btnDescuento">APLICAR</button>
+            <PrimaryButton text="Aplicar" width="fit-content" />
           </div>
         </div>
-        <button className="btnPagarCarrito">PAGAR</button>
 
-        <div className="mt-4">
+        <div className="containerFooterBtnResumeCart">
           <button
             type="button"
-            className="btn btn-outline-danger w-100"
+            className="vaciarCarritoBtn"
             onClick={() => setConfirmModal(true)}
           >
             VACIAR CARRITO
           </button>
+
+          <PrimaryButton text="Comprar" width="fit-content" />
         </div>
       </section>
 
