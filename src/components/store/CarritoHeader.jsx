@@ -8,7 +8,7 @@ const CarritoHeader = ({ itemCount }) => {
         <img src={carrito} alt="Logo carrito de compras" height="25" />
       </div>
 
-      <p id="carritoTexto">{itemCount > 0 ? `(${itemCount})` : ""}</p>
+      <p id="carritoTexto">{`(${itemCount})`}</p>
     </Link>
   );
 };

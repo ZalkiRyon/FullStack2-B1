@@ -1,8 +1,12 @@
 import Navbar from "./Navbar";
 import CarritoHeader from "../store/CarritoHeader";
-import  icono  from "../../assets/img/icono.png";
+import icono from "../../assets/img/icono.png";
+import { useCart } from "../../context/CartContext";
 
 const Header = () => {
+
+  const { totalItemsCount } = useCart();
+  console.log(totalItemsCount)
   return (
     <header className="header">
       <div className="d-flex align-items-center">
@@ -12,7 +16,7 @@ const Header = () => {
         <h1>Huerto Hogar</h1>
       </div>
       <Navbar />
-      <CarritoHeader />
+      <CarritoHeader itemCount={totalItemsCount} />
     </header>
   );
 };

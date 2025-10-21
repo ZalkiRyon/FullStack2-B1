@@ -1,12 +1,92 @@
-import React from 'react'
+import React, { useState } from "react";
+import { useCart } from "../../context/CartContext";
+import CartItem from "../../components/store/CartItem";
+import Modal from "../../components/common/Modal";
 
 function CartPage() {
+  const { cartItems, addItem, deleteItem, cleanCart, totalPrice } = useCart();
+  const [confirmModal, setConfirmModal] = useState(false);
+
+  const handleCleanCart = () => {
+    if (cartItems > 0) {
+      cleanCart();
+      setConfirmModal(false);
+    } else {
+      alert("no hay na pa eliminar");
+    }
+  };
+
   return (
-    <div>
-      Carrito
+    <div className="mainPage">
+      <section className="izqCarrito">
+        <h1>Mi carrito de compras</h1>
+        <div id="cart-list">
+          {cartItems.length > 0 ? (
+            cartItems.map((produc) => (
+              <CartItem
+                key={produc.id}
+                id={produc.id}
+                name={produc.nombre}
+                price={produc.precio}
+                quantity={produc.cantidad}
+                description={produc.descripcion}
+                image={produc.imagen}
+                onDecrement={() => deleteItem(produc, 1)}
+                onIncrement={() => addItem(produc, 1)}
+              />
+            ))
+          ) : (
+            <div class="mensajeErrorCarrito">
+              <h2>
+                No hay elementos en tu carrito {".·´¯`(>▂<)´¯`·."} <br /> Agrega
+                algunos productos para continuar...
+              </h2>
+            </div>
+          )}
+        </div>
+      </section>
+      <section className="derCarrito">
+        <div className="resumenCarrito">
+          <h3>Total</h3>
+        </div>
+        <div className="d-flex justify-content-between align-items-center resumenCarrito">
+          <span>Total: {totalPrice}</span>
+          <span id="totalCarrito"></span>
+        </div>
+        <div className="d-flex flex-column">
+          <div className="w-100 d-flex justify-content-between align-items-baseline">
+            <input
+              id="cupon"
+              type="text"
+              placeholder="Ingrese cupon de descuento"
+              className="cuponDescuento"
+            />
+            <button className="btnDescuento">APLICAR</button>
+          </div>
+        </div>
+        <button className="btnPagarCarrito">PAGAR</button>
+
+        <div className="mt-4">
+          <button
+            type="button"
+            className="btn btn-outline-danger w-100"
+            onClick={() => setConfirmModal(true)}
+          >
+            VACIAR CARRITO
+          </button>
+        </div>
+      </section>
+
+      <Modal
+        isOpen={confirmModal}
+        title="Vaciar carrito"
+        message="Estas seguro que deseas vaciar el carrito de compras compeltamente?"
+        confirmText="Confirmar"
+        onClose={() => setConfirmModal(false)}
+        onConfirm={() => handleCleanCart()}
+      />
     </div>
-  )
+  );
 }
 
-export default CartPage
-
+export default CartPage;

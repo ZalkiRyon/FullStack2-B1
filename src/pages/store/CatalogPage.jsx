@@ -3,6 +3,7 @@ import { getProductosFromStorage } from "../../utils/dataProductos";
 import ProductCard from "../../components/store/ProductCard";
 import ProductFilters from "../../components/common/ProductFilters";
 import Modal from "../../components/common/Modal";
+import { useCart } from "../../context/CartContext";
 
 function CatalogPage() {
   const [productos, setProductos] = useState([]);
@@ -12,14 +13,18 @@ function CatalogPage() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const { addItem } = useCart();
+
   useEffect(() => {
     let productosStorage = getProductosFromStorage();
     setProductos(productosStorage);
     setFilteredProductos(productosStorage);
   }, []);
 
-  const handleAddCart = () => {
+  const handleAddCart = (produ) => {
     setIsModalOpen(true);
+    addItem(produ, 1);
+    console.log(produ);
   };
 
   useEffect(() => {
@@ -72,7 +77,7 @@ function CatalogPage() {
               price={produ.precio}
               category={produ.categoria}
               image={produ.imagen}
-              onClickButton={handleAddCart}
+              onClickButton={() => handleAddCart(produ)}
               variant="withButton"
             />
           ))

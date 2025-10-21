@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
 import HomePage from "./pages/store/HomePage";
 import StoreLayout from "./layouts/StoreLayout";
 import CatalogPage from "./pages/store/CatalogPage";
@@ -29,6 +28,8 @@ import AyudaPage from "./pages/admin/AyudaPage";
 import NotFoundPage from "./pages/common/NotFoundPage";
 import { initializeDataProductos } from "./utils/dataProductos";
 import { initializeDataUsuarios } from "./utils/data";
+import { AuthProvider } from "./context/AuthContext";
+import { CartProvider } from "./context/CartContext";
 
 // Ocuparemos un createBrowserRouter de react-router-dom para mantener un orden dentro del archivo
 const router = createBrowserRouter([
@@ -152,11 +153,13 @@ function App() {
   useEffect(() => {
     initializeDataProductos();
     initializeDataUsuarios();
-  }, [])
-  
+  }, []);
+
   return (
     <AuthProvider>
-      <RouterProvider router={router} />
+      <CartProvider>
+        <RouterProvider router={router} />
+      </CartProvider>
     </AuthProvider>
   );
 }
