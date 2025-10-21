@@ -62,9 +62,9 @@
 }
 
 .modalCloseBtn .closeModal {
-    width: 20px;
-    height: 20px;
-    display: block;
+  width: 20px;
+  height: 20px;
+  display: block;
 }
 
 .modalBody {
@@ -85,4 +85,64 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.2s;
+}
+
+.toastContainer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 2000; /* por siaca */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toastNotification {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  border-radius: 8px;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  min-width: 250px;
+  max-width: 350px;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toastShow {
+  opacity: 1;
+  transform: translateX(0);
+}
+.toastHide {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.toast-success {
+  background-color: #4caf50;
+}
+.toast-error {
+  background-color: #f44336;
+}
+.toast-info {
+  background-color: #2196f3;
+}
+
+.toastMessage {
+  margin: 0;
+  flex-grow: 1;
+  font-size: 1rem;
+}
+
+.toastCloseBtn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  line-height: 1;
+  margin-left: 10px;
 }
