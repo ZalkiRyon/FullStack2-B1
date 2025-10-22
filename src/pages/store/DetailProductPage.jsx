@@ -3,11 +3,17 @@ import { useParams } from "react-router-dom";
 import { getProductosFromStorage } from "../../utils/dataProductos";
 import { useCart } from "../../context/CartContext";
 import Breadcrumbs from "../../components/common/BreadCrumbs";
+import { productImages } from "../../utils/dataProductos";
+import PrimaryButton from "../../components/common/PrimaryButton";
+import { useToast } from "../../context/ToastContext";
 
 const DetailProductPage = () => {
   const { id } = useParams();
-  const { addItem, deleteItem } = useCart();
-  const [producto, setProducto] = useState([]);
+  const { showToast } = useToast();
+  const { addItem } = useCart();
+
+  const [producto, setProducto] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
     let productosStorage = getProductosFromStorage();
@@ -16,41 +22,89 @@ const DetailProductPage = () => {
     setProducto(productoDetail);
   }, [id]);
 
+  const handleIncrement = () => setQuantity((prev) => prev + 1);
+  const handleDecrement = () =>
+    setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+
+  const handleAddCart = () => {
+    if (!producto) return;
+
+    addItem(producto, quantity);
+    showToast(
+      `Se agregaron ${quantity} unidades de ${producto.nombre} al carrito.`,
+      "success"
+    );
+    setQuantity(1);
+  };
+
+  if (!producto) {
+    return (
+      <main className="mainPage">
+        <div>Cargando detalle del producto...</div>
+      </main>
+    );
+  }
+
+  const totalPrice = producto ? producto.precio * quantity : 0;
+
+  const imagenSrc = productImages[producto.imagen] || productImages["default"];
+
   return (
-    <main class="d-flex flex-column mainDetalleProducto">
+    <main className="d-flex flex-column mainPage">
       <Breadcrumbs />
 
-      <section class="d-flex justify-content-between align-items-start">
-        <div class="containerImgProductoDetalle">
-          <img src="" class="imgDetalleProducto" id="imgDetalleProducto" />
+      <section className="d-flex justify-content-between align-items-start">
+        <div className="containerImgProductoDetalle">
+          <img
+            src={imagenSrc}
+            alt={`Imagen de ${producto.nombre}`}
+            className="imgDetalleProducto"
+          />
         </div>
-        <article class="detalleProducto">
-          <header class="d-flex flex-column">
-            <h2 id="nombreDetalleProducto"></h2>
-            <h3 id="precioDetalleProducto"></h3>
+        <article className="detalleProducto">
+          <header className="d-flex flex-column">
+            <h2 className="nombreDetalleProducto">{producto.nombre}</h2>
+            <div className="precioUnitarioDetalle">
+              <p>Precio unitario:</p>
+              <p>
+                <strong>${producto.precio.toLocaleString("es-CL")}</strong>
+              </p>
+            </div>
           </header>
-          <p id="descripcionDetalleProducto"></p>
-          <div class="d-flex flex-row align-items-baseline gap-2">
-            <label for="cantidad" class="cantidadDetalleLabel">
+          <p className="descripcionDetalleProducto">{producto.descripcion}</p>
+          <div className="d-flex flex-row align-items-baseline gap-2">
+            <label htmlFor="cantidad" className="cantidadDetalleLabel">
               Cantidad
             </label>
-            <div class="cantidadDetalleContainer">
-              <button class="btn-restar-detalle">-</button>
+
+            <div className="controlQuantity">
+              <button
+                className="btnQuantity"
+                onClick={handleDecrement}
+                disabled={quantity <= 1}
+              >
+                –
+              </button>
+
               <input
                 type="number"
-                id="cantidad"
-                name="cantidad"
-                min="1"
-                max="100"
-                value="1"
-                class="cantidadProductoCarrito"
-                onkeydown="return false"
-                onpaste="return false"
+                readOnly
+                value={quantity}
+                className="inputQuantity"
               />
-              <button class="btn-sumar-detalle">+</button>
+
+              <button className="btnQuantity" onClick={handleIncrement}>
+                +
+              </button>
             </div>
           </div>
-          <button class="btnAddProductoDetalle">Añadir al carrito</button>
+          <div className="precioTotalDetalle">
+            <p> Total a pagar:</p>
+            <p>
+              <strong>${totalPrice.toLocaleString("es-CL")}</strong>
+            </p>
+          </div>
+          <PrimaryButton text="Añadir al carrito" onClick={handleAddCart} />
         </article>
       </section>
     </main>
