@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import PrimaryButton from "../../components/common/PrimaryButton";
-import { getUsuariosFromStorage, regionesYComunas } from "../../utils/data";
+import BackButton from "../../components/common/BackButton";
+import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
+import { regionesYComunas } from "../../utils/dataRegiones";
 
 const DeleteUser = () => {
   const navigate = useNavigate();
@@ -42,10 +43,10 @@ const DeleteUser = () => {
         // Guardar en localStorage
         localStorage.setItem("ListaUsuarios", JSON.stringify(usuariosActualizados));
         
-        alert(`✓ Usuario eliminado exitosamente\n\nEl usuario ${usuario.nombre} ${usuario.apellido} ha sido eliminado del sistema.`);
+        alert(`Usuario eliminado exitosamente\n\nEl usuario ${usuario.nombre} ${usuario.apellido} ha sido eliminado del sistema.`);
         navigate("/admin/usuarios");
       } catch (error) {
-        alert(`✗ Error al eliminar usuario\n\nDetalle: ${error.message}`);
+        alert(`Error al eliminar usuario\n\nDetalle: ${error.message}`);
       }
     }
   };
@@ -271,10 +272,7 @@ const DeleteUser = () => {
 
           {/* Botones de acción */}
           <div className="formActionsGroup">
-            <PrimaryButton 
-              text={"Volver"} 
-              onClick={() => navigate("/admin/usuarios")}
-            />
+            <BackButton text="Volver" />
             <button 
               type="button"
               className="btnEliminarUsuario"

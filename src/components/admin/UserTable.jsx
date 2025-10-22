@@ -1,6 +1,6 @@
 import React from "react";
 
-const UserTable = ({ usuarios, onVer, onEditar, onEliminar }) => {
+const UserTable = ({ usuarios, onVer, onEditar, onHistorial }) => {
   return (
     <div className="tableContainer">
       <table className="productosTable">
@@ -57,13 +57,13 @@ const UserTable = ({ usuarios, onVer, onEditar, onEliminar }) => {
                           ✏
                         </button>
                       )}
-                      {onEliminar && (
+                      {onHistorial && (
                         <button
-                          onClick={() => onEliminar(usuario.id)}
-                          className="btnAccion btnEliminar"
-                          title="Eliminar"
+                          onClick={() => onHistorial(usuario.id)}
+                          className="btnAccion btnHistorial"
+                          title="Historial de Compras"
                         >
-                          🗑
+                          📋
                         </button>
                       )}
                     </div>

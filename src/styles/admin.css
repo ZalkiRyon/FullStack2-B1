@@ -438,6 +438,24 @@
   background-color: #28a745;
 }
 
+/* Badges de estados para órdenes */
+.estadoEnviado {
+  background-color: #28a745;
+}
+
+.estadoProcesando {
+  background-color: #ffc107;
+  color: #000;
+}
+
+.estadoPendiente {
+  background-color: #17a2b8;
+}
+
+.estadoCancelado {
+  background-color: #dc3545;
+}
+
 /* Botones de acciones */
 .accionesButtons {
   display: flex;
@@ -484,6 +502,15 @@
 .btnEliminar:hover {
   background-color: #dc3545;
   border-color: #dc3545;
+}
+
+.btnHistorial {
+  border-color: #28a745;
+}
+
+.btnHistorial:hover {
+  background-color: #28a745;
+  border-color: #28a745;
 }
 
 /* No resultados */

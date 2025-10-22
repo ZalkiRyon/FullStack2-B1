@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import logoEmpresa from "../../assets/img/logoEmpresa.jpg";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import { useAuth } from "../../context/AuthContext";
-import { getUsuariosFromStorage } from "../../utils/data";
+import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
 
 const LoginPage = () => {
   const navigate = useNavigate();

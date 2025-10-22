@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import PrimaryButton from "../../components/common/PrimaryButton";
+import BackButton from "../../components/common/BackButton";
 import { getProductosFromStorage } from "../../utils/dataProductos";
 
 const EditProduct = () => {
@@ -52,10 +52,6 @@ const EditProduct = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  };
-
-  const handleVolver = () => {
-    navigate("/admin/inventario");
   };
 
   // Manejar envío del formulario
@@ -270,7 +266,7 @@ const EditProduct = () => {
 
           {/* Botones de acción */}
           <div className="formActionsGroup">
-            <PrimaryButton text={"Volver"} onClick={handleVolver} />
+            <BackButton text="Volver" />
             <button 
               type="submit"
               className="btnGuardarCambios"

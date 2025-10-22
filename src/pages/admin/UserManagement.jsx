@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUsuariosFromStorage } from "../../utils/data";
+import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import UserFilters from "../../components/admin/UserFilters";
 import UserTable from "../../components/admin/UserTable";
@@ -82,8 +82,8 @@ const UserManagement = () => {
     navigate(`/admin/editar-usuario/${id}`);
   };
 
-  const handleEliminar = (id) => {
-    navigate(`/admin/eliminar-usuario/${id}`);
+  const handleHistorial = (id) => {
+    navigate(`/admin/usuario/${id}/historial-compras`);
   };
 
   return (
@@ -122,7 +122,7 @@ const UserManagement = () => {
           usuarios={filteredUsuarios}
           onVer={handleVer}
           onEditar={handleEditar}
-          onEliminar={handleEliminar}
+          onHistorial={handleHistorial}
         />
       </div>
     </div>

@@ -19,8 +19,7 @@ const ProductFilters = ({
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
           className="searchInput"
-        />
-        <span className="searchIcon">🔍</span>
+        />       
       </div>
 
       {/* Filtro de categoría */}

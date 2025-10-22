@@ -115,13 +115,7 @@ export const productImages = {
   "default": defaultImage,
 };
 
-export const initializeDataProductos = () => {
-  if (!localStorage.getItem("ListaProductos")) {
-    console.log("Inicializando productos en localStorage...");
-    localStorage.setItem("ListaProductos", JSON.stringify(listaProductos));
-  }
-};
-
+// Funciones para gestión de productos en localStorage
 export const getProductosFromStorage = () => {
   const storedProducts = localStorage.getItem("ListaProductos");
   if (storedProducts) {

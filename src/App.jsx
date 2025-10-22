@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/store/HomePage";
 import StoreLayout from "./layouts/StoreLayout";
 import CatalogPage from "./pages/store/CatalogPage";
+import DetailProductPage from "./pages/store/DetailProductPage";
 import AboutPage from "./pages/store/AboutPage";
 import BlogPage from "./pages/store/BlogPage";
 import ContactPage from "./pages/store/ContactPage";
@@ -18,6 +19,7 @@ import NewUser from "./pages/admin/NewUser";
 import ShowUser from "./pages/admin/ShowUser";
 import EditUser from "./pages/admin/EditUser";
 import DeleteUser from "./pages/admin/DeleteUser";
+import UserPurchaseHistory from "./pages/admin/UserPurchaseHistory";
 import ShowProduct from "./pages/admin/ShowProduct";
 import EditProduct from "./pages/admin/EditProduct";
 import DeleteProduct from "./pages/admin/DeleteProduct";
@@ -25,13 +27,15 @@ import ConfiguracionesPage from "./pages/admin/ConfiguracionesPage";
 import PerfilPage from "./pages/admin/PerfilPage";
 import BuscarPage from "./pages/admin/BuscarPage";
 import AyudaPage from "./pages/admin/AyudaPage";
+import OrderManagement from "./pages/admin/OrderManagement";
+import ShowOrden from "./pages/admin/ShowOrden";
+import ReportesPage from "./pages/admin/ReportesPage";
 import NotFoundPage from "./pages/common/NotFoundPage";
-import { initializeDataProductos } from "./utils/dataProductos";
-import { initializeDataUsuarios } from "./utils/data";
+
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { ToastProvider } from "./context/ToastContext";
-import DetailProductPage from "./pages/store/DetailProductPage";
+import { initializeApp } from "./services/initializationService";
 
 // Ocuparemos un createBrowserRouter de react-router-dom para mantener un orden dentro del archivo
 const router = createBrowserRouter([
@@ -127,8 +131,24 @@ const router = createBrowserRouter([
         element: <DeleteUser />,
       },
       {
+        path: "usuario/:id/historial-compras",
+        element: <UserPurchaseHistory />,
+      },
+      {
         path: "nuevo-usuario",
         element: <NewUser />,
+      },
+      {
+        path: "ordenes",
+        element: <OrderManagement />,
+      },
+      {
+        path: "orden/:id",
+        element: <ShowOrden />,
+      },
+      {
+        path: "reportes",
+        element: <ReportesPage />,
       },
       {
         path: "configuraciones",
@@ -157,8 +177,7 @@ const router = createBrowserRouter([
 
 function App() {
   useEffect(() => {
-    initializeDataProductos();
-    initializeDataUsuarios();
+    initializeApp();
   }, []);
 
   return (
