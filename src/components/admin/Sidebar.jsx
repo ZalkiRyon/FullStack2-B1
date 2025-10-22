@@ -66,6 +66,26 @@ const Sidebar = () => {
               <span className="sidebarText">Usuarios</span>
             </NavLink>
           </li>
+          <li className="sidebarMenuItem">
+            <NavLink
+              to="/admin/ordenes"
+              className={({ isActive }) =>
+                isActive ? "sidebarLink sidebarLinkActive" : "sidebarLink"
+              }
+            >
+              <span className="sidebarText">Ordenes</span>
+            </NavLink>
+          </li>
+          <li className="sidebarMenuItem">
+            <NavLink
+              to="/admin/reportes"
+              className={({ isActive }) =>
+                isActive ? "sidebarLink sidebarLinkActive" : "sidebarLink"
+              }
+            >
+              <span className="sidebarText">Reportes</span>
+            </NavLink>
+          </li>
         </ul>
       </nav>
 
@@ -74,42 +94,12 @@ const Sidebar = () => {
         <ul className="sidebarMenuFooter">
           <li className="sidebarMenuItem">
             <NavLink
-              to="/admin/configuraciones"
-              className={({ isActive }) =>
-                isActive ? "sidebarLink sidebarLinkActive" : "sidebarLink"
-              }
-            >
-              <span className="sidebarText">Configuraciones</span>
-            </NavLink>
-          </li>
-          <li className="sidebarMenuItem">
-            <NavLink
               to="/admin/perfil"
               className={({ isActive }) =>
                 isActive ? "sidebarLink sidebarLinkActive" : "sidebarLink"
               }
             >
               <span className="sidebarText">Perfil</span>
-            </NavLink>
-          </li>
-          <li className="sidebarMenuItem">
-            <NavLink
-              to="/admin/buscar"
-              className={({ isActive }) =>
-                isActive ? "sidebarLink sidebarLinkActive" : "sidebarLink"
-              }
-            >
-              <span className="sidebarText">Buscar</span>
-            </NavLink>
-          </li>
-          <li className="sidebarMenuItem">
-            <NavLink
-              to="/admin/ayuda"
-              className={({ isActive }) =>
-                isActive ? "sidebarLink sidebarLinkActive" : "sidebarLink"
-              }
-            >
-              <span className="sidebarText">Ayuda</span>
             </NavLink>
           </li>
         </ul>

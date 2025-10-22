@@ -26,6 +26,9 @@ import ConfiguracionesPage from "./pages/admin/ConfiguracionesPage";
 import PerfilPage from "./pages/admin/PerfilPage";
 import BuscarPage from "./pages/admin/BuscarPage";
 import AyudaPage from "./pages/admin/AyudaPage";
+import OrderManagement from "./pages/admin/OrderManagement";
+import ShowOrden from "./pages/admin/ShowOrden";
+import ReportesPage from "./pages/admin/ReportesPage";
 import NotFoundPage from "./pages/common/NotFoundPage";
 import { initializeApp } from "./services/initializationService";
 
@@ -121,6 +124,18 @@ const router = createBrowserRouter([
       {
         path: "nuevo-usuario",
         element: <NewUser />,
+      },
+      {
+        path: "ordenes",
+        element: <OrderManagement />,
+      },
+      {
+        path: "orden/:id",
+        element: <ShowOrden />,
+      },
+      {
+        path: "reportes",
+        element: <ReportesPage />,
       },
       {
         path: "configuraciones",
