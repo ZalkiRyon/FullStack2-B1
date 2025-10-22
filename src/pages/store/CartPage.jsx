@@ -3,17 +3,20 @@ import { useCart } from "../../context/CartContext";
 import CartItem from "../../components/store/CartItem";
 import Modal from "../../components/common/Modal";
 import PrimaryButton from "../../components/common/PrimaryButton";
+import { useToast } from "../../context/ToastContext";
 
 function CartPage() {
   const { cartItems, addItem, deleteItem, cleanCart, totalPrice } = useCart();
+  const { showToast } = useToast();
   const [confirmModal, setConfirmModal] = useState(false);
 
   const handleCleanCart = () => {
-    if (cartItems > 0) {
+    if (cartItems.length > 0) {
       cleanCart();
       setConfirmModal(false);
+      showToast("Carrito de compras vaciado correctamente", "success", 5000);
     } else {
-      alert("no hay na pa eliminar");
+      showToast("Carrito actualmente vacio", "info", 5000);
     }
   };
 

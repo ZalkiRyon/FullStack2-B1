@@ -6,7 +6,7 @@ import { useCart } from "../../context/CartContext";
 const Header = () => {
 
   const { totalItemsCount } = useCart();
-  console.log(totalItemsCount)
+
   return (
     <header className="header">
       <div className="d-flex align-items-center">

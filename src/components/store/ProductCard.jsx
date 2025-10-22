@@ -29,7 +29,7 @@ const ProductCard = ({
           <img src={imagenSrc} alt={`Producto ${name}`} />
         </div>
         <div className="contenidoCartaProducto">
-          <p>{category}</p>
+          <p>{name}</p>
           <p>${price}</p>
         </div>
       </article>

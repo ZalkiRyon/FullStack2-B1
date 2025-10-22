@@ -248,9 +248,10 @@ footer {
 .cardProductos {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 350px;
+  justify-content: space-between;
   background-color: white;
-  padding: 1rem;
+  padding: 1.5rem 2rem;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
@@ -746,7 +747,7 @@ footer {
   text-align: center;
   font-family: var(--fuente-principal);
 }
-.productoCarritoControls{
+.productoCarritoControls {
   display: flex;
   flex-flow: column nowrap;
   align-items: flex-end;
@@ -779,10 +780,10 @@ footer {
 .izqCarrito {
   width: 65%;
 }
-.cartList{
+.cartList {
   width: 95%;
 }
-.controlQuantity{
+.controlQuantity {
   display: flex;
   align-items: center;
 }
@@ -820,7 +821,7 @@ footer {
 .btnDescuento {
   width: fit-content;
 }
-.containerFooterBtnResumeCart{
+.containerFooterBtnResumeCart {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
