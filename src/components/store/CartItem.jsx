@@ -31,7 +31,9 @@ const CartItem = ({
       </div>
 
       <div className="productoCarritoControls">
-        <span className="precioItem">Subtotal: ${price.toLocaleString("es-CL") * quantity}</span>
+        <span className="precioItem">
+          Subtotal: ${(price * quantity).toLocaleString("es-CL")}
+        </span>
 
         <div className="controlQuantity">
           <button

@@ -742,7 +742,6 @@ footer {
 }
 
 .precioItem {
-  color: var(--color-verde-esmeralda);
   font-weight: bold;
   text-align: center;
   font-family: var(--fuente-principal);
