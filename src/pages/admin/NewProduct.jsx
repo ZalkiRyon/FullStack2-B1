@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/common/PrimaryButton";
+import BackButton from "../../components/common/BackButton";
 import { getProductosFromStorage, saveProductoToStorage } from "../../utils/dataProductos";
 import { PREFIJOS_CATEGORIA } from "../../utils/dataCategorias";
 
@@ -203,8 +204,9 @@ const NewProduct = () => {
             />
           </div>
 
-          {/* Botón de guardar */}
-          <div className="formActions">
+          {/* Botones de acción */}
+          <div className="formActionsGroup">
+            <BackButton text="Volver" />
             <PrimaryButton text={"Guardar Producto"} type="submit" />
           </div>
         </form>

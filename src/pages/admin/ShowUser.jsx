@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import PrimaryButton from "../../components/common/PrimaryButton";
+import BackButton from "../../components/common/BackButton";
 import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
 import { regionesYComunas } from "../../utils/dataRegiones";
 
@@ -240,10 +240,7 @@ const ShowUser = () => {
 
           {/* Botón de volver */}
           <div className="formActions">
-            <PrimaryButton 
-              text={"Volver"} 
-              onClick={() => navigate("/admin/usuarios")}
-            />
+            <BackButton text="Volver" />
           </div>
         </div>
       </div>

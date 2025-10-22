@@ -19,6 +19,7 @@ import NewUser from "./pages/admin/NewUser";
 import ShowUser from "./pages/admin/ShowUser";
 import EditUser from "./pages/admin/EditUser";
 import DeleteUser from "./pages/admin/DeleteUser";
+import UserPurchaseHistory from "./pages/admin/UserPurchaseHistory";
 import ShowProduct from "./pages/admin/ShowProduct";
 import EditProduct from "./pages/admin/EditProduct";
 import DeleteProduct from "./pages/admin/DeleteProduct";
@@ -120,6 +121,10 @@ const router = createBrowserRouter([
       {
         path: "eliminar-usuario/:id",
         element: <DeleteUser />,
+      },
+      {
+        path: "usuario/:id/historial-compras",
+        element: <UserPurchaseHistory />,
       },
       {
         path: "nuevo-usuario",

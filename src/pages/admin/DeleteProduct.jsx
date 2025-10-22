@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import PrimaryButton from "../../components/common/PrimaryButton";
+import BackButton from "../../components/common/BackButton";
 import { getProductosFromStorage } from "../../utils/dataProductos";
 
 const DeleteProduct = () => {
@@ -25,10 +25,6 @@ const DeleteProduct = () => {
     const categoriasUnicas = [...new Set(productos.map((p) => p.categoria))];
     setCategorias(categoriasUnicas);
   }, [id, navigate]);
-
-  const handleVolver = () => {
-    navigate("/admin/inventario");
-  };
 
   const handleEliminar = () => {
     const confirmacion = window.confirm(
@@ -194,7 +190,7 @@ const DeleteProduct = () => {
 
           {/* Botones de acción */}
           <div className="formActionsGroup">
-            <PrimaryButton text={"Volver"} onClick={handleVolver} />
+            <BackButton text="Volver" />
             <button
               type="button"
               className="btnEliminarUsuario"

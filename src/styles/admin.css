@@ -504,6 +504,15 @@
   border-color: #dc3545;
 }
 
+.btnHistorial {
+  border-color: #28a745;
+}
+
+.btnHistorial:hover {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
 /* No resultados */
 .noResultados {
   text-align: center;

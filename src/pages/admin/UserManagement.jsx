@@ -82,8 +82,8 @@ const UserManagement = () => {
     navigate(`/admin/editar-usuario/${id}`);
   };
 
-  const handleEliminar = (id) => {
-    navigate(`/admin/eliminar-usuario/${id}`);
+  const handleHistorial = (id) => {
+    navigate(`/admin/usuario/${id}/historial-compras`);
   };
 
   return (
@@ -122,7 +122,7 @@ const UserManagement = () => {
           usuarios={filteredUsuarios}
           onVer={handleVer}
           onEditar={handleEditar}
-          onEliminar={handleEliminar}
+          onHistorial={handleHistorial}
         />
       </div>
     </div>

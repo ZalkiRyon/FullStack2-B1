@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import PrimaryButton from "../../components/common/PrimaryButton";
+import BackButton from "../../components/common/BackButton";
 import { getOrdenById } from "../../utils/dataOrdenes";
 
 const ShowOrden = () => {
@@ -19,10 +19,6 @@ const ShowOrden = () => {
       navigate("/admin/ordenes");
     }
   }, [id, navigate]);
-
-  const handleVolver = () => {
-    navigate("/admin/ordenes");
-  };
 
   // Función para formatear el precio
   const formatearPrecio = (precio) => {
@@ -194,7 +190,7 @@ const ShowOrden = () => {
 
           {/* Botón de volver */}
           <div className="formActions" style={{ marginTop: "2rem" }}>
-            <PrimaryButton text={"Volver a Órdenes"} onClick={handleVolver} />
+            <BackButton text="Volver" />
           </div>
         </form>
       </div>

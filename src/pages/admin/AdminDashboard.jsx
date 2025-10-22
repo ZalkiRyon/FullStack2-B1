@@ -7,7 +7,7 @@ const AdminDashboard = () => {
   // Obtener el nombre completo del usuario o usar placeholder
   const userName = usuario 
     ? `${usuario.nombre} ${usuario.apellido}` 
-    : "{Nombre Usuario}";
+    : "Nombre Usuario";
 
   return (
     <div className="adminDashboardContainer">
