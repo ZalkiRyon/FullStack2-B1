@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useCart } from "../../context/CartContext";
-import CartItem from "../../components/store/CartItem";
+import { CartItem } from "../../components/store/CartItem";
 import Modal from "../../components/common/Modal";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import { useToast } from "../../context/ToastContext";

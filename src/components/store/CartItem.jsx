@@ -1,6 +1,6 @@
 import { productImages } from "../../utils/dataProductos";
 
-const CartItem = ({
+export const CartItem = ({
   id,
   name,
   price,
@@ -60,4 +60,4 @@ const CartItem = ({
   );
 };
 
-export default CartItem;
+
