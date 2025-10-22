@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import PrimaryButton from "../../components/common/PrimaryButton";
-import { getUsuariosFromStorage, regionesYComunas } from "../../utils/data";
+import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
+import { regionesYComunas } from "../../utils/dataRegiones";
 
 const ShowUser = () => {
   const navigate = useNavigate();

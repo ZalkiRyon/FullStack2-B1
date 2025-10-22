@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUsuariosFromStorage } from "../../utils/data";
+import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import UserFilters from "../../components/admin/UserFilters";
 import UserTable from "../../components/admin/UserTable";

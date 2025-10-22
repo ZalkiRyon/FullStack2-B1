@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import { getProductosFromStorage, saveProductoToStorage } from "../../utils/dataProductos";
-import { PREFIJOS_CATEGORIA } from "../../utils/data";
+import { PREFIJOS_CATEGORIA } from "../../utils/dataCategorias";
 
 const NewProduct = () => {
   const navigate = useNavigate();

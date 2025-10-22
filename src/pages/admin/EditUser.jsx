@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import PrimaryButton from "../../components/common/PrimaryButton";
-import { getUsuariosFromStorage, regionesYComunas, validarEmailUnico, validarRunUnico } from "../../utils/data";
+import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
+import { regionesYComunas } from "../../utils/dataRegiones";
+import { validarEmailUnico, validarRunUnico } from "../../validators/usuarioValidators";
 
 const EditUser = () => {
   const navigate = useNavigate();
@@ -133,10 +135,10 @@ const EditUser = () => {
       // Guardar en localStorage
       localStorage.setItem("ListaUsuarios", JSON.stringify(usuarios));
       
-      alert(`✓ Usuario actualizado exitosamente\n\nLos datos de ${formData.nombre} ${formData.apellido} han sido actualizados.`);
+      alert(`Usuario actualizado exitosamente\n\nLos datos de ${formData.nombre} ${formData.apellido} han sido actualizados.`);
       navigate("/admin/usuarios");
     } catch (error) {
-      alert(`✗ Error al actualizar usuario\n\nDetalle: ${error.message}`);
+      alert(`Error al actualizar usuario\n\nDetalle: ${error.message}`);
     }
   };
 

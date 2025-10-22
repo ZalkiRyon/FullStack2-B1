@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/common/PrimaryButton";
-import { regionesYComunas, saveUsuarioToStorage, validarEmailUnico, validarRunUnico } from "../../utils/data";
+import { saveUsuarioToStorage } from "../../utils/dataUsuarios";
+import { regionesYComunas } from "../../utils/dataRegiones";
+import { validarEmailUnico, validarRunUnico } from "../../validators/usuarioValidators";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
