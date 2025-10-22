@@ -23,6 +23,7 @@ const DetailProductPage = () => {
   }, [id]);
 
   const handleIncrement = () => setQuantity((prev) => prev + 1);
+
   const handleDecrement = () =>
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
 
@@ -30,17 +31,19 @@ const DetailProductPage = () => {
     if (!producto) return;
 
     addItem(producto, quantity);
+
     showToast(
       `Se agregaron ${quantity} unidades de ${producto.nombre} al carrito.`,
       "success"
     );
+    
     setQuantity(1);
   };
 
   if (!producto) {
     return (
       <main className="mainPage">
-        <div>Cargando detalle del producto...</div>
+        <h2>Cargando detalle del producto...</h2>
       </main>
     );
   }

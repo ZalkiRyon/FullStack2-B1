@@ -54,7 +54,7 @@ function CartPage() {
           <h3>Total</h3>
         </div>
         <div className="d-flex justify-content-between align-items-center resumenCarrito">
-          <span>Total: {totalPrice}</span>
+          <span>Total: {totalPrice.toLocaleString("es-CL")}</span>
           <span id="totalCarrito"></span>
         </div>
         <div className="d-flex flex-column">

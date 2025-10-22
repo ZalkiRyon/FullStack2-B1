@@ -30,7 +30,7 @@ const ProductCard = ({
         </div>
         <div className="contenidoCartaProducto">
           <p>{name}</p>
-          <p>${price}</p>
+          <p>${price.toLocaleString("es-CL")}</p>
         </div>
       </article>
     );
@@ -52,7 +52,7 @@ const ProductCard = ({
             />
           </div>
           <h4 className="nameCardProductos">{name}</h4>
-          <span className="priceCardProductos">${price}</span>
+          <span className="priceCardProductos">${price.toLocaleString("es-CL")}</span>
         </Link>
 
         <PrimaryButton onClick={onClickButton} width="auto" text={"Añadir"} />
