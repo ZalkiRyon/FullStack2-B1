@@ -145,3 +145,43 @@
   line-height: 1;
   margin-left: 10px;
 }
+
+.breadcrumbsNav {
+  padding: 1rem 0;
+  margin-bottom: 20px;
+}
+
+.breadcrumbList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumbItem {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+
+.breadcrumbItem a {
+  color: var(--brown);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.breadcrumbItem a:hover {
+  color: var(--emerald);
+}
+
+.breadcrumbSeparator {
+  margin: 0 8px;
+  color: var(--brown);
+}
+
+.breadcrumbCurrent {
+  color: var(--emerald);
+  font-weight: bold;
+}

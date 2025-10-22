@@ -40,7 +40,7 @@ const ProductCard = ({
     return (
       <article className="cardProductos" data-producto-id={id}>
         <Link
-          to={`/producto/${id}`}
+          to={`/productos/${id}`}
           onClick={onClick}
           className="cardLink"
         >
