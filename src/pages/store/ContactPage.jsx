@@ -25,44 +25,47 @@ const ContactPage = () => {
         <h3 className="titleForm">Formulario de contactos</h3>
         <form className="formContacto" action="#" method="POST">
           <div className="mb-3">
-            <label className="labelForm" for="name">
+            <label className="labelForm" htmlFor="name">
               NOMBRE COMPLETO
             </label>
             <input
               type="text"
               className="formInput"
-              id="username"
-              name="username"
+              id="name"
+              name="name"
+              maxLength="100"
               required
             />
           </div>
 
           <div className="mb-3">
-            <label for="username" className="labelForm">
+            <label htmlFor="email" className="labelForm">
               CORREO
             </label>
             <input
               type="text"
               className="formInput"
-              id="username"
-              name="username"
+              id="email"
+              name="email"
+              maxLength="100"
               required
             />
           </div>
 
           <div className="mb-3">
-            <label for="password" className="labelForm">
-              CONTENIDO
+            <label htmlFor="comment" className="labelForm">
+              COMENTARIO
             </label>
             <input
-              type="password"
+              type="text"
               className="formInput"
-              id="password"
-              name="password"
+              id="comment"
+              name="comment"
+              maxLength="100"
               required
             />
           </div>
-          <PrimaryButton text={"Enviar mensaje"} onClick={handleOpenModal} />
+          <PrimaryButton text="Enviar mensaje" onClick={handleOpenModal} />
         </form>
       </section>
       <Modal
