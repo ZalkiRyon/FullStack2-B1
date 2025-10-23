@@ -4,11 +4,20 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'src/**/*.spec.js'
+      // Setup de jsdom para simular el DOM
+      { pattern: 'test-setup.js', watched: false },
+      // Archivos de prueba
+      { pattern: 'src/**/*.spec.js', watched: true }
     ],
-    reporters: ['spec'],
+    reporters: ['spec', 'kjhtml'],
     browsers: ['ChromeHeadless'],
     singleRun: true,
-    concurrency: Infinity
+    concurrency: Infinity,
+    client: {
+      clearContext: false,
+      jasmine: {
+        random: false
+      }
+    }
   });
 };
