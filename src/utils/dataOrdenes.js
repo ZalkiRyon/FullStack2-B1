@@ -533,6 +533,7 @@ export const getOrdenesByCliente = (clienteId) => {
 };
 
 export const saveOrdenToStorage = (nuevaOrden) => {
+
   try {
     const ordenes = getOrdenesFromStorage();
 

@@ -24,7 +24,10 @@ const OrdenSummary = ({ shippingCost, finalTotal }) => {
             return (
               <tr key={item.id}>
                 <td>
-                  <img src={imagenSrc} />
+                  <img
+                    src={imagenSrc}
+                    alt={`Imagen del producto ${item.nombre}`}
+                  />
                 </td>
                 <td>
                   <span className="product-item-name">{item.nombre}</span>

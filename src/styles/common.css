@@ -1,5 +1,6 @@
 /* Estilos comunes compartidos */
-.primaryButton {
+.primaryButton,
+.backButton {
   background-color: var(--emerald);
   color: #fff;
   border: none;
@@ -11,7 +12,47 @@
   font-weight: 600;
   text-transform: uppercase;
   text-decoration: none;
+  border: 2px solid var(--emerald);
   display: inline-block;
+}
+
+.primaryButton-default {
+  background-color: var(--emerald);
+  border: 2px solid var(--emerald);
+}
+
+.primaryButton-default:hover {
+  color: var(--emerald);
+}
+
+.primaryButton-error {
+  background-color: #dc3545;
+  border: 2px solid #dc3545;
+}
+.primaryButton-error:hover {
+  color: #dc3545;
+}
+
+.primaryButton-none,
+.backButton {
+  background: #333;
+  color: white;
+  border: 2px solid #333;
+}
+
+.primaryButton-none:hover,
+.backButton:hover {
+  color: #333;
+}
+
+.primaryButton:hover,
+.primaryButton-default:hover,
+.primaryButton-error:hover,
+.primaryButton-none:hover,
+.backButton:hover {
+  background-color: transparent;
+  transition: background-color 0.3s ease-out;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 .modalOverlay {
@@ -29,21 +70,22 @@
 
 .modalContent {
   background: #fff;
-  padding: 25px;
+  padding: 2rem;
   border-radius: 8px;
-  width: 90%;
-  max-width: 450px;
+  max-width: 60%;
+  max-height: 60%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .modalHeader {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 15px;
   width: 100%;
+  padding-bottom: 1rem;
 }
 
 .modalHeader h3 {
@@ -57,22 +99,24 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  margin-top: -10px;
+  align-self: flex-end;
 }
 
 .modalCloseBtn .closeModal {
   width: 20px;
   height: 20px;
-  display: block;
+  filter: invert(21%) sepia(5%) saturate(17%) hue-rotate(345deg) brightness(88%)
+    contrast(96%);
 }
 
 .modalBody {
-  margin-bottom: 20px;
+  border-top: 1px solid #e0e0e0;
+  padding: 2rem 0rem 3rem 0rem;
 }
 
 .modalFooter {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 10px;
 }
 

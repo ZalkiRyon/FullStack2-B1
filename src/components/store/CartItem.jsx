@@ -37,7 +37,7 @@ export const CartItem = ({
 
         <div className="controlQuantity">
           <button
-            className="btnQuantity"
+            className="btnQuantity btnQuantity-minus"
             onClick={() => onDecrement(id)}
             disabled={quantity < 1}
           >
@@ -51,7 +51,7 @@ export const CartItem = ({
             className="inputQuantity"
           />
 
-          <button className="btnQuantity" onClick={() => onIncrement(id)}>
+          <button className="btnQuantity btnQuantity-plus" onClick={() => onIncrement(id)}>
             +
           </button>
         </div>

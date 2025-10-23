@@ -10,6 +10,7 @@ import "../../styles/common.css";
 // height -> altura que se le queira dar, de otra forma sera automatico siempre
 // type -> tipo de botón (button, submit, reset) - por defecto "button"
 
+// color -> default(esmeralda), error(rojo), none(gris)
 const PrimaryButton = ({
   to,
   onClick,
@@ -17,7 +18,9 @@ const PrimaryButton = ({
   width = "100%",
   height = "auto",
   type = "button",
+  color = "default"
 }) => {
+  
   const dynamicStyles = {
     width: width,
     height: height,
@@ -30,7 +33,7 @@ const PrimaryButton = ({
         type={type}
         onClick={onClick}
         style={dynamicStyles}
-        className="primaryButton"
+        className={`primaryButton primaryButton-${color}`}
       >
         {text}
       </Link>
@@ -41,7 +44,7 @@ const PrimaryButton = ({
       onClick={onClick}
       type={type}
       style={dynamicStyles}
-      className="primaryButton"
+      className={`primaryButton primaryButton-${color}`}
     >
       {text}
     </button>

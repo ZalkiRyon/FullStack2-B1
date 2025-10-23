@@ -27,12 +27,11 @@ const Modal = ({
   return (
     <div className="modalOverlay" onClick={handleCancel}>
       <div className="modalContent" onClick={(e) => e.stopPropagation()}>
-        
         <div className="modalHeader">
-          <h3>{title}</h3>
           <button className="modalCloseBtn" onClick={handleCancel}>
-            <img src={close} alt="icon-close" className="closeModal"/>
+            <img src={close} alt="icon-close" className="closeModal" />
           </button>
+          <h3>{title}</h3>
         </div>
 
         <div className="modalBody">
@@ -41,12 +40,22 @@ const Modal = ({
 
         <div className="modalFooter">
           {showCancelButton && (
-            <button className="btn-cancel" onClick={handleCancel}>
-              Cancelar
-            </button>
+            <PrimaryButton
+              onClick={handleCancel}
+              text="Cancelar"
+              color="none"
+              height="50px"
+              width="fit-content"
+            />
           )}
 
-          <PrimaryButton onClick={handleConfirm} text={confirmText} to={to} />
+          <PrimaryButton
+            onClick={handleConfirm}
+            text={confirmText}
+            to={to}
+            height="50px"
+            width="fit-content"
+          />
         </div>
       </div>
     </div>

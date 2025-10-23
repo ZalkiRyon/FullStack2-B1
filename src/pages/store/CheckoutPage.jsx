@@ -30,14 +30,16 @@ const CheckoutPage = () => {
   const navigate = useNavigate();
   const [shippingCost, setShippingCost] = useState(0);
 
-  const ultimoElemento = getOrdenesFromStorage().length;
-
+  const allOrders = getOrdenesFromStorage();
+  const ultimoElemento = allOrders.length;
+  const ultimaOrden = allOrders[ultimoElemento - 1].numeroOrden;
+  const nuevoCodigoOrden = parseInt(ultimaOrden.slice(2, 6)) + 1;
   const [formData, setFormData] = useState({
     name: usuario?.nombre || "",
     lastname: usuario?.apellido || "",
     email: usuario?.email || "",
     telefono: usuario?.telefono || "",
-    direction: usuario?.direccion || "aaa",
+    direction: usuario?.direccion || "",
     department: "",
     region: usuario?.region || "",
     comuna: usuario?.comuna || "",
@@ -46,7 +48,7 @@ const CheckoutPage = () => {
 
   const [orderData, setOrderData] = useState({
     id: ultimoElemento ? ultimoElemento + 1 : 1,
-    numeroOrden: "SO" + generateRandomNumber(1000, 9000),
+    numeroOrden: "SO" + nuevoCodigoOrden,
     fecha: new Date().toISOString().split("T")[0],
     clienteId: usuario?.id || null,
     estado: generateRandomStatus(),
@@ -95,9 +97,9 @@ const CheckoutPage = () => {
       detalles: [...cartItems],
     };
 
-    saveOrdenToStorage(nuevaOrden);
+    const isSuccess = saveOrdenToStorage(nuevaOrden).success;
 
-    if (saveOrdenToStorage(nuevaOrden).success) {
+    if (isSuccess) {
       localStorage.setItem("UltimaOrdenId", nuevaOrden.id);
       navigate("/resumen-compra");
     } else {

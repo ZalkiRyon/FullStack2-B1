@@ -25,7 +25,7 @@ const BackButton = ({ text = "Volver", width = "auto", height = "auto" }) => {
   return (
     <button
       type="button"
-      className="primaryButton"
+      className="backButton"
       style={dynamicStyles}
       onClick={handleBack}
     >
