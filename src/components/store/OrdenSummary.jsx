@@ -1,68 +1,75 @@
 import React from "react";
 import { useCart } from "../../context/CartContext";
+import { productImages } from "../../utils/dataProductos";
 
-const OrdenSummary = () => {
+const OrdenSummary = ({ shippingCost, finalTotal }) => {
   const { cartItems, totalPrice } = useCart();
-  console.log(cartItems);
+
   return (
     <div>
-      <table className="product-table-details">
+      <table className="productTable">
         <thead>
           <tr>
-            <th style={{ width: "70%" }}>Imagen</th>
-            <th style={{ width: "70%" }}>Nombre</th>
-            <th style={{ textAlign: "left" }}>Precio</th>
-            <th style={{ textAlign: "left" }}>Cantidad</th>
-            <th style={{ textAlign: "left" }}>Total</th>
+            <th style={{ width: "15%" }}>Imagen</th>
+            <th style={{ width: "40%" }}>Nombre</th>
+            <th style={{ textAlign: "left", width: "15%" }}>Precio</th>
+            <th style={{ textAlign: "right", width: "15%" }}>Cantidad</th>
+            <th style={{ textAlign: "right", width: "20%" }}>Total</th>
           </tr>
         </thead>
         <tbody>
-          {cartItems.map((item) => (
-            <tr key={item.id}>
-              <td>
-                <span className="product-item-name">{item.imagen}</span>
-              </td>
-              <td>
-                <span className="product-item-name">{item.nombre}</span>
-              </td>
-              <td style={{ textAlign: "left" }}>
-                <span className="product-item-name">
-                  $ {item.precio.toLocaleString("es-CL")}
-                </span>
-              </td>
-              <td style={{ textAlign: "left" }}>
-                <span className="product-item-name">{item.cantidad}</span>
-              </td>
-              <td style={{ textAlign: "left" }}>
-                ${(item.precio * item.cantidad).toLocaleString("es-CL")}
-              </td>
-            </tr>
-          ))}
+          {cartItems.map((item) => {
+            const imagenSrc =
+              productImages[item.imagen] || productImages["default"];
+            return (
+              <tr key={item.id}>
+                <td>
+                  <img src={imagenSrc} />
+                </td>
+                <td>
+                  <span className="product-item-name">{item.nombre}</span>
+                </td>
+                <td style={{ textAlign: "left" }}>
+                  <span className="product-item-name">
+                    $ {item.precio.toLocaleString("es-CL")}
+                  </span>
+                </td>
+                <td style={{ textAlign: "right" }}>
+                  <span className="product-item-name">{item.cantidad}</span>
+                </td>
+                <td style={{ textAlign: "right" }}>
+                  ${(item.precio * item.cantidad).toLocaleString("es-CL")}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
 
-      <table className="summary-table">
+      <table className="summaryTable">
         <tbody>
-          <tr className="product-row">
-            <td>Subtotal:</td>
-            <td>${totalPrice.toLocaleString("es-CL")}</td>
+          <tr className="summaryTableRow">
+            <td style={{ textAlign: "left" }}>Subtotal:</td>
+            <td style={{ textAlign: "right" }}>
+              ${totalPrice.toLocaleString("es-CL")}
+            </td>
           </tr>
-          <tr className="product-row">
+          <tr className="summaryTableRow">
             <td>Envío:</td>
-            <td>
-              {/* {shippingCost === 0
+            <td style={{ textAlign: "right" }}>
+              {shippingCost === 0
                 ? "GRATIS"
-                : `$${shippingCost.toLocaleString("es-CL")}`} */}
+                : `$${shippingCost.toLocaleString("es-CL")}`}
             </td>
           </tr>
         </tbody>
       </table>
 
-      <div className="summary-total">
+      <div className="summaryTotal">
         <span>Total a Pagar:</span>
-        {/* descuentos + subtoral */}
-        <span className="total-amount">
-          ${totalPrice.toLocaleString("es-CL")}
+
+        <span className="totalAmount">
+          ${finalTotal.toLocaleString("es-CL")}
         </span>
       </div>
     </div>

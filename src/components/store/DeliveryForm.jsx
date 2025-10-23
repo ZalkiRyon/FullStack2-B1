@@ -1,26 +1,20 @@
-import React, { useState } from "react";
-import OrdenSummary from "./OrdenSummary";
-import { useAuth } from "../../context/AuthContext";
+import React, { useState, useEffect } from "react";
 import { regionesYComunas } from "../../utils/dataRegiones";
 
-const DeliveryForm = () => {
-  const { usuario } = useAuth();
 
-  const [selectedRegion, setSelectedRegion] = useState(usuario.region || "");
+const DeliveryForm = ({ formData, setFormData, handleFormChange }) => {
+  const [selectedRegion, setSelectedRegion] = useState(formData.region || "");
 
-  const [formData, setFormData] = useState({
-    name: usuario.nombre || "",
-    lastname: usuario.apellido || "",
-    email: usuario.email || "",
-    direction: usuario.direccion || "",
-    department: "",
-    telefono: usuario.telefono || "",
-    region: selectedRegion || "",
-    comuna: usuario.comuna || "",
-    comment: "",
-  });
 
-  // Obtener comunas de la región seleccionada
+  useEffect(() => {
+    if (formData.region && formData.region !== selectedRegion) {
+      setSelectedRegion(formData.region);
+    }
+
+  
+
+  }, [formData.region]);
+
   const comunasDisponibles = selectedRegion
     ? regionesYComunas[selectedRegion]?.comunas || []
     : [];
@@ -28,105 +22,106 @@ const DeliveryForm = () => {
   const handleRegionChange = (e) => {
     const region = e.target.value;
     setSelectedRegion(region);
-    setFormData({ ...formData, region: region, comuna: "" });
-  };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  // Manejar envío del formulario
-  const handleSubmit = (e) => {
-    e.preventDefault();
+    setFormData((prevData) => ({
+      ...prevData,
+      region: region,
+      comuna: "",
+    }));
   };
 
   return (
-    <form onSubmit={handleSubmit} className="checkout-wrapper">
-      <div>
+    <div>
+      <div className="deliveryForm" style={{ borderBottom: "1px solid #eee" }}>
         <h3>Datos de contacto</h3>
-        <div>
-          <div>
-            <label className="labelFormRegister" htmlFor="name">
+
+        <div className="formRow">
+          <div className="formField">
+            <label className="labelFormDelivery" htmlFor="name">
               Nombre*
             </label>
             <input
               type="text"
-              className="formInputRegister"
+              className="formInputDelivery"
               id="name"
               name="name"
               value={formData.name}
-              onChange={handleInputChange}
+              onChange={handleFormChange}
               required
             />
           </div>
-          <div>
-            <label className="labelFormRegister" htmlFor="lastname">
+          <div className="formField">
+            <label className="labelFormDelivery" htmlFor="lastname">
               Apellidos*
             </label>
             <input
               type="text"
-              className="formInputRegister"
+              className="formInputDelivery"
               id="lastname"
               name="lastname"
               value={formData.lastname}
-              onChange={handleInputChange}
+              onChange={handleFormChange}
               required
             />
           </div>
-          <div>
-            <label className="labelFormRegister" htmlFor="correo">
+        </div>
+        <div className="formRow">
+          <div className="formField">
+            <label className="labelFormDelivery" htmlFor="correo">
               Correo*
             </label>
             <input
               type="email"
-              className="formInputRegister"
+              className="formInputDelivery"
               id="email"
               name="email"
               value={formData.email}
-              onChange={handleInputChange}
+              onChange={handleFormChange}
               required
             />
           </div>
         </div>
       </div>
-      <div>
+      <div className="deliveryForm">
         <h3>Direccion de entrega de los productos</h3>
-        <div>
-          <div>
-            <label className="labelFormRegister" htmlFor="direction">
+
+        <div className="formRow">
+          <div className="formField">
+            <label className="labelFormDelivery" htmlFor="direction">
               Calle*
             </label>
             <input
               type="text"
-              className="formInputRegister"
+              className="formInputDelivery"
               id="direction"
               name="direction"
               value={formData.direction}
-              onChange={handleInputChange}
+              onChange={handleFormChange}
               required
             />
           </div>
-          <div>
-            <label className="labelFormRegister" htmlFor="department">
+          <div className="formField">
+            <label className="labelFormDelivery" htmlFor="department">
               Departamento (opcional)
             </label>
             <input
               type="text"
-              className="formInputRegister"
+              className="formInputDelivery"
               id="department"
               name="department"
               value={formData.department}
-              onChange={handleInputChange}
-              required
+              onChange={handleFormChange}
+            
             />
           </div>
-          <div>
-            <label className="labelFormRegister" htmlFor="region">
+        </div>
+        <div className="formRow">
+          <div className="formField">
+            <label className="labelFormDelivery" htmlFor="region">
               Region*
             </label>
             <select
-              className="formInputRegister formSelectRegister"
+              className="formInputDelivery formSelectDelivery"
               id="region"
               name="region"
               value={formData.region}
@@ -141,16 +136,16 @@ const DeliveryForm = () => {
               ))}
             </select>
           </div>
-          <div>
-            <label className="labelFormRegister" htmlFor="comuna">
+          <div className="formField">
+            <label className="labelFormDelivery" htmlFor="comuna">
               COMUNA
             </label>
             <select
-              className="formInputRegister formSelectRegister"
+              className="formInputDelivery formSelectDelivery"
               id="comuna"
               name="comuna"
               value={formData.comuna}
-              onChange={handleInputChange}
+              onChange={handleFormChange}
               disabled={!selectedRegion}
               required
             >
@@ -162,23 +157,25 @@ const DeliveryForm = () => {
               ))}
             </select>
           </div>
-          <div>
-            <label className="labelFormRegister" htmlFor="comment">
+        </div>
+        <div className="formRow">
+          <div className="formField">
+            <label className="labelFormDelivery" htmlFor="comment">
               Indicaciones para la entrega (opcional)
             </label>
             <input
               type="text"
-              className="formInputRegister"
+              className="formInputDelivery"
               id="comment"
               name="comment"
               value={formData.comment}
-              onChange={handleInputChange}
-              required
+              onChange={handleFormChange}
+              
             />
           </div>
         </div>
       </div>
-    </form>
+    </div>
   );
 };
 

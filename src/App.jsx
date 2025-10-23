@@ -8,7 +8,7 @@ import AboutPage from "./pages/store/AboutPage";
 import BlogPage from "./pages/store/BlogPage";
 import ContactPage from "./pages/store/ContactPage";
 import CartPage from "./pages/store/CartPage";
-import CheckoutPage from "./pages/store/CheckoutPage"; 
+import CheckoutPage from "./pages/store/CheckoutPage";
 import LoginPage from "./pages/store/LoginPage";
 import RegisterPage from "./pages/store/RegisterPage";
 import AdminLayout from "./layouts/AdminLayout";
@@ -37,7 +37,6 @@ import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { ToastProvider } from "./context/ToastContext";
 import { initializeApp } from "./services/initializationService";
-import CheckoutPage from "./pages/store/CheckoutPage";
 
 // Ocuparemos un createBrowserRouter de react-router-dom para mantener un orden dentro del archivo
 const router = createBrowserRouter([
