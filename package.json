@@ -7,9 +7,8 @@
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "lint": "eslint .",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "test:karma": "karma start"
+    "test": "karma start",
+    "eject": "react-scripts eject"
   },
   "dependencies": {
     "react": "^19.1.1",
@@ -19,15 +18,10 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
-    "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^14.6.1",
     "eslint": "^9.36.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "globals": "^16.4.0",
     "jasmine-core": "^5.12.0",
-    "jsdom": "^27.0.1",
     "karma": "^6.4.4",
     "karma-chrome-launcher": "^3.2.0",
     "karma-jasmine": "^5.1.0",

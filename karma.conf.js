@@ -1,17 +1,20 @@
-// karma.conf.js
-module.exports = function (config) {
+// Karma configuration
+module.exports = function(config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      // Setup de jsdom para simular el DOM
-      { pattern: 'test-setup.js', watched: false },
-      // Archivos de prueba
-      { pattern: 'src/**/*.spec.js', watched: true }
+      'src/**/*.spec.js'
     ],
+    exclude: [],
+    preprocessors: {},
     reporters: ['spec', 'kjhtml'],
+    port: 9876,
+    colors: true,
+    logLevel: config.LOG_INFO,
+    autoWatch: true,
     browsers: ['ChromeHeadless'],
-    singleRun: true,
+    singleRun: false,
     concurrency: Infinity,
     client: {
       clearContext: false,
