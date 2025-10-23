@@ -9,6 +9,7 @@ import {
 } from "../../utils/dataOrdenes";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "../../context/ToastContext";
 
 const generateRandomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -24,9 +25,9 @@ function generateRandomStatus() {
 
 const CheckoutPage = () => {
   const { usuario } = useAuth();
+  const { showToast } = useToast();
+  const { cartItems, totalPrice, cleanCart } = useCart();
   const navigate = useNavigate();
-  const { cartItems, totalPrice } = useCart();
-
   const [shippingCost, setShippingCost] = useState(0);
 
   const ultimoElemento = getOrdenesFromStorage().length;
@@ -96,7 +97,12 @@ const CheckoutPage = () => {
 
     saveOrdenToStorage(nuevaOrden);
 
-    localStorage.setItem("UltimaOrdenId", nuevaOrden.id);
+    if (saveOrdenToStorage(nuevaOrden).success) {
+      localStorage.setItem("UltimaOrdenId", nuevaOrden.id);
+      navigate("/resumen-compra");
+    } else {
+      showToast("Error al guardar la orden", "error", 10000);
+    }
   };
 
   if (cartItems.length === 0) {
