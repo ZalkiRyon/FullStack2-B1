@@ -7,11 +7,37 @@ export const ordenes = [
     clienteNombre: "Ana María Martínez López",
     estado: "Enviado",
     monto: 21300,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 1, productoNombre: "FR001 - Manzanas Fuji", cantidad: 5, precioUnitario: 1200, subtotal: 6000 },
-      { productoId: 7, productoNombre: "PO001 - Miel Organica", cantidad: 2, precioUnitario: 5000, subtotal: 10000 },
-      { productoId: 5, productoNombre: "VR002 - Espinacas Frescas", cantidad: 3, precioUnitario: 700, subtotal: 2100 },
-      { productoId: 3, productoNombre: "FR003 - Plátanos Cavendish", cantidad: 4, precioUnitario: 800, subtotal: 3200 },
+      {
+        productoId: 1,
+        productoNombre: "FR001 - Manzanas Fuji",
+        cantidad: 5,
+        precioUnitario: 1200,
+        subtotal: 6000,
+      },
+      {
+        productoId: 7,
+        productoNombre: "PO001 - Miel Organica",
+        cantidad: 2,
+        precioUnitario: 5000,
+        subtotal: 10000,
+      },
+      {
+        productoId: 5,
+        productoNombre: "VR002 - Espinacas Frescas",
+        cantidad: 3,
+        precioUnitario: 700,
+        subtotal: 2100,
+      },
+      {
+        productoId: 3,
+        productoNombre: "FR003 - Plátanos Cavendish",
+        cantidad: 4,
+        precioUnitario: 800,
+        subtotal: 3200,
+      },
     ],
   },
   {
@@ -22,9 +48,23 @@ export const ordenes = [
     clienteNombre: "Pedro Antonio Ramírez Castro",
     estado: "Pendiente",
     monto: 14500,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 2, productoNombre: "FR002 - Naranjas Valencia", cantidad: 10, precioUnitario: 1000, subtotal: 10000 },
-      { productoId: 4, productoNombre: "VR001 - Zanahorias Organicas", cantidad: 5, precioUnitario: 900, subtotal: 4500 },
+      {
+        productoId: 2,
+        productoNombre: "FR002 - Naranjas Valencia",
+        cantidad: 10,
+        precioUnitario: 1000,
+        subtotal: 10000,
+      },
+      {
+        productoId: 4,
+        productoNombre: "VR001 - Zanahorias Organicas",
+        cantidad: 5,
+        precioUnitario: 900,
+        subtotal: 4500,
+      },
     ],
   },
   {
@@ -35,8 +75,16 @@ export const ordenes = [
     clienteNombre: "Lucía Elena Fernández Morales",
     estado: "Cancelado",
     monto: 8000,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 3, productoNombre: "FR003 - Plátanos Cavendish", cantidad: 10, precioUnitario: 800, subtotal: 8000 },
+      {
+        productoId: 3,
+        productoNombre: "FR003 - Plátanos Cavendish",
+        cantidad: 10,
+        precioUnitario: 800,
+        subtotal: 8000,
+      },
     ],
   },
   {
@@ -47,9 +95,23 @@ export const ordenes = [
     clienteNombre: "Juan Carlos Pérez Soto",
     estado: "Procesando",
     monto: 12000,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 6, productoNombre: "VR003 - Pimentones Tricolores", cantidad: 4, precioUnitario: 1500, subtotal: 6000 },
-      { productoId: 8, productoNombre: "PO002 - Quinua Organica", cantidad: 2, precioUnitario: 3000, subtotal: 6000 },
+      {
+        productoId: 6,
+        productoNombre: "VR003 - Pimentones Tricolores",
+        cantidad: 4,
+        precioUnitario: 1500,
+        subtotal: 6000,
+      },
+      {
+        productoId: 8,
+        productoNombre: "PO002 - Quinua Organica",
+        cantidad: 2,
+        precioUnitario: 3000,
+        subtotal: 6000,
+      },
     ],
   },
   {
@@ -60,9 +122,23 @@ export const ordenes = [
     clienteNombre: "Carla Andrea López Muñoz",
     estado: "Enviado",
     monto: 16800,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 1, productoNombre: "FR001 - Manzanas Fuji", cantidad: 8, precioUnitario: 1200, subtotal: 9600 },
-      { productoId: 9, productoNombre: "PL001 - Leche Entera", cantidad: 6, precioUnitario: 1200, subtotal: 7200 },
+      {
+        productoId: 1,
+        productoNombre: "FR001 - Manzanas Fuji",
+        cantidad: 8,
+        precioUnitario: 1200,
+        subtotal: 9600,
+      },
+      {
+        productoId: 9,
+        productoNombre: "PL001 - Leche Entera",
+        cantidad: 6,
+        precioUnitario: 1200,
+        subtotal: 7200,
+      },
     ],
   },
   {
@@ -73,9 +149,23 @@ export const ordenes = [
     clienteNombre: "Roberto Andrés Sánchez Vera",
     estado: "Pendiente",
     monto: 18500,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 7, productoNombre: "PO001 - Miel Organica", cantidad: 3, precioUnitario: 5000, subtotal: 15000 },
-      { productoId: 5, productoNombre: "VR002 - Espinacas Frescas", cantidad: 5, precioUnitario: 700, subtotal: 3500 },
+      {
+        productoId: 7,
+        productoNombre: "PO001 - Miel Organica",
+        cantidad: 3,
+        precioUnitario: 5000,
+        subtotal: 15000,
+      },
+      {
+        productoId: 5,
+        productoNombre: "VR002 - Espinacas Frescas",
+        cantidad: 5,
+        precioUnitario: 700,
+        subtotal: 3500,
+      },
     ],
   },
   {
@@ -86,9 +176,23 @@ export const ordenes = [
     clienteNombre: "María Cristina Silva Rojas",
     estado: "Enviado",
     monto: 16800,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 9, productoNombre: "PL001 - Leche Entera", cantidad: 10, precioUnitario: 1200, subtotal: 12000 },
-      { productoId: 3, productoNombre: "FR003 - Plátanos Cavendish", cantidad: 6, precioUnitario: 800, subtotal: 4800 },
+      {
+        productoId: 9,
+        productoNombre: "PL001 - Leche Entera",
+        cantidad: 10,
+        precioUnitario: 1200,
+        subtotal: 12000,
+      },
+      {
+        productoId: 3,
+        productoNombre: "FR003 - Plátanos Cavendish",
+        cantidad: 6,
+        precioUnitario: 800,
+        subtotal: 4800,
+      },
     ],
   },
   {
@@ -99,9 +203,23 @@ export const ordenes = [
     clienteNombre: "Diego Sebastián Morales Castro",
     estado: "Procesando",
     monto: 28000,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 7, productoNombre: "PO001 - Miel Organica", cantidad: 4, precioUnitario: 5000, subtotal: 20000 },
-      { productoId: 2, productoNombre: "FR002 - Naranjas Valencia", cantidad: 8, precioUnitario: 1000, subtotal: 8000 },
+      {
+        productoId: 7,
+        productoNombre: "PO001 - Miel Organica",
+        cantidad: 4,
+        precioUnitario: 5000,
+        subtotal: 20000,
+      },
+      {
+        productoId: 2,
+        productoNombre: "FR002 - Naranjas Valencia",
+        cantidad: 8,
+        precioUnitario: 1000,
+        subtotal: 8000,
+      },
     ],
   },
   {
@@ -112,8 +230,16 @@ export const ordenes = [
     clienteNombre: "Valentina Isabel Rojas Hernández",
     estado: "Cancelado",
     monto: 6000,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 1, productoNombre: "FR001 - Manzanas Fuji", cantidad: 5, precioUnitario: 1200, subtotal: 6000 },
+      {
+        productoId: 1,
+        productoNombre: "FR001 - Manzanas Fuji",
+        cantidad: 5,
+        precioUnitario: 1200,
+        subtotal: 6000,
+      },
     ],
   },
   {
@@ -124,9 +250,23 @@ export const ordenes = [
     clienteNombre: "Francisco Javier Gómez Torres",
     estado: "Enviado",
     monto: 14700,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 8, productoNombre: "PO002 - Quinua Organica", cantidad: 4, precioUnitario: 3000, subtotal: 12000 },
-      { productoId: 4, productoNombre: "VR001 - Zanahorias Organicas", cantidad: 3, precioUnitario: 900, subtotal: 2700 },
+      {
+        productoId: 8,
+        productoNombre: "PO002 - Quinua Organica",
+        cantidad: 4,
+        precioUnitario: 3000,
+        subtotal: 12000,
+      },
+      {
+        productoId: 4,
+        productoNombre: "VR001 - Zanahorias Organicas",
+        cantidad: 3,
+        precioUnitario: 900,
+        subtotal: 2700,
+      },
     ],
   },
   {
@@ -137,9 +277,23 @@ export const ordenes = [
     clienteNombre: "Camila Fernanda Vargas Pérez",
     estado: "Pendiente",
     monto: 13800,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 6, productoNombre: "VR003 - Pimentones Tricolores", cantidad: 6, precioUnitario: 1500, subtotal: 9000 },
-      { productoId: 1, productoNombre: "FR001 - Manzanas Fuji", cantidad: 4, precioUnitario: 1200, subtotal: 4800 },
+      {
+        productoId: 6,
+        productoNombre: "VR003 - Pimentones Tricolores",
+        cantidad: 6,
+        precioUnitario: 1500,
+        subtotal: 9000,
+      },
+      {
+        productoId: 1,
+        productoNombre: "FR001 - Manzanas Fuji",
+        cantidad: 4,
+        precioUnitario: 1200,
+        subtotal: 4800,
+      },
     ],
   },
   {
@@ -150,8 +304,16 @@ export const ordenes = [
     clienteNombre: "Andrés Felipe Muñoz Bravo",
     estado: "Enviado",
     monto: 8000,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 2, productoNombre: "FR002 - Naranjas Valencia", cantidad: 8, precioUnitario: 1000, subtotal: 8000 },
+      {
+        productoId: 2,
+        productoNombre: "FR002 - Naranjas Valencia",
+        cantidad: 8,
+        precioUnitario: 1000,
+        subtotal: 8000,
+      },
     ],
   },
   {
@@ -162,9 +324,23 @@ export const ordenes = [
     clienteNombre: "Daniela Patricia Castro Fuentes",
     estado: "Procesando",
     monto: 9600,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 5, productoNombre: "VR002 - Espinacas Frescas", cantidad: 8, precioUnitario: 700, subtotal: 5600 },
-      { productoId: 3, productoNombre: "FR003 - Plátanos Cavendish", cantidad: 5, precioUnitario: 800, subtotal: 4000 },
+      {
+        productoId: 5,
+        productoNombre: "VR002 - Espinacas Frescas",
+        cantidad: 8,
+        precioUnitario: 700,
+        subtotal: 5600,
+      },
+      {
+        productoId: 3,
+        productoNombre: "FR003 - Plátanos Cavendish",
+        cantidad: 5,
+        precioUnitario: 800,
+        subtotal: 4000,
+      },
     ],
   },
   {
@@ -175,9 +351,23 @@ export const ordenes = [
     clienteNombre: "Ana María Martínez López",
     estado: "Enviado",
     monto: 29800,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 7, productoNombre: "PO001 - Miel Organica", cantidad: 5, precioUnitario: 5000, subtotal: 25000 },
-      { productoId: 9, productoNombre: "PL001 - Leche Entera", cantidad: 4, precioUnitario: 1200, subtotal: 4800 },
+      {
+        productoId: 7,
+        productoNombre: "PO001 - Miel Organica",
+        cantidad: 5,
+        precioUnitario: 5000,
+        subtotal: 25000,
+      },
+      {
+        productoId: 9,
+        productoNombre: "PL001 - Leche Entera",
+        cantidad: 4,
+        precioUnitario: 1200,
+        subtotal: 4800,
+      },
     ],
   },
   {
@@ -188,8 +378,16 @@ export const ordenes = [
     clienteNombre: "Pedro Antonio Ramírez Castro",
     estado: "Cancelado",
     monto: 5400,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 4, productoNombre: "VR001 - Zanahorias Organicas", cantidad: 6, precioUnitario: 900, subtotal: 5400 },
+      {
+        productoId: 4,
+        productoNombre: "VR001 - Zanahorias Organicas",
+        cantidad: 6,
+        precioUnitario: 900,
+        subtotal: 5400,
+      },
     ],
   },
   {
@@ -200,9 +398,23 @@ export const ordenes = [
     clienteNombre: "Juan Carlos Pérez Soto",
     estado: "Pendiente",
     monto: 21600,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 8, productoNombre: "PO002 - Quinua Organica", cantidad: 6, precioUnitario: 3000, subtotal: 18000 },
-      { productoId: 1, productoNombre: "FR001 - Manzanas Fuji", cantidad: 3, precioUnitario: 1200, subtotal: 3600 },
+      {
+        productoId: 8,
+        productoNombre: "PO002 - Quinua Organica",
+        cantidad: 6,
+        precioUnitario: 3000,
+        subtotal: 18000,
+      },
+      {
+        productoId: 1,
+        productoNombre: "FR001 - Manzanas Fuji",
+        cantidad: 3,
+        precioUnitario: 1200,
+        subtotal: 3600,
+      },
     ],
   },
   {
@@ -213,9 +425,23 @@ export const ordenes = [
     clienteNombre: "Carla Andrea López Muñoz",
     estado: "Procesando",
     monto: 10300,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 6, productoNombre: "VR003 - Pimentones Tricolores", cantidad: 5, precioUnitario: 1500, subtotal: 7500 },
-      { productoId: 5, productoNombre: "VR002 - Espinacas Frescas", cantidad: 4, precioUnitario: 700, subtotal: 2800 },
+      {
+        productoId: 6,
+        productoNombre: "VR003 - Pimentones Tricolores",
+        cantidad: 5,
+        precioUnitario: 1500,
+        subtotal: 7500,
+      },
+      {
+        productoId: 5,
+        productoNombre: "VR002 - Espinacas Frescas",
+        cantidad: 4,
+        precioUnitario: 700,
+        subtotal: 2800,
+      },
     ],
   },
   {
@@ -226,8 +452,16 @@ export const ordenes = [
     clienteNombre: "Roberto Andrés Sánchez Vera",
     estado: "Enviado",
     monto: 15000,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 2, productoNombre: "FR002 - Naranjas Valencia", cantidad: 15, precioUnitario: 1000, subtotal: 15000 },
+      {
+        productoId: 2,
+        productoNombre: "FR002 - Naranjas Valencia",
+        cantidad: 15,
+        precioUnitario: 1000,
+        subtotal: 15000,
+      },
     ],
   },
   {
@@ -238,8 +472,16 @@ export const ordenes = [
     clienteNombre: "María Cristina Silva Rojas",
     estado: "Pendiente",
     monto: 14400,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 9, productoNombre: "PL001 - Leche Entera", cantidad: 12, precioUnitario: 1200, subtotal: 14400 },
+      {
+        productoId: 9,
+        productoNombre: "PL001 - Leche Entera",
+        cantidad: 12,
+        precioUnitario: 1200,
+        subtotal: 14400,
+      },
     ],
   },
   {
@@ -250,9 +492,23 @@ export const ordenes = [
     clienteNombre: "Diego Sebastián Morales Castro",
     estado: "Enviado",
     monto: 38000,
+    departamento: "",
+    comentario: "",
     detalles: [
-      { productoId: 7, productoNombre: "PO001 - Miel Organica", cantidad: 6, precioUnitario: 5000, subtotal: 30000 },
-      { productoId: 3, productoNombre: "FR003 - Plátanos Cavendish", cantidad: 10, precioUnitario: 800, subtotal: 8000 },
+      {
+        productoId: 7,
+        productoNombre: "PO001 - Miel Organica",
+        cantidad: 6,
+        precioUnitario: 5000,
+        subtotal: 30000,
+      },
+      {
+        productoId: 3,
+        productoNombre: "FR003 - Plátanos Cavendish",
+        cantidad: 10,
+        precioUnitario: 800,
+        subtotal: 8000,
+      },
     ],
   },
 ];
@@ -268,37 +524,39 @@ export const getOrdenesFromStorage = () => {
 
 export const getOrdenById = (id) => {
   const ordenes = getOrdenesFromStorage();
-  return ordenes.find(orden => orden.id === parseInt(id));
+  return ordenes.find((orden) => orden.id === parseInt(id));
 };
 
 export const getOrdenesByCliente = (clienteId) => {
   const ordenes = getOrdenesFromStorage();
-  return ordenes.filter(orden => orden.clienteId === parseInt(clienteId));
+  return ordenes.filter((orden) => orden.clienteId === parseInt(clienteId));
 };
 
 export const saveOrdenToStorage = (nuevaOrden) => {
   try {
     const ordenes = getOrdenesFromStorage();
-    
+
     // Generar nuevo ID
-    const nuevoId = ordenes.length > 0 
-      ? Math.max(...ordenes.map(o => o.id)) + 1 
-      : 1;
-    
+    const nuevoId =
+      ordenes.length > 0 ? Math.max(...ordenes.map((o) => o.id)) + 1 : 1;
+
     // Calcular monto total
-    const montoTotal = nuevaOrden.detalles.reduce((sum, detalle) => sum + detalle.subtotal, 0);
-    
+    const montoTotal = nuevaOrden.detalles.reduce(
+      (sum, detalle) => sum + detalle.subtotal,
+      0
+    );
+
     const ordenCompleta = {
       id: nuevoId,
-      fecha: new Date().toISOString().split('T')[0],
-      numeroOrden: `SO${String(1000 + nuevoId).padStart(4, '0')}`,
+      fecha: new Date().toISOString().split("T")[0],
+      numeroOrden: `SO${String(1000 + nuevoId).padStart(4, "0")}`,
       ...nuevaOrden,
       monto: montoTotal,
     };
-    
+
     ordenes.push(ordenCompleta);
     localStorage.setItem("ListaOrdenes", JSON.stringify(ordenes));
-    
+
     return { success: true, orden: ordenCompleta };
   } catch (error) {
     console.error("Error al guardar orden:", error);
@@ -309,20 +567,23 @@ export const saveOrdenToStorage = (nuevaOrden) => {
 export const updateOrdenInStorage = (id, ordenActualizada) => {
   try {
     const ordenes = getOrdenesFromStorage();
-    const index = ordenes.findIndex(o => o.id === parseInt(id));
-    
+    const index = ordenes.findIndex((o) => o.id === parseInt(id));
+
     if (index === -1) {
       return { success: false, error: "Orden no encontrada" };
     }
-    
+
     // Recalcular monto si hay detalles
     if (ordenActualizada.detalles) {
-      ordenActualizada.monto = ordenActualizada.detalles.reduce((sum, detalle) => sum + detalle.subtotal, 0);
+      ordenActualizada.monto = ordenActualizada.detalles.reduce(
+        (sum, detalle) => sum + detalle.subtotal,
+        0
+      );
     }
-    
+
     ordenes[index] = { ...ordenes[index], ...ordenActualizada };
     localStorage.setItem("ListaOrdenes", JSON.stringify(ordenes));
-    
+
     return { success: true, orden: ordenes[index] };
   } catch (error) {
     console.error("Error al actualizar orden:", error);
@@ -333,14 +594,14 @@ export const updateOrdenInStorage = (id, ordenActualizada) => {
 export const deleteOrdenFromStorage = (id) => {
   try {
     const ordenes = getOrdenesFromStorage();
-    const filteredOrdenes = ordenes.filter(o => o.id !== parseInt(id));
-    
+    const filteredOrdenes = ordenes.filter((o) => o.id !== parseInt(id));
+
     if (filteredOrdenes.length === ordenes.length) {
       return { success: false, error: "Orden no encontrada" };
     }
-    
+
     localStorage.setItem("ListaOrdenes", JSON.stringify(filteredOrdenes));
-    
+
     return { success: true };
   } catch (error) {
     console.error("Error al eliminar orden:", error);

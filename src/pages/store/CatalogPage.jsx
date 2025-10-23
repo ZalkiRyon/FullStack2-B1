@@ -24,7 +24,6 @@ function CatalogPage() {
     addItem(produ, 1);
 
     showToast(`Se agregó ${produ.nombre} al carrito.`, "success");
-    console.log(produ);
   };
 
   useEffect(() => {
