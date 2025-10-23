@@ -1,7 +1,7 @@
 /**
  * Pruebas de Componentes React - ProductForm
  * 
- * ✅ Prueba de Estado (cambio en input)
+ * Prueba de Estado (cambio en input)
  */
 
 describe('ProductForm Component', () => {
@@ -17,7 +17,7 @@ describe('ProductForm Component', () => {
     container = null;
   });
 
-  // ✅ PRUEBA DE ESTADO (CAMBIO EN INPUT)
+  //  PRUEBA DE ESTADO (CAMBIO EN INPUT)
   it('debería actualizar el estado cuando el usuario escribe en un input', () => {
     // Arrange
     let formData = { nombre: '' };
