@@ -38,6 +38,7 @@ import { CartProvider } from "./context/CartContext";
 import { ToastProvider } from "./context/ToastContext";
 import { initializeApp } from "./services/initializationService";
 import OrdenSummaryPage from "./pages/store/OrdenSummaryPage";
+import DiscountProductPage from "./pages/store/DiscountProductPage";
 
 // Ocuparemos un createBrowserRouter de react-router-dom para mantener un orden dentro del archivo
 const router = createBrowserRouter([
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
       {
         path: "resumen-compra",
         element: <OrdenSummaryPage />,
+      },
+      {
+        path: "descuentos",
+        element: <DiscountProductPage />,
       },
       {
         path: "inicio-sesion",

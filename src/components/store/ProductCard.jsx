@@ -50,6 +50,7 @@ const ProductCard = ({
           <span className="priceCardProductos">
             ${price.toLocaleString("es-CL")}
           </span>
+          
         </Link>
 
         <PrimaryButton onClick={onClickButton} width="auto" text={"Añadir"} />
