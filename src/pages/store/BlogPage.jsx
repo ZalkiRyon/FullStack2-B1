@@ -42,7 +42,7 @@ const BlogPage = () => {
 
   return (
     <main className="mainPage">
-      <h1>Noticias importantes</h1>
+      <h1 className="title">Noticias importantes</h1>
 
       <article className="articleBlog">
         <div>
@@ -54,6 +54,7 @@ const BlogPage = () => {
           <PrimaryButton
             text={"Ver blog"}
             onClick={() => setIsOpenModal1(true)}
+            width="fit-content"
           />
         </div>
 
@@ -86,6 +87,7 @@ const BlogPage = () => {
           <PrimaryButton
             text={"Ver blog"}
             onClick={() => setIsOpenModal2(true)}
+            width="fit-content"
           />
         </div>
         <div className="containerImgBlogMin">

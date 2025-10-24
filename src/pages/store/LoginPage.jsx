@@ -68,18 +68,13 @@ const LoginPage = () => {
             className="imgLogoEmpresaLogin"
           />
         </div>
-        <h2 className="nombreEmpresaLogin">{"Huertix"}</h2>
+        <h2>Huertix</h2>
       </section>
 
       <section className="sectionLoginForm">
         <h3 className="titleFormLogin">Inicio de sesion</h3>
         <form className="formLogin" onSubmit={handleSubmit}>
-          
-          {error && (
-            <div className="loginError">
-              {error}
-            </div>
-          )}
+          {error && <div className="loginError">{error}</div>}
 
           <div className="formGroup">
             <label className="labelFormLogin" htmlFor="correo">

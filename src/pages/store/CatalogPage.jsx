@@ -73,7 +73,7 @@ function CatalogPage() {
 
   return (
     <div className="mainPage">
-      <h3 className="text-center">Productos</h3>
+      <h3 className="title">Productos</h3>
       <ProductFilters
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}

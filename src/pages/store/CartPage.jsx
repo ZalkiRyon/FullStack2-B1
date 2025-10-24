@@ -53,7 +53,7 @@ function CartPage() {
   return (
     <div className="mainPage d-flex">
       <section className="izqCarrito">
-        <h1>Mi carrito de compras</h1>
+        <h1 className="title">Mi carrito de compras</h1>
         <div className="cartList">
           {cartItems.length > 0 ? (
             cartItems.map((produc) => (
@@ -71,10 +71,10 @@ function CartPage() {
             ))
           ) : (
             <div className="mensajeErrorCarrito">
-              <h2>
-                No hay elementos en tu carrito {".·´¯`(>▂<)´¯`·."} <br /> Agrega
+              <h3>
+                No hay elementos en tu carrito <br /> Agrega
                 algunos productos para continuar...
-              </h2>
+              </h3>
             </div>
           )}
         </div>

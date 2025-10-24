@@ -251,73 +251,67 @@
 /* Filtros */
 .inventarioFilters {
   display: flex;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
   flex-wrap: wrap;
+  gap: 15px;
   align-items: center;
+  padding: 15px 20px;
+  margin-bottom: 25px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .searchBox {
-  position: relative;
-  flex: 1;
-  min-width: 250px;
+  flex-grow: 1;
+  min-width: 200px;
 }
 
 .searchInput {
   width: 100%;
-  padding: 0.75rem 2.5rem 0.75rem 1rem;
-  border: 1px solid #ccc;
+  padding: 10px 15px;
+  border: 1px solid #ced4da;
   border-radius: 5px;
-  font-family: var(--fuente-principal);
   font-size: 1rem;
-  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 .searchInput:focus {
+  border-color: var(--primary-color, var(--emerald));
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.25);
   outline: none;
-  border-color: var(--emerald);
-}
-
-.searchIcon {
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1.2rem;
-  pointer-events: none;
 }
 
 .filterSelect {
-  padding: 0.75rem 1rem;
-  border: 1px solid #ccc;
+  padding: 10px 15px;
+  border: 1px solid #ced4da;
   border-radius: 5px;
-  font-family: var(--fuente-principal);
-  font-size: 0.95rem;
+  font-size: 1rem;
   background-color: white;
   cursor: pointer;
-  min-width: 180px;
-}
-
-.filterSelect:focus {
-  outline: none;
-  border-color: var(--emerald);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  padding-right: 35px;
 }
 
 .btnLimpiar {
-  padding: 0.75rem 1.5rem;
+  padding: 10px 20px;
   background-color: white;
-  color: var(--secundary-text);
-  border: 1px solid #ccc;
+  color: var(--text-color, #555);
+  border: 1px solid #ced4da;
   border-radius: 5px;
-  font-family: var(--fuente-principal);
-  font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .btnLimpiar:hover {
-  background-color: var(--light-bg);
-  border-color: var(--secundary-text);
+  color: var(--primary-color, var(--emerald));
+  border: 1px solid var(--emerald);
 }
 
 /* Tabla */

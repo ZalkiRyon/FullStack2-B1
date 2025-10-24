@@ -116,8 +116,8 @@ const RegisterPage = () => {
 
   return (
     <main className="mainPage registerPageContainer">
-      <section className="sectionRegisterForm">
-        <h3 className="titleFormRegister">Registro de Usuario</h3>
+      <section className="sectionRegisterForm ">
+        <h2 className="mb-4">Registro de Usuario</h2>
         <form className="formRegister" onSubmit={handleSubmit}>
           {/* Nombre */}
           <div className="formGroup">

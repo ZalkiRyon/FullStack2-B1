@@ -102,6 +102,7 @@ const CheckoutPage = () => {
     if (isSuccess) {
       localStorage.setItem("UltimaOrdenId", nuevaOrden.id);
       navigate("/resumen-compra");
+      cleanCart();
     } else {
       showToast("Error al guardar la orden", "error", 10000);
     }

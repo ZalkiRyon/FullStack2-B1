@@ -7,7 +7,7 @@ import vision from '../../assets/img/vision.jpg';
 const AboutPage = () => {
   return (
     <main className="mainPage">
-    <h1 className='titleAbout'>Sobre Huerto Hogar</h1>
+    <h1 className='title'>Sobre Huerto Hogar</h1>
 
     <article className='articleAbout'>
       <div className="containerImgNosotros">

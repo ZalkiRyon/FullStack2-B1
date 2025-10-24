@@ -3,16 +3,17 @@ import CarritoHeader from "../store/CarritoHeader";
 import icono from "../../assets/img/icono.png";
 import { useCart } from "../../context/CartContext";
 import { useAuth } from "../../context/AuthContext";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import UserDropdown from "./UserDropdown";
 import Modal from "../common/Modal";
 import { useToast } from "../../context/ToastContext";
 
 const Header = () => {
-  const { totalItemsCount } = useCart();
+  const { totalItemsCount, cleanCart } = useCart();
   const { usuario, logout } = useAuth();
   const { showToast } = useToast();
+  const navigate = useNavigate();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,7 +25,9 @@ const Header = () => {
 
   const handleConfirmLogout = () => {
     if (logout) {
+      navigate("/");
       logout();
+      cleanCart();
       showToast("Sesión cerrada con exito", "success", 5000);
     }
   };

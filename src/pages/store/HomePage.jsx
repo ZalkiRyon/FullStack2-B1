@@ -45,7 +45,7 @@ const HomePage = () => {
       </section>
 
       <section className="seccion-productos">
-        <h2>Productos Destacados</h2>
+        <h2 className="seccion-productos-title">Productos Destacados</h2>
         <div className="productsListContainer">
           {productos.length > 0 ? (
             productos.map((produc) => (
