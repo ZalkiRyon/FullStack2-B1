@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
 import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
@@ -17,7 +17,7 @@ const UserPurchaseHistory = () => {
 
     if (usuarioEncontrado) {
       setUsuario(usuarioEncontrado);
-      
+
       // Cargar órdenes del cliente
       const ordenesCliente = getOrdenesByCliente(parseInt(id));
       setOrdenes(ordenesCliente);
@@ -79,9 +79,7 @@ const UserPurchaseHistory = () => {
       <div className="inventarioTableSection">
         {ordenes.length > 0 ? (
           <>
-            <h2 className="tableTitle">
-              Órdenes de Compra ({ordenes.length})
-            </h2>
+            <h2 className="tableTitle">Órdenes de Compra ({ordenes.length})</h2>
 
             {/* Tabla de órdenes */}
             <div className="tableContainer">
@@ -98,10 +96,16 @@ const UserPurchaseHistory = () => {
                 <tbody>
                   {ordenes.map((orden) => (
                     <tr key={orden.id}>
-                      <td style={{ textAlign: "left" }} className="productoNombre">
+                      <td
+                        style={{ textAlign: "left" }}
+                        className="productoNombre"
+                      >
                         {orden.numeroOrden}
                       </td>
-                      <td style={{ textAlign: "center" }} className="productoCodigo">
+                      <td
+                        style={{ textAlign: "center" }}
+                        className="productoCodigo"
+                      >
                         {new Date(orden.fecha).toLocaleDateString("es-CL", {
                           day: "2-digit",
                           month: "2-digit",
@@ -109,11 +113,16 @@ const UserPurchaseHistory = () => {
                         })}
                       </td>
                       <td style={{ textAlign: "center" }}>
-                        <span className={`badge ${getEstadoClass(orden.estado)}`}>
+                        <span
+                          className={`badge ${getEstadoClass(orden.estado)}`}
+                        >
                           {orden.estado}
                         </span>
                       </td>
-                      <td style={{ textAlign: "right" }} className="productoPrecio">
+                      <td
+                        style={{ textAlign: "right" }}
+                        className="productoPrecio"
+                      >
                         {formatearPrecio(orden.monto)}
                       </td>
                       <td style={{ textAlign: "center" }}>
@@ -141,8 +150,8 @@ const UserPurchaseHistory = () => {
               backgroundColor: "#f8f9fa",
               borderRadius: "8px",
               marginTop: "2rem",
-            }}          >
-            
+            }}
+          >
             <h2 style={{ color: "#6c757d", marginBottom: "0.5rem" }}>
               Sin Historial de Compras
             </h2>

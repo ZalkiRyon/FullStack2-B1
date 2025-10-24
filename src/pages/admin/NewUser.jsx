@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import { saveUsuarioToStorage } from "../../utils/dataUsuarios";
 import { regionesYComunas } from "../../utils/dataRegiones";
-import { validarEmailUnico, validarRunUnico } from "../../validators/usuarioValidators";
+import {
+  validarEmailUnico,
+  validarRunUnico,
+} from "../../validators/usuarioValidators";
 
 const NewUser = () => {
   const navigate = useNavigate();
@@ -54,12 +57,14 @@ const NewUser = () => {
 
     // Validar dominio del correo
     const dominiosPermitidos = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
-    const emailValido = dominiosPermitidos.some(dominio => 
+    const emailValido = dominiosPermitidos.some((dominio) =>
       formData.correo.toLowerCase().endsWith(dominio)
     );
-    
+
     if (!emailValido) {
-      alert("El correo debe terminar en @duoc.cl, @profesor.duoc.cl o @gmail.com");
+      alert(
+        "El correo debe terminar en @duoc.cl, @profesor.duoc.cl o @gmail.com"
+      );
       return;
     }
 
@@ -77,7 +82,7 @@ const NewUser = () => {
 
     // Guardar usuario
     const resultado = saveUsuarioToStorage(formData);
-    
+
     if (resultado.success) {
       alert(`Usuario creado exitosamente`);
       navigate("/admin/usuarios");

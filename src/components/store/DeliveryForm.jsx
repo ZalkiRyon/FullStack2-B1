@@ -1,18 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { regionesYComunas } from "../../utils/dataRegiones";
-
 
 const DeliveryForm = ({ formData, setFormData, handleFormChange }) => {
   const [selectedRegion, setSelectedRegion] = useState(formData.region || "");
-
 
   useEffect(() => {
     if (formData.region && formData.region !== selectedRegion) {
       setSelectedRegion(formData.region);
     }
-
-  
-
   }, [formData.region]);
 
   const comunasDisponibles = selectedRegion
@@ -111,7 +106,6 @@ const DeliveryForm = ({ formData, setFormData, handleFormChange }) => {
               name="department"
               value={formData.department}
               onChange={handleFormChange}
-            
             />
           </div>
         </div>
@@ -170,7 +164,6 @@ const DeliveryForm = ({ formData, setFormData, handleFormChange }) => {
               name="comment"
               value={formData.comment}
               onChange={handleFormChange}
-              
             />
           </div>
         </div>

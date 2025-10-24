@@ -1,5 +1,3 @@
-import React from "react";
-
 const PerfilPage = () => {
   return (
     <div className="adminPageContainer">

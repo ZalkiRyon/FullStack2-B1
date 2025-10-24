@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
 import { getProductosFromStorage } from "../../utils/dataProductos";
@@ -34,18 +34,18 @@ const DeleteProduct = () => {
     if (confirmacion) {
       // Obtener productos actuales
       const productos = getProductosFromStorage();
-      
+
       // Filtrar el producto a eliminar
       const productosActualizados = productos.filter(
         (p) => p.id !== parseInt(id)
       );
-      
+
       // Guardar en localStorage
       localStorage.setItem(
         "ListaProductos",
         JSON.stringify(productosActualizados)
       );
-      
+
       alert("Producto eliminado exitosamente");
       navigate("/admin/inventario");
     }

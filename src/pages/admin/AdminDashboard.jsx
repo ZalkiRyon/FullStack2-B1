@@ -1,12 +1,11 @@
-import React from "react";
 import { useAuth } from "../../context/AuthContext";
 
 const AdminDashboard = () => {
   const { usuario } = useAuth();
 
   // Obtener el nombre completo del usuario o usar placeholder
-  const userName = usuario 
-    ? `${usuario.nombre} ${usuario.apellido}` 
+  const userName = usuario
+    ? `${usuario.nombre} ${usuario.apellido}`
     : "Nombre Usuario";
 
   return (
@@ -17,4 +16,3 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
-

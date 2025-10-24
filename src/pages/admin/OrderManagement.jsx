@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getOrdenesFromStorage } from "../../utils/dataOrdenes";
 import OrdenTable from "../../components/admin/OrdenTable";
@@ -33,12 +33,12 @@ const OrderManagement = () => {
       }
     };
 
-    window.addEventListener('visibilitychange', handleVisibilityChange);
-    window.addEventListener('focus', cargarOrdenes);
+    window.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("focus", cargarOrdenes);
 
     return () => {
-      window.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('focus', cargarOrdenes);
+      window.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("focus", cargarOrdenes);
     };
   }, []);
 
@@ -75,8 +75,10 @@ const OrderManagement = () => {
         const monto = orden.monto;
         if (montoFilter === "0-5000") return monto >= 0 && monto <= 5000;
         if (montoFilter === "5000-10000") return monto > 5000 && monto <= 10000;
-        if (montoFilter === "10000-20000") return monto > 10000 && monto <= 20000;
-        if (montoFilter === "20000-30000") return monto > 20000 && monto <= 30000;
+        if (montoFilter === "10000-20000")
+          return monto > 10000 && monto <= 20000;
+        if (montoFilter === "20000-30000")
+          return monto > 20000 && monto <= 30000;
         if (montoFilter === "30000+") return monto > 30000;
         return true;
       });

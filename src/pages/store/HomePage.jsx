@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import principalImg from "../../assets/img/img-principal.jpg";
+import { useEffect, useState } from "react";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import Footer from "../../components/store/Footer";
 import { getProductosFromStorage } from "../../utils/dataProductos";
-import { useAuth } from "../../context/AuthContext";
 import ProductCard from "../../components/store/ProductCard";
 
 const HomePage = () => {
@@ -37,7 +34,6 @@ const HomePage = () => {
             width="fit-content"
           />
         </div>
-    
       </section>
 
       <section className="seccion-productos">

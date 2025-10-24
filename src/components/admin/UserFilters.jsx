@@ -1,5 +1,3 @@
-import React from "react";
-
 const UserFilters = ({
   searchTerm,
   onSearchChange,
@@ -18,7 +16,7 @@ const UserFilters = ({
           value={searchTerm}
           onChange={(e) => onSearchChange(e.target.value)}
           className="searchInput"
-        />        
+        />
       </div>
 
       {/* Filtro de rol */}

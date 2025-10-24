@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
 import { getOrdenById } from "../../utils/dataOrdenes";
@@ -122,7 +122,13 @@ const ShowOrden = () => {
               <label className="labelFormAdmin" htmlFor="estado">
                 Estado
               </label>
-              <div style={{ display: "flex", alignItems: "center", height: "100%" }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  height: "100%",
+                }}
+              >
                 <span className={`badge ${getEstadoClass(orden.estado)}`}>
                   {orden.estado}
                 </span>
@@ -148,10 +154,13 @@ const ShowOrden = () => {
 
           {/* Tabla de Productos */}
           <div className="formGroupAdmin" style={{ marginTop: "2rem" }}>
-            <label className="labelFormAdmin" style={{ marginBottom: "1rem", display: "block" }}>
+            <label
+              className="labelFormAdmin"
+              style={{ marginBottom: "1rem", display: "block" }}
+            >
               Productos Comprados
             </label>
-            
+
             <div className="tableResponsive">
               <table className="table">
                 <thead>
@@ -165,9 +174,15 @@ const ShowOrden = () => {
                 <tbody>
                   {orden.detalles.map((detalle, index) => (
                     <tr key={index}>
-                      <td style={{ textAlign: "left" }}>{detalle.productoNombre}</td>
-                      <td style={{ textAlign: "center" }}>{detalle.cantidad}</td>
-                      <td style={{ textAlign: "right" }}>{formatearPrecio(detalle.precioUnitario)}</td>
+                      <td style={{ textAlign: "left" }}>
+                        {detalle.productoNombre}
+                      </td>
+                      <td style={{ textAlign: "center" }}>
+                        {detalle.cantidad}
+                      </td>
+                      <td style={{ textAlign: "right" }}>
+                        {formatearPrecio(detalle.precioUnitario)}
+                      </td>
                       <td style={{ textAlign: "right", fontWeight: "bold" }}>
                         {formatearPrecio(detalle.subtotal)}
                       </td>
@@ -176,10 +191,24 @@ const ShowOrden = () => {
                 </tbody>
                 <tfoot>
                   <tr style={{ borderTop: "2px solid #ddd" }}>
-                    <td colSpan="3" style={{ textAlign: "right", fontWeight: "bold", fontSize: "1.1rem" }}>
+                    <td
+                      colSpan="3"
+                      style={{
+                        textAlign: "right",
+                        fontWeight: "bold",
+                        fontSize: "1.1rem",
+                      }}
+                    >
                       Total:
                     </td>
-                    <td style={{ textAlign: "right", fontWeight: "bold", fontSize: "1.1rem", color: "#2c5f2d" }}>
+                    <td
+                      style={{
+                        textAlign: "right",
+                        fontWeight: "bold",
+                        fontSize: "1.1rem",
+                        color: "#2c5f2d",
+                      }}
+                    >
                       {formatearPrecio(orden.monto)}
                     </td>
                   </tr>

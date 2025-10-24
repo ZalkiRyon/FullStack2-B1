@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
 import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
@@ -12,8 +12,8 @@ const ShowUser = () => {
   // Cargar datos del usuario
   useEffect(() => {
     const usuarios = getUsuariosFromStorage();
-    const usuarioEncontrado = usuarios.find(u => u.id === parseInt(id));
-    
+    const usuarioEncontrado = usuarios.find((u) => u.id === parseInt(id));
+
     if (usuarioEncontrado) {
       setUsuario(usuarioEncontrado);
     } else {
@@ -123,7 +123,9 @@ const ShowUser = () => {
               className="formInputAdmin"
               id="role"
               name="role"
-              value={usuario.role.charAt(0).toUpperCase() + usuario.role.slice(1)}
+              value={
+                usuario.role.charAt(0).toUpperCase() + usuario.role.slice(1)
+              }
               disabled
             />
           </div>
@@ -233,7 +235,7 @@ const ShowUser = () => {
               className="formInputAdmin"
               id="fechaRegistro"
               name="fechaRegistro"
-              value={new Date(usuario.fechaRegistro).toLocaleString('es-CL')}
+              value={new Date(usuario.fechaRegistro).toLocaleString("es-CL")}
               disabled
             />
           </div>

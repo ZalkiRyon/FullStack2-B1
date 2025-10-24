@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getProductosFromStorage } from "../../utils/dataProductos";
 import PrimaryButton from "../../components/common/PrimaryButton";
@@ -34,12 +34,12 @@ const InventarioPage = () => {
     };
 
     // Escuchar cuando volvemos a esta página
-    window.addEventListener('visibilitychange', handleVisibilityChange);
-    window.addEventListener('focus', cargarProductos);
+    window.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("focus", cargarProductos);
 
     return () => {
-      window.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('focus', cargarProductos);
+      window.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("focus", cargarProductos);
     };
   }, []);
 

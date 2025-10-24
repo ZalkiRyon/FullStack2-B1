@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
 import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
@@ -12,8 +12,8 @@ const DeleteUser = () => {
   // Cargar datos del usuario
   useEffect(() => {
     const usuarios = getUsuariosFromStorage();
-    const usuarioEncontrado = usuarios.find(u => u.id === parseInt(id));
-    
+    const usuarioEncontrado = usuarios.find((u) => u.id === parseInt(id));
+
     if (usuarioEncontrado) {
       setUsuario(usuarioEncontrado);
     } else {
@@ -26,24 +26,31 @@ const DeleteUser = () => {
   const handleEliminar = () => {
     const confirmar = window.confirm(
       `¿Está seguro de eliminar al usuario?\n\n` +
-      `Nombre: ${usuario.nombre} ${usuario.apellido}\n` +
-      `Correo: ${usuario.email}\n` +
-      `Rol: ${usuario.role}\n\n` +
-      `Esta acción no se puede deshacer.`
+        `Nombre: ${usuario.nombre} ${usuario.apellido}\n` +
+        `Correo: ${usuario.email}\n` +
+        `Rol: ${usuario.role}\n\n` +
+        `Esta acción no se puede deshacer.`
     );
 
     if (confirmar) {
       try {
         // Obtener usuarios del localStorage
         const usuarios = getUsuariosFromStorage();
-        
+
         // Filtrar el usuario a eliminar
-        const usuariosActualizados = usuarios.filter(u => u.id !== parseInt(id));
-        
+        const usuariosActualizados = usuarios.filter(
+          (u) => u.id !== parseInt(id)
+        );
+
         // Guardar en localStorage
-        localStorage.setItem("ListaUsuarios", JSON.stringify(usuariosActualizados));
-        
-        alert(`Usuario eliminado exitosamente\n\nEl usuario ${usuario.nombre} ${usuario.apellido} ha sido eliminado del sistema.`);
+        localStorage.setItem(
+          "ListaUsuarios",
+          JSON.stringify(usuariosActualizados)
+        );
+
+        alert(
+          `Usuario eliminado exitosamente\n\nEl usuario ${usuario.nombre} ${usuario.apellido} ha sido eliminado del sistema.`
+        );
         navigate("/admin/usuarios");
       } catch (error) {
         alert(`Error al eliminar usuario\n\nDetalle: ${error.message}`);
@@ -70,7 +77,7 @@ const DeleteUser = () => {
       <div className="inventarioHeader">
         <div className="inventarioTitleSection">
           <h1 className="inventarioTitle">Eliminar Usuario</h1>
-          <p className="inventarioSubtitle" style={{ color: '#dc3545' }}>
+          <p className="inventarioSubtitle" style={{ color: "#dc3545" }}>
             Revise los datos antes de confirmar la eliminación
           </p>
         </div>
@@ -78,8 +85,10 @@ const DeleteUser = () => {
 
       {/* Formulario de visualización */}
       <div className="inventarioTableSection">
-        <div className="formHeader" style={{ backgroundColor: '#dc3545' }}>
-          <h2 className="formSectionTitle">INFORMACIÓN DEL USUARIO A ELIMINAR</h2>
+        <div className="formHeader" style={{ backgroundColor: "#dc3545" }}>
+          <h2 className="formSectionTitle">
+            INFORMACIÓN DEL USUARIO A ELIMINAR
+          </h2>
         </div>
 
         <div className="formAdmin">
@@ -155,7 +164,9 @@ const DeleteUser = () => {
               className="formInputAdmin"
               id="role"
               name="role"
-              value={usuario.role.charAt(0).toUpperCase() + usuario.role.slice(1)}
+              value={
+                usuario.role.charAt(0).toUpperCase() + usuario.role.slice(1)
+              }
               disabled
             />
           </div>
@@ -265,7 +276,7 @@ const DeleteUser = () => {
               className="formInputAdmin"
               id="fechaRegistro"
               name="fechaRegistro"
-              value={new Date(usuario.fechaRegistro).toLocaleString('es-CL')}
+              value={new Date(usuario.fechaRegistro).toLocaleString("es-CL")}
               disabled
             />
           </div>
@@ -273,7 +284,7 @@ const DeleteUser = () => {
           {/* Botones de acción */}
           <div className="formActionsGroup">
             <BackButton text="Volver" />
-            <button 
+            <button
               type="button"
               className="btnEliminarUsuario"
               onClick={handleEliminar}

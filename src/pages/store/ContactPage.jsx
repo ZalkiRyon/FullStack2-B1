@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import logoEmpresa from "../../assets/img/logoEmpresa.jpg";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import Modal from "../../components/common/Modal";

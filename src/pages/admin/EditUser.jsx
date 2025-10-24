@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
 import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
 import { regionesYComunas } from "../../utils/dataRegiones";
-import { validarEmailUnico, validarRunUnico } from "../../validators/usuarioValidators";
+import {
+  validarEmailUnico,
+  validarRunUnico,
+} from "../../validators/usuarioValidators";
 
 const EditUser = () => {
   const navigate = useNavigate();
@@ -28,8 +31,8 @@ const EditUser = () => {
   // Cargar datos del usuario
   useEffect(() => {
     const usuarios = getUsuariosFromStorage();
-    const usuarioEncontrado = usuarios.find(u => u.id === parseInt(id));
-    
+    const usuarioEncontrado = usuarios.find((u) => u.id === parseInt(id));
+
     if (usuarioEncontrado) {
       setFormData({
         nombre: usuarioEncontrado.nombre,
@@ -83,17 +86,22 @@ const EditUser = () => {
 
     // Validar dominio del correo
     const dominiosPermitidos = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
-    const emailValido = dominiosPermitidos.some(dominio => 
+    const emailValido = dominiosPermitidos.some((dominio) =>
       formData.email.toLowerCase().endsWith(dominio)
     );
-    
+
     if (!emailValido) {
-      alert("El correo debe terminar en @duoc.cl, @profesor.duoc.cl o @gmail.com");
+      alert(
+        "El correo debe terminar en @duoc.cl, @profesor.duoc.cl o @gmail.com"
+      );
       return;
     }
 
     // Validar que el email sea único (excepto si es el mismo)
-    if (formData.email !== emailOriginal && !validarEmailUnico(formData.email)) {
+    if (
+      formData.email !== emailOriginal &&
+      !validarEmailUnico(formData.email)
+    ) {
       alert("Este correo ya está registrado");
       return;
     }
@@ -107,10 +115,10 @@ const EditUser = () => {
     try {
       // Obtener usuarios del localStorage
       const usuarios = getUsuariosFromStorage();
-      
+
       // Encontrar el índice del usuario a actualizar
-      const indice = usuarios.findIndex(u => u.id === parseInt(id));
-      
+      const indice = usuarios.findIndex((u) => u.id === parseInt(id));
+
       if (indice === -1) {
         alert("Usuario no encontrado");
         return;
@@ -131,11 +139,13 @@ const EditUser = () => {
         direccion: formData.direccion,
         comentario: formData.comentario,
       };
-      
+
       // Guardar en localStorage
       localStorage.setItem("ListaUsuarios", JSON.stringify(usuarios));
-      
-      alert(`Usuario actualizado exitosamente\n\nLos datos de ${formData.nombre} ${formData.apellido} han sido actualizados.`);
+
+      alert(
+        `Usuario actualizado exitosamente\n\nLos datos de ${formData.nombre} ${formData.apellido} han sido actualizados.`
+      );
       navigate("/admin/usuarios");
     } catch (error) {
       alert(`Error al actualizar usuario\n\nDetalle: ${error.message}`);
@@ -363,10 +373,7 @@ const EditUser = () => {
           {/* Botones de acción */}
           <div className="formActionsGroup">
             <BackButton text="Volver" />
-            <button 
-              type="submit"
-              className="btnGuardarCambios"
-            >
+            <button type="submit" className="btnGuardarCambios">
               Guardar Cambios
             </button>
           </div>

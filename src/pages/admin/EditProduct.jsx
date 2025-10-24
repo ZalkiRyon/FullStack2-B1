@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
 import { getProductosFromStorage } from "../../utils/dataProductos";
@@ -24,12 +24,12 @@ const EditProduct = () => {
 
     if (productoEncontrado) {
       setProductoOriginal(productoEncontrado);
-      
+
       // Extraer el nombre sin el código (después del " - ")
       const nombreSinCodigo = productoEncontrado.nombre.includes(" - ")
         ? productoEncontrado.nombre.split(" - ").slice(1).join(" - ")
         : productoEncontrado.nombre;
-      
+
       setFormData({
         nombre: nombreSinCodigo,
         categoria: productoEncontrado.categoria,
@@ -81,10 +81,10 @@ const EditProduct = () => {
 
     // Obtener productos actuales
     const productos = getProductosFromStorage();
-    
+
     // Encontrar el índice del producto a editar
     const indiceProducto = productos.findIndex((p) => p.id === parseInt(id));
-    
+
     if (indiceProducto === -1) {
       alert("Error: Producto no encontrado");
       return;
@@ -98,7 +98,9 @@ const EditProduct = () => {
     // Crear producto actualizado manteniendo id y código original
     const productoActualizado = {
       id: parseInt(id),
-      nombre: codigoProducto ? `${codigoProducto} - ${formData.nombre}` : formData.nombre,
+      nombre: codigoProducto
+        ? `${codigoProducto} - ${formData.nombre}`
+        : formData.nombre,
       categoria: formData.categoria,
       precio: parseInt(formData.precio),
       stock: parseInt(formData.stock),
@@ -267,10 +269,7 @@ const EditProduct = () => {
           {/* Botones de acción */}
           <div className="formActionsGroup">
             <BackButton text="Volver" />
-            <button 
-              type="submit"
-              className="btnGuardarCambios"
-            >
+            <button type="submit" className="btnGuardarCambios">
               Guardar Cambios
             </button>
           </div>

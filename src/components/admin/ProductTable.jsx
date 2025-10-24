@@ -1,4 +1,3 @@
-import React from "react";
 import { productImages } from "../../utils/dataProductos";
 
 const ProductTable = ({ productos, onVer, onEditar, onEliminar }) => {

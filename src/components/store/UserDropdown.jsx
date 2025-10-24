@@ -1,5 +1,3 @@
-import React from "react";
-
 const UserDropdown = ({ usuario, onLogout }) => {
   return (
     <div className="user-dropdown-menu">

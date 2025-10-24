@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { productImages } from "../../utils/dataProductos";
 import PrimaryButton from "../common/PrimaryButton";
@@ -39,11 +38,7 @@ const ProductCard = ({
   if (variant === "withButton") {
     return (
       <article className="cardProductos" data-producto-id={id}>
-        <Link
-          to={`/productos/${id}`}
-          onClick={onClick}
-          className="cardLink"
-        >
+        <Link to={`/productos/${id}`} onClick={onClick} className="cardLink">
           <div className="containerImgProductos">
             <img
               src={imagenSrc}
@@ -52,7 +47,9 @@ const ProductCard = ({
             />
           </div>
           <h4 className="nameCardProductos">{name}</h4>
-          <span className="priceCardProductos">${price.toLocaleString("es-CL")}</span>
+          <span className="priceCardProductos">
+            ${price.toLocaleString("es-CL")}
+          </span>
         </Link>
 
         <PrimaryButton onClick={onClickButton} width="auto" text={"Añadir"} />

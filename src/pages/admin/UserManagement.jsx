@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
 import PrimaryButton from "../../components/common/PrimaryButton";
@@ -33,12 +33,12 @@ const UserManagement = () => {
     };
 
     // Escuchar cuando volvemos a esta página
-    window.addEventListener('visibilitychange', handleVisibilityChange);
-    window.addEventListener('focus', cargarUsuarios);
+    window.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("focus", cargarUsuarios);
 
     return () => {
-      window.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('focus', cargarUsuarios);
+      window.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("focus", cargarUsuarios);
     };
   }, []);
 
@@ -49,7 +49,8 @@ const UserManagement = () => {
     // Filtro de búsqueda por nombre completo o teléfono
     if (searchTerm) {
       resultado = resultado.filter((usuario) => {
-        const nombreCompleto = `${usuario.nombre} ${usuario.apellido}`.toLowerCase();
+        const nombreCompleto =
+          `${usuario.nombre} ${usuario.apellido}`.toLowerCase();
         const telefono = usuario.telefono.toLowerCase();
         const busqueda = searchTerm.toLowerCase();
         return nombreCompleto.includes(busqueda) || telefono.includes(busqueda);

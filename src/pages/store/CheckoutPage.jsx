@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import OrdenSummary from "../../components/store/OrdenSummary";
 import DeliveryForm from "../../components/store/DeliveryForm";
 import { useAuth } from "../../context/AuthContext";

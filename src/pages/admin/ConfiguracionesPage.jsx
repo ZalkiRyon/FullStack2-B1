@@ -1,5 +1,3 @@
-import React from "react";
-
 const ConfiguracionesPage = () => {
   return (
     <div className="adminPageContainer">

@@ -1,11 +1,10 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/common.css";
 
 /**
  * Componente de botón para volver a la página anterior
  * Usa navigate(-1) para regresar a la página desde donde se llegó
- * 
+ *
  * @param {string} text - Texto del botón (opcional, por defecto "Volver")
  * @param {string} width - Ancho del botón (opcional, por defecto "auto")
  * @param {string} height - Alto del botón (opcional, por defecto "auto")

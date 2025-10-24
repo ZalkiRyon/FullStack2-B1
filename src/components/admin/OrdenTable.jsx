@@ -1,19 +1,17 @@
-import React from "react";
-
 const OrdenTable = ({ ordenes, onVer }) => {
   const formatFecha = (fecha) => {
     const date = new Date(fecha);
-    return date.toLocaleDateString('es-CL', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
+    return date.toLocaleDateString("es-CL", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
     });
   };
 
   const formatMonto = (monto) => {
-    return new Intl.NumberFormat('es-CL', {
-      style: 'currency',
-      currency: 'CLP'
+    return new Intl.NumberFormat("es-CL", {
+      style: "currency",
+      currency: "CLP",
     }).format(monto);
   };
 

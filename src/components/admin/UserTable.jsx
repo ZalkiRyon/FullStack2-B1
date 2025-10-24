@@ -1,5 +1,3 @@
-import React from "react";
-
 const UserTable = ({ usuarios, onVer, onEditar, onHistorial }) => {
   return (
     <div className="tableContainer">

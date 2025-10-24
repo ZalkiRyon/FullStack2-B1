@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useCart } from "../../context/CartContext";
 import { CartItem } from "../../components/store/CartItem";
 import Modal from "../../components/common/Modal";
@@ -72,8 +72,8 @@ function CartPage() {
           ) : (
             <div className="mensajeErrorCarrito">
               <h3>
-                No hay elementos en tu carrito <br /> Agrega
-                algunos productos para continuar...
+                No hay elementos en tu carrito <br /> Agrega algunos productos
+                para continuar...
               </h3>
             </div>
           )}

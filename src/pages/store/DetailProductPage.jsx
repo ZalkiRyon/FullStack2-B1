@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProductosFromStorage } from "../../utils/dataProductos";
 import { useCart } from "../../context/CartContext";
@@ -36,7 +36,7 @@ const DetailProductPage = () => {
       `Se agregaron ${quantity} unidades de ${producto.nombre} al carrito.`,
       "success"
     );
-    
+
     setQuantity(1);
   };
 

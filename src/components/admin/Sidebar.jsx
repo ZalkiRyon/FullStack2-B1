@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import icono from "../../assets/img/icono.png";
@@ -9,8 +8,8 @@ const Sidebar = () => {
 
   // Obtener datos del usuario o usar placeholder
   const userRole = usuario?.role === "admin" ? "Admin" : "Usuario";
-  const userName = usuario 
-    ? `${usuario.nombre} ${usuario.apellido}` 
+  const userName = usuario
+    ? `${usuario.nombre} ${usuario.apellido}`
     : "{Nombre Usuario}";
 
   const handleCerrarSesion = () => {

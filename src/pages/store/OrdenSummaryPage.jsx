@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getOrdenesFromStorage } from "../../utils/dataOrdenes";
 import { useAuth } from "../../context/AuthContext";
 import PrimaryButton from "../../components/common/PrimaryButton";
