@@ -16,32 +16,10 @@ const HomePage = () => {
     setProductos(productosDestacados.slice(0, 3));
   }, []);
 
-  const { usuario } = useAuth();
-  const isLoggedIn = !!usuario;
+
 
   return (
     <div>
-      <nav className="navSesion">
-        <ul className="nav justify-content-end">
-          {isLoggedIn ? (
-            <h4 className="grettingUser">Hola, {usuario.nombre}</h4>
-          ) : (
-            <>
-              <li className="nav-item">
-                <Link className="nav-link" to="/inicio-sesion">
-                  Iniciar sesión
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/registro">
-                  Registrar usuario
-                </Link>
-              </li>
-            </>
-          )}
-        </ul>
-      </nav>
-
       <section className="seccion-principal">
         <div className="izq-seccion-principal gap-2">
           <div className="texto-seccion-principal">

@@ -1,15 +1,27 @@
-import { Link } from "react-router-dom";
-import  carrito  from "../../assets/img/cart-icon.svg";
+import { NavLink } from "react-router-dom";
+import carrito from "../../assets/img/cart-icon.svg";
 
 const CarritoHeader = ({ itemCount }) => {
   return (
-    <Link to="/carrito" className="carrito-container nav-link-base d-flex align-items-center">
+    <NavLink
+      to="/carrito"
+      className={({ isActive }) =>
+        isActive
+          ? "carrito-container nav-link-base d-flex align-items-center active-link"
+          : "carrito-container nav-link-base d-flex align-items-center"
+      }
+    >
       <div>
-        <img src={carrito} alt="Logo carrito de compras" height="25" />
+        <img
+          src={carrito}
+          alt="Logo carrito de compras"
+          height="25"
+          className="cartLogo"
+        />
       </div>
 
       <p id="carritoTexto">{`(${itemCount})`}</p>
-    </Link>
+    </NavLink>
   );
 };
 
