@@ -141,10 +141,10 @@
 }
 
 .toastNotification {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: block;
+  position: relative;
   padding: 15px 20px;
+  padding-right: 40px;
   border-radius: 8px;
   color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -174,20 +174,33 @@
   background-color: #2196f3;
 }
 
-.toastMessage {
-  margin: 0;
-  flex-grow: 1;
-  font-size: 1rem;
-}
-
 .toastCloseBtn {
   background: none;
   border: none;
-  color: white;
-  font-size: 1.5rem;
   cursor: pointer;
   line-height: 1;
-  margin-left: 10px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 5px;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.toastCloseBtn:hover {
+  opacity: 1;
+}
+
+.closeToast {
+  height: 12px;
+  width: 12px;
+  filter: invert(100%);
+}
+
+.toastMessage {
+  margin: 0;
+  font-size: 1rem;
+  padding-right: 5px;
 }
 
 .breadcrumbsNav {
