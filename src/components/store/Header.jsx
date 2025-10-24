@@ -36,9 +36,9 @@ const Header = () => {
     <header className="header">
       <Link to="/" className="d-flex align-items-center header-logo-group">
         <div>
-          <img src={icono} alt="Logo de Huerto Hogar" width="150" />
+          <img src={icono} alt="Logo de Huerto Hogar" width="70" />
         </div>
-        <h1>Huerto Hogar</h1>
+        <h2 className="">Huerto Hogar</h2>
       </Link>
 
       <div className="flex-grow-1">

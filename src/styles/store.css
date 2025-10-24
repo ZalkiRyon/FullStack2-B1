@@ -9,9 +9,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: white;
   padding: 1rem 2rem;
-  border-bottom: 1px solid #e0e0e0;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.05),
+    -5px -5px 10px rgba(255, 255, 255, 0.8);
 }
 
 .header > div:nth-child(2) {
@@ -143,46 +150,58 @@
 /* Sección principal (página de inicio) */
 .seccion-principal {
   display: flex;
-  flex-flow: row nowrap;
-  border-radius: 5px;
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
+  padding: 200px 80px 60px 80px;
+  min-height: 600px;
+  padding-bottom: 80px;
+  background-image: url("../assets/img/fondo-nuevo.jpg");
+  background-size: cover;
+  background-position: center 0%;
+  background-repeat: no-repeat;
+  margin: -100px -4rem 0rem -4rem;
+  position: relative;
+  overflow: hidden;
 }
+
+.seccion-principal::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 150px;
+
+  background: linear-gradient(
+    to bottom,
+    rgba(var(--main-background-rgb, 240, 240, 240), 0) 0%,
+    #F4F5F7 70%
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
 
 .izq-seccion-principal {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  height: 100%;
-  padding: 4rem 0rem;
-  max-width: 1200px;
-  margin: 2rem 0rem;
-  flex: 1;
-  text-align: left;
+  align-items: center;
+  gap: 20px;
+  max-width: 45%; 
+  text-align: center;
+  color: var(--primary-text); 
+  z-index: 2; 
+  padding: 30px;
 }
 
 .izq-seccion-principal h1 {
-  font-size: 3rem;
-  line-height: 1.2;
-  font-weight: 600;
+  font-size: 3rem; 
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); 
 }
 
 .izq-seccion-principal p {
-  color: var(--secundary-text);
-  margin-bottom: 1.5rem;
-}
-
-.img-principal {
-  width: 900px;
-  height: 400px;
-}
-
-.img-principal > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
+  color: #444; 
+  text-shadow: 0.5px 0.5px 2px rgba(255, 255, 255, 0.5); 
 }
 
 /* Footer específico de tienda */

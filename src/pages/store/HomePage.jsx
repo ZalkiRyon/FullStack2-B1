@@ -16,10 +16,8 @@ const HomePage = () => {
     setProductos(productosDestacados.slice(0, 3));
   }, []);
 
-
-
   return (
-    <div>
+    <div style={{ backgroundColor: "#F4F5F7" }}>
       <section className="seccion-principal">
         <div className="izq-seccion-principal gap-2">
           <div className="texto-seccion-principal">
@@ -36,12 +34,10 @@ const HomePage = () => {
           <PrimaryButton
             text={"Ver productos"}
             to={"/productos"}
-            width="auto"
+            width="fit-content"
           />
         </div>
-        <div className="img-principal">
-          <img src={principalImg} alt="Imagen del banner principal" />
-        </div>
+    
       </section>
 
       <section className="seccion-productos">
