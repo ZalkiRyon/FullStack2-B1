@@ -13,22 +13,22 @@ const Footer = () => {
           <nav className="nav-footer">
             <ul className="nav justify-content-end">
               <li className="nav-item">
-                <Link className="nav-link" to="/productos?category=frutas">
+                <Link className="nav-link" to="/productos?category=frutas-frescas">
                   Frutas frescas
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/productos?category=verduras">
+                <Link className="nav-link" to="/productos?category=verduras-organicas">
                   Verduras orgánicas
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/productos?category=organicos">
+                <Link className="nav-link" to="/productos?category=productos-organicos">
                   Productos orgánicos
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/productos?category=lacteos">
+                <Link className="nav-link" to="/productos?category=productos-lacteos">
                   Productos lácteos
                 </Link>
               </li>

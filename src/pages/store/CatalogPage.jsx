@@ -4,6 +4,7 @@ import ProductCard from "../../components/store/ProductCard";
 import ProductFilters from "../../components/common/ProductFilters";
 import { useCart } from "../../context/CartContext";
 import { useToast } from "../../context/ToastContext";
+import { useSearchParams } from "react-router-dom";
 
 function CatalogPage() {
   const [productos, setProductos] = useState([]);
@@ -13,12 +14,28 @@ function CatalogPage() {
 
   const { addItem } = useCart();
   const { showToast } = useToast();
+  const [searchParams] = useSearchParams();
+
+  const categoryParam = searchParams.get("category");
+
+  const normalizeCategory = (cat) => {
+    if (!cat) return null;
+
+    return cat.replace(/-/g, " ").toLowerCase();
+  };
 
   useEffect(() => {
     let productosStorage = getProductosFromStorage();
     setProductos(productosStorage);
     setFilteredProductos(productosStorage);
   }, []);
+
+  useEffect(() => {
+    if (categoryParam) {
+      const normalizedCategory = normalizeCategory(categoryParam);
+      setCategoriaFilter(normalizedCategory);
+    }
+  }, [categoryParam]);
 
   const handleAddCart = (produ) => {
     addItem(produ, 1);
@@ -39,7 +56,8 @@ function CatalogPage() {
     // Filtro por categoría
     if (categoriaFilter !== "todas") {
       resultado = resultado.filter(
-        (producto) => producto.categoria === categoriaFilter
+        (producto) =>
+          producto.categoria.toLowerCase() === categoriaFilter.toLowerCase()
       );
     }
 
