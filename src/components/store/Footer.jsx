@@ -47,13 +47,13 @@ const Footer = () => {
 
       <div className="der-footer">
         <p>Quédate en contacto, únete a nuestro boletín</p>
-        <div>
+        <div className="d-flex flex-row gap-5">
           <input
             type="email"
             placeholder="Ingresa tu email"
             className="inputFooter"
           />
-          <PrimaryButton text={"Suscribirse"} width="auto"/>
+          <PrimaryButton text={"Suscribirse"} width="auto" />
         </div>
       </div>
     </footer>
