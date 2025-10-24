@@ -33,64 +33,65 @@ const Header = () => {
   };
 
   return (
-    <header className="header">
-      <Link to="/" className="d-flex align-items-center header-logo-group">
-        <div>
-          <img src={icono} alt="Logo de Huerto Hogar" width="70" />
-        </div>
-        <h2 className="">Huerto Hogar</h2>
-      </Link>
+    <>
+      <header className="header">
+        <Link to="/" className="d-flex align-items-center header-logo-group">
+          <div>
+            <img src={icono} alt="Logo de Huerto Hogar" width="70" />
+          </div>
+          <h2 className="">Huerto Hogar</h2>
+        </Link>
 
-      <div className="flex-grow-1">
-        <Navbar />
-      </div>
-
-      <div className="d-flex align-items-center header-right-group">
-        <div className="nav-auth-section me-3">
-          {!!usuario ? (
-            <div
-              className="user-greeting-wrapper"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              <h4 className="nav-link-base grettingUser clickable-saludo">
-                Hola, {usuario.nombre + " " + usuario.apellido}
-              </h4>
-              {isMenuOpen && (
-                <UserDropdown
-                  usuario={usuario}
-                  onLogout={handleLogoutAttempt}
-                />
-              )}
-            </div>
-          ) : (
-            <ul className="nav d-flex align-items-center">
-              <li className="nav-item">
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive ? "nav-link-auth active-link" : "nav-link-auth"
-                  }
-                  to="/inicio-sesion"
-                >
-                  Iniciar sesión
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive ? "nav-link-auth active-link" : "nav-link-auth"
-                  }
-                  to="/registro"
-                >
-                  Registrar usuario
-                </NavLink>
-              </li>
-            </ul>
-          )}
+        <div className="flex-grow-1">
+          <Navbar />
         </div>
 
-        <CarritoHeader itemCount={totalItemsCount} />
-      </div>
+        <div className="d-flex align-items-center header-right-group">
+          <div className="nav-auth-section me-3">
+            {!!usuario ? (
+              <div
+                className="user-greeting-wrapper"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+              >
+                <h4 className="nav-link-base grettingUser clickable-saludo">
+                  Hola, {usuario.nombre + " " + usuario.apellido}
+                </h4>
+                {isMenuOpen && (
+                  <UserDropdown
+                    usuario={usuario}
+                    onLogout={handleLogoutAttempt}
+                  />
+                )}
+              </div>
+            ) : (
+              <ul className="nav d-flex align-items-center">
+                <li className="nav-item">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "nav-link-auth active-link" : "nav-link-auth"
+                    }
+                    to="/inicio-sesion"
+                  >
+                    Iniciar sesión
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive ? "nav-link-auth active-link" : "nav-link-auth"
+                    }
+                    to="/registro"
+                  >
+                    Registrar usuario
+                  </NavLink>
+                </li>
+              </ul>
+            )}
+          </div>
 
+          <CarritoHeader itemCount={totalItemsCount} />
+        </div>
+      </header>
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -100,7 +101,7 @@ const Header = () => {
         confirmText="Sí, Cerrar Sesión"
         showCancelButton={true}
       />
-    </header>
+    </>
   );
 };
 
