@@ -3,7 +3,17 @@ module.exports = function (config) {
   config.set({
     basePath: "",
     frameworks: ["jasmine"],
-    files: ["src/**/*.logic.spec.js", "src/**/*.logic.js"],
+    files: [
+      // Primero se cargan todos los archivos de lógica
+      "src/components/admin/__tests__/*.logic.js",
+      "src/components/common/__tests__/*.logic.js",
+      // Luego los archivos de pruebas
+      "src/components/admin/__tests__/*.spec.js",
+      "src/components/common/__tests__/*.spec.js",
+      "src/**/*.spec.js",
+      "src/**/*.logic.spec.js",
+      "src/**/*.logic.js",
+    ],
     exclude: [],
     preprocessors: {},
     reporters: ["spec", "kjhtml"],
