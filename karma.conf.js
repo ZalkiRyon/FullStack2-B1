@@ -4,6 +4,12 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
+      // Primero se cargan todos los archivos de lógica
+      'src/components/admin/__tests__/*.logic.js',
+      'src/components/common/__tests__/*.logic.js',
+      // Luego los archivos de pruebas
+      'src/components/admin/__tests__/*.spec.js',
+      'src/components/common/__tests__/*.spec.js',
       'src/**/*.spec.js'
     ],
     exclude: [],
