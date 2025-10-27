@@ -44,9 +44,9 @@ const ProductFilters = ({
           className="filterSelect"
         >
           <option value="todos">Todos los stocks</option>
-          <option value="bajo">Stock bajo (&lt; 100)</option>
-          <option value="medio">Stock medio (100-200)</option>
-          <option value="alto">Stock alto (&gt; 200)</option>
+          <option value="critico">Stock Crítico (&lt; 100)</option>
+          <option value="medio">Stock Medio (100-200)</option>
+          <option value="alto">Stock Alto (&gt; 200)</option>
         </select>
       )}
 

@@ -24,10 +24,7 @@ import UserPurchaseHistory from "./pages/admin/UserPurchaseHistory";
 import ShowProduct from "./pages/admin/ShowProduct";
 import EditProduct from "./pages/admin/EditProduct";
 import DeleteProduct from "./pages/admin/DeleteProduct";
-import ConfiguracionesPage from "./pages/admin/ConfiguracionesPage";
 import PerfilPage from "./pages/admin/PerfilPage";
-import BuscarPage from "./pages/admin/BuscarPage";
-import AyudaPage from "./pages/admin/AyudaPage";
 import OrderManagement from "./pages/admin/OrderManagement";
 import ShowOrden from "./pages/admin/ShowOrden";
 import ReportesPage from "./pages/admin/ReportesPage";
@@ -166,20 +163,8 @@ const router = createBrowserRouter([
         element: <ReportesPage />,
       },
       {
-        path: "configuraciones",
-        element: <ConfiguracionesPage />,
-      },
-      {
         path: "perfil",
         element: <PerfilPage />,
-      },
-      {
-        path: "buscar",
-        element: <BuscarPage />,
-      },
-      {
-        path: "ayuda",
-        element: <AyudaPage />,
       },
     ],
   },

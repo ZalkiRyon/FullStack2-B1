@@ -1,20 +1,20 @@
 const ReportesPage = () => {
   return (
-    <div className="adminContainer">
-      <div className="adminHeader">
-        <h1 className="adminTitle">Reportes</h1>
+    <div className="inventarioContainer">
+      {/* Header */}
+      <div className="inventarioHeader">
+        <div className="inventarioTitleSection">
+          <h1 className="inventarioTitle">Reportes</h1>
+          <p className="inventarioSubtitle">
+            Consulta y genera reportes del sistema de Huerto Hogar
+          </p>
+        </div>
       </div>
-      <div className="adminContent">
-        <p
-          style={{
-            textAlign: "center",
-            fontSize: "18px",
-            color: "#666",
-            marginTop: "50px",
-          }}
-        >
-          Aquí irán los reportes...
-        </p>
+
+      {/* Sección de contenido */}
+      <div className="inventarioTableSection">
+        <h2 className="tableTitle">Panel de Reportes</h2>
+        <p>Aquí irán los reportes...</p>
       </div>
     </div>
   );

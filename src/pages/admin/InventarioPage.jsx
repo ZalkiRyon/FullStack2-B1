@@ -63,7 +63,7 @@ const InventarioPage = () => {
 
     // Filtro por stock
     if (stockFilter !== "todos") {
-      if (stockFilter === "bajo") {
+      if (stockFilter === "critico") {
         resultado = resultado.filter((producto) => producto.stock < 100);
       } else if (stockFilter === "medio") {
         resultado = resultado.filter(
