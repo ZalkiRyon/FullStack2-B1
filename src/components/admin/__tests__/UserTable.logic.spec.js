@@ -14,7 +14,7 @@ describe('UserTableLogic', function() {
     // =========================================================================
     // PRUEBA 1: handleActionClick (Manejo de Acción Válida)
     // =========================================================================
-    it('1. handleActionClick: Debería llamar al callback con el ID del usuario para una acción válida', function() {
+    it('handleActionClick: Debería llamar al callback con el ID del usuario para una acción válida', function() {
         var userIdEsperado = mockUser.id;
 
         window.UserTableLogic.handleActionClick(onCallbackSpy, userIdEsperado);
@@ -27,7 +27,7 @@ describe('UserTableLogic', function() {
     // =========================================================================
     // PRUEBA 2: handleActionClick (Caso Borde: Callback nulo)
     // =========================================================================
-    it('2. handleActionClick: NO debería fallar si el callback es null o undefined', function() {
+    it('handleActionClick: NO debería fallar si el callback es null o undefined', function() {
         var userId = mockUser.id;
 
         // Se prueba con callback nulo e indefinido para verificar seguridad.
@@ -41,7 +41,7 @@ describe('UserTableLogic', function() {
     // =========================================================================
     // PRUEBA 3: getFullUserName (Concatenación)
     // =========================================================================
-    it('3. getFullUserName: Debería concatenar correctamente nombre y apellido', function() {
+    it('getFullUserName: Debería concatenar correctamente nombre y apellido', function() {
         var nombreCompleto = window.UserTableLogic.getFullUserName(mockUser);
         
         // Verifica la estructura del nombre completo.
@@ -51,7 +51,7 @@ describe('UserTableLogic', function() {
     // =========================================================================
     // PRUEBA 4: getRoleClassName (Lógica Condicional - Rol Admin)
     // =========================================================================
-    it('4. getRoleClassName: Debería devolver "rolAdmin" para el rol "admin" (case insensitive)', function() {
+    it('getRoleClassName: Debería devolver "rolAdmin" para el rol "admin" (case insensitive)', function() {
         var claseAdmin = window.UserTableLogic.getRoleClassName('ADMIN');
         
         // Verifica la clase correcta.
@@ -61,7 +61,7 @@ describe('UserTableLogic', function() {
     // =========================================================================
     // PRUEBA 5: getRoleClassName (Lógica Condicional - Rol por Defecto)
     // =========================================================================
-    it('5. getRoleClassName: Debería devolver "rolCliente" para un rol desconocido o nulo', function() {
+    it('getRoleClassName: Debería devolver "rolCliente" para un rol desconocido o nulo', function() {
         var claseDesconocida = window.UserTableLogic.getRoleClassName('supervisor');
         var claseNula = window.UserTableLogic.getRoleClassName(null);
         
