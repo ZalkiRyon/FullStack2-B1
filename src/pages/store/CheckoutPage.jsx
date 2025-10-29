@@ -88,13 +88,19 @@ const CheckoutPage = () => {
 
     const totalConEnvio = totalPrice + shippingCost;
 
+    // Mapear cartItems para agregar el subtotal calculado
+    const detallesConSubtotal = cartItems.map((item) => ({
+      ...item,
+      subtotal: item.precio * item.cantidad,
+    }));
+
     const nuevaOrden = {
       ...orderData,
       clienteNombre: formData.name + " " + formData.lastname,
       monto: totalConEnvio,
       departamento: formData.department,
       comentario: formData.comment,
-      detalles: [...cartItems],
+      detalles: detallesConSubtotal,
     };
 
     const isSuccess = saveOrdenToStorage(nuevaOrden).success;

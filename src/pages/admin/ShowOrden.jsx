@@ -52,6 +52,13 @@ const ShowOrden = () => {
     );
   }
 
+  // Calcular el subtotal de productos y el costo de envío
+  const subtotalProductos = orden.detalles.reduce(
+    (sum, detalle) => sum + (detalle.subtotal || 0),
+    0
+  );
+  const costoEnvio = orden.monto - subtotalProductos;
+
   return (
     <div className="inventarioContainer">
       {/* Header */}
@@ -136,20 +143,36 @@ const ShowOrden = () => {
             </div>
           </div>
 
-          {/* Monto Total */}
-          <div className="formGroupAdmin">
-            <label className="labelFormAdmin" htmlFor="monto">
-              Monto Total
-            </label>
-            <input
-              type="text"
-              className="formInputAdmin"
-              id="monto"
-              name="monto"
-              value={formatearPrecio(orden.monto)}
-              disabled
-              style={{ fontWeight: "bold", fontSize: "1.1rem" }}
-            />
+          {/* Fila 3: Costo de Envío y Monto Total */}
+          <div className="formGroupRow">
+            <div className="formGroupAdmin formGroupHalf">
+              <label className="labelFormAdmin" htmlFor="costoEnvio">
+                Costo de Envío
+              </label>
+              <input
+                type="text"
+                className="formInputAdmin"
+                id="costoEnvio"
+                name="costoEnvio"
+                value={formatearPrecio(costoEnvio)}
+                disabled
+              />
+            </div>
+
+            <div className="formGroupAdmin formGroupHalf">
+              <label className="labelFormAdmin" htmlFor="monto">
+                Monto Total
+              </label>
+              <input
+                type="text"
+                className="formInputAdmin"
+                id="monto"
+                name="monto"
+                value={formatearPrecio(orden.monto)}
+                disabled
+                style={{ fontWeight: "bold", fontSize: "1.1rem" }}
+              />
+            </div>
           </div>
 
           {/* Tabla de Productos */}
@@ -175,13 +198,13 @@ const ShowOrden = () => {
                   {orden.detalles.map((detalle, index) => (
                     <tr key={index}>
                       <td style={{ textAlign: "left" }}>
-                        {detalle.productoNombre}
+                        {detalle.productoNombre || detalle.nombre}
                       </td>
                       <td style={{ textAlign: "center" }}>
                         {detalle.cantidad}
                       </td>
                       <td style={{ textAlign: "right" }}>
-                        {formatearPrecio(detalle.precioUnitario)}
+                        {formatearPrecio(detalle.precioUnitario || detalle.precio)}
                       </td>
                       <td style={{ textAlign: "right", fontWeight: "bold" }}>
                         {formatearPrecio(detalle.subtotal)}

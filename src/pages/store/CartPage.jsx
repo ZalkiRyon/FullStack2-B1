@@ -46,7 +46,7 @@ function CartPage() {
     if (isLoggedIn) {
       navigate("/pago");
     } else {
-      navigate("/login");
+      navigate("/inicio-sesion");
     }
   };
 

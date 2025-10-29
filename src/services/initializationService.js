@@ -1,6 +1,7 @@
 import { usuarios } from "../utils/dataUsuarios";
 import { listaProductos } from "../utils/dataProductos";
 import { ordenes } from "../utils/dataOrdenes";
+import { repairOrdenesInStorage } from "../utils/repairOrdenes";
 
 /**
  * Servicio centralizado para inicializar todos los datos de la aplicación 
@@ -43,4 +44,7 @@ export const initializeApp = () => {
   initializeUsuarios();
   initializeProductos();
   initializeOrdenes();
+  
+  // Reparar órdenes existentes que puedan tener subtotales incorrectos
+  repairOrdenesInStorage();
 };
