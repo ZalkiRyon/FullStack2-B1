@@ -42,15 +42,16 @@ export const getAllProducts = async () => {
 
 // DELETE / DELETE: product
 export const deleteProductById = async (productId) => {
+   const url = `${API_BASE}/${productId}`;
   try {
-    const response = await axios.delete(API_BASE);
+    const response = await axios.delete(url);
 
     if (response.status == 204) {
       console.log(`Producto con id ${productId} eliminado con exito`);
       return true;
     } else {
       console.error(`Error 404: El producto de id ${productId} no existe`);
-      return [];
+      return false;
     }
   } catch (error) {
     console.error("Error en deleteProductById:", error);
