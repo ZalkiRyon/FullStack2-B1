@@ -1,4 +1,4 @@
-import { getUsuariosFromStorage } from "../utils/dataUsuarios";
+import { getAllUsers } from "../services/UserService";
 
 /**
  * Valida que el email sea único en el sistema
@@ -6,8 +6,8 @@ import { getUsuariosFromStorage } from "../utils/dataUsuarios";
  * @param {number} excludeId - ID de usuario a excluir de la validación (para edición)
  * @returns {boolean} - true si el email es único, false si ya existe
  */
-export const validarEmailUnico = (email, excludeId = null) => {
-  const usuarios = getUsuariosFromStorage();
+export const validarEmailUnico = async (email, excludeId = null) => {
+  const usuarios = await getAllUsers();
   return !usuarios.some(
     u => u.email.toLowerCase() === email.toLowerCase() && u.id !== excludeId
   );
@@ -19,8 +19,8 @@ export const validarEmailUnico = (email, excludeId = null) => {
  * @param {number} excludeId - ID de usuario a excluir de la validación (para edición)
  * @returns {boolean} - true si el RUN es único, false si ya existe
  */
-export const validarRunUnico = (run, excludeId = null) => {
-  const usuarios = getUsuariosFromStorage();
+export const validarRunUnico = async (run, excludeId = null) => {
+  const usuarios = await getAllUsers();
   return !usuarios.some(u => u.run === run && u.id !== excludeId);
 };
 
