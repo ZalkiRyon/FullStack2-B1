@@ -1,5 +1,4 @@
 import { usuarios } from "../utils/dataUsuarios";
-import { listaProductos } from "../utils/dataProductos";
 import { ordenes } from "../utils/dataOrdenes";
 import { repairOrdenesInStorage } from "../utils/repairOrdenes";
 
@@ -17,15 +16,6 @@ const initializeUsuarios = () => {
   }
 };
 
-/**
- * Inicializa los productos en localStorage si no existen
- */
-const initializeProductos = () => {
-  if (!localStorage.getItem("ListaProductos")) {
-    console.log("Inicializando productos en localStorage...");
-    localStorage.setItem("ListaProductos", JSON.stringify(listaProductos));
-  }
-};
 
 /**
  * Inicializa las órdenes en localStorage si no existen
@@ -42,9 +32,7 @@ const initializeOrdenes = () => {
  */
 export const initializeApp = () => {
   initializeUsuarios();
-  initializeProductos();
   initializeOrdenes();
-  
   // Reparar órdenes existentes que puedan tener subtotales incorrectos
   repairOrdenesInStorage();
 };
