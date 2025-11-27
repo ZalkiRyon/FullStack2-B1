@@ -2,11 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import BackButton from "../../components/common/BackButton";
-import {
-  getProductosFromStorage,
-  saveProductoToStorage,
-} from "../../utils/dataProductos";
-import { PREFIJOS_CATEGORIA } from "../../utils/dataCategorias";
+import { createProduct, getAllProducts } from "../../services/ProductsService";
 
 const NewProduct = () => {
   const navigate = useNavigate();
@@ -22,9 +18,13 @@ const NewProduct = () => {
 
   // Cargar categorías únicas de productos existentes
   useEffect(() => {
-    const productos = getProductosFromStorage();
-    const categoriasUnicas = [...new Set(productos.map((p) => p.categoria))];
-    setCategorias(categoriasUnicas);
+    const fetchProducts = async () => {
+      const productos = await getAllProducts();
+
+      const categoriasUnicas = [...new Set(productos.map((p) => p.categoria))];
+      setCategorias(categoriasUnicas);
+    };
+    fetchProducts();
   }, []);
 
   // Manejar cambios en los inputs
@@ -34,7 +34,7 @@ const NewProduct = () => {
   };
 
   // Manejar envío del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validaciones
@@ -59,9 +59,9 @@ const NewProduct = () => {
     }
 
     // Guardar producto
-    const resultado = saveProductoToStorage(formData);
-
-    if (resultado.success) {
+    const resultado = await createProduct(formData);
+    console.log(resultado)
+    if (resultado) {
       const mensaje = `Producto creado exitosamente`;
       alert(mensaje);
       navigate("/admin/inventario");

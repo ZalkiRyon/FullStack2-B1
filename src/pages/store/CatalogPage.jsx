@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { getProductosFromStorage } from "../../utils/dataProductos";
 import ProductCard from "../../components/store/ProductCard";
 import ProductFilters from "../../components/common/ProductFilters";
 import { useCart } from "../../context/CartContext";
 import { useToast } from "../../context/ToastContext";
 import { useSearchParams } from "react-router-dom";
+import { getAllProducts } from "../../services/ProductsService";
 
 function CatalogPage() {
   const [productos, setProductos] = useState([]);
@@ -25,9 +25,13 @@ function CatalogPage() {
   };
 
   useEffect(() => {
-    let productosStorage = getProductosFromStorage();
-    setProductos(productosStorage);
-    setFilteredProductos(productosStorage);
+    const fetchProducts = async () => {
+      const res = await getAllProducts();
+      setProductos(res);
+      setFilteredProductos(res);
+    };
+
+    fetchProducts()
   }, []);
 
   useEffect(() => {

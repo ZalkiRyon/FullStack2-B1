@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProductosFromStorage } from "../../utils/dataProductos";
 import { useCart } from "../../context/CartContext";
 import Breadcrumbs from "../../components/common/BreadCrumbs";
-import { productImages } from "../../utils/dataProductos";
+import { productImages } from "../../utils/productUtils";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import { useToast } from "../../context/ToastContext";
+import { getProductById } from "../../services/ProductsService";
 
 const DetailProductPage = () => {
   const { id } = useParams();
@@ -16,10 +16,14 @@ const DetailProductPage = () => {
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
-    let productosStorage = getProductosFromStorage();
-    const productoDetail = productosStorage.find((p) => p.id == id);
+    const fetchProduct = async () => {
+      const productoDetail = await getProductById(id);
+      setProducto(productoDetail);
+      console.log(productoDetail)
+    };
 
-    setProducto(productoDetail);
+    fetchProduct();
+
   }, [id]);
 
   const handleIncrement = () => setQuantity((prev) => prev + 1);

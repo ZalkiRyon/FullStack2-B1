@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import Footer from "../../components/store/Footer";
-import { getProductosFromStorage } from "../../utils/dataProductos";
+
 import ProductCard from "../../components/store/ProductCard";
+import { getAllProducts } from "../../services/ProductsService";
 
 const HomePage = () => {
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
-    let productosDestacados = getProductosFromStorage();
-
-    setProductos(productosDestacados.slice(0, 3));
+    const fetchProducts = async () => {
+      const res = await getAllProducts();
+      setProductos(res.slice(0, 3));
+    };
+    fetchProducts();
   }, []);
 
   return (

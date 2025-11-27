@@ -1,10 +1,10 @@
 import { useAuth } from "../../context/AuthContext";
 import { useState, useEffect } from "react";
-import { getProductosFromStorage } from "../../utils/dataProductos";
 import { getOrdenesFromStorage } from "../../utils/dataOrdenes";
 import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
 import DashboardStatCard from "../../components/admin/DashboardStatCard";
 import DashboardActionCard from "../../components/admin/DashboardActionCard";
+import { getAllProducts } from "../../services/ProductsService";
 
 const AdminDashboard = () => {
   const { usuario } = useAuth();
@@ -16,28 +16,34 @@ const AdminDashboard = () => {
   });
 
   useEffect(() => {
-    // Cargar datos desde localStorage
-    const productos = getProductosFromStorage();
-    const ordenes = getOrdenesFromStorage();
-    const usuarios = getUsuariosFromStorage();
+    const fetchProducts = async () => {
+      const allProducts = await getAllProducts();
 
-    // Calcular estadísticas
-    const totalOrdenes = ordenes.length;
-    const totalProductosDistintos = productos.length;
-    const totalStockProductos = productos.reduce(
-      (sum, producto) => sum + producto.stock,
-      0
-    );
-    const totalUsuariosClientes = usuarios.filter(
-      (u) => u.role === "cliente"
-    ).length;
+      // Cargar datos desde API/ local
+      const productos = allProducts;
+      const ordenes = getOrdenesFromStorage();
+      const usuarios = getUsuariosFromStorage();
 
-    setStats({
-      totalOrdenes,
-      totalProductosDistintos,
-      totalStockProductos,
-      totalUsuariosClientes,
-    });
+      // Calcular estadísticas
+      const totalOrdenes = ordenes.length;
+      const totalProductosDistintos = productos.length;
+      const totalStockProductos = productos.reduce(
+        (sum, producto) => sum + producto.stock,
+        0
+      );
+      const totalUsuariosClientes = usuarios.filter(
+        (u) => u.role === "cliente"
+      ).length;
+
+      setStats({
+        totalOrdenes,
+        totalProductosDistintos,
+        totalStockProductos,
+        totalUsuariosClientes,
+      });
+    };
+
+    fetchProducts();
   }, []);
 
   // Obtener el nombre completo del usuario o usar placeholder

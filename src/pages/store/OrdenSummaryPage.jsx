@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getOrdenesFromStorage } from "../../utils/dataOrdenes";
 import { useAuth } from "../../context/AuthContext";
 import PrimaryButton from "../../components/common/PrimaryButton";
-import { productImages } from "../../utils/dataProductos";
+import { productImages } from "../../utils/productUtils";
 import { useToast } from "../../context/ToastContext";
 import Breadcrumbs from "../../components/common/BreadCrumbs";
 import BackButton from "../../components/common/BackButton";

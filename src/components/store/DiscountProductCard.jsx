@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { productImages } from "../../utils/dataProductos";
+import { productImages } from "../../utils/productUtils";
 import PrimaryButton from "../common/PrimaryButton";
 
 const DiscountProductCard = ({

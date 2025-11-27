@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getProductosFromStorage } from "../../utils/dataProductos";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import ProductFilters from "../../components/common/ProductFilters";
 import ProductTable from "../../components/admin/ProductTable";
+import { getAllProducts } from "../../services/ProductsService";
 
 const InventarioPage = () => {
   const navigate = useNavigate();
@@ -13,35 +13,17 @@ const InventarioPage = () => {
   const [categoriaFilter, setCategoriaFilter] = useState("todas");
   const [stockFilter, setStockFilter] = useState("todos");
 
-  // Función para cargar productos
-  const cargarProductos = () => {
-    const productosStorage = getProductosFromStorage();
-    setProductos(productosStorage);
-    setFilteredProductos(productosStorage);
-  };
 
-  // Cargar productos al montar el componente
   useEffect(() => {
-    cargarProductos();
-  }, []);
-
-  // Recargar productos cuando la página vuelva a estar visible
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (!document.hidden) {
-        cargarProductos();
-      }
+    const fetchProducts = async () => {
+      const res = await getAllProducts();
+      setProductos(res);
+      setFilteredProductos(res);
     };
 
-    // Escuchar cuando volvemos a esta página
-    window.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("focus", cargarProductos);
-
-    return () => {
-      window.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("focus", cargarProductos);
-    };
+    fetchProducts()
   }, []);
+
 
   // Aplicar filtros
   useEffect(() => {

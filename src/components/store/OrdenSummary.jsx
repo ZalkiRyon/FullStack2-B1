@@ -1,5 +1,5 @@
 import { useCart } from "../../context/CartContext";
-import { productImages } from "../../utils/dataProductos";
+import { productImages } from "../../utils/productUtils";
 
 const OrdenSummary = ({ shippingCost, finalTotal }) => {
   const { cartItems, totalPrice } = useCart();

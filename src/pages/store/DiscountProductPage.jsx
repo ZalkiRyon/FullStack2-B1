@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useCart } from "../../context/CartContext";
 import { useToast } from "../../context/ToastContext";
-import { getProductosFromStorage } from "../../utils/dataProductos";
+
 import DiscountProductCard from "../../components/store/DiscountProductCard";
+import { getAllProducts } from "../../services/ProductsService";
 
 const DiscountProductPage = () => {
   const [productos, setProductos] = useState([]);
@@ -11,8 +12,11 @@ const DiscountProductPage = () => {
   const { showToast } = useToast();
 
   useEffect(() => {
-    let allProducts = getProductosFromStorage();
-    setProductos(allProducts.filter((p) => p.id % 2 !== 0).slice(0, 6));
+    const fetchProducts = async () => {
+      const res = await getAllProducts();
+      setProductos(res.filter((p) => p.id % 2 !== 0).slice(0, 6));
+    };
+    fetchProducts()
   }, []);
 
   const handleAddCart = (produ) => {

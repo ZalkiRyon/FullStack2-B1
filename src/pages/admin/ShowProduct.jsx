@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
-import { getProductosFromStorage } from "../../utils/dataProductos";
+import { getAllProducts, getProductById } from "../../services/ProductsService";
 
 const ShowProduct = () => {
   const navigate = useNavigate();
@@ -11,19 +11,23 @@ const ShowProduct = () => {
 
   // Cargar datos del producto
   useEffect(() => {
-    const productos = getProductosFromStorage();
-    const productoEncontrado = productos.find((p) => p.id === parseInt(id));
+    const fetchProduct = async () => {
+      const productos = await getAllProducts();
+      const productoEncontrado = await getProductById(parseInt(id));
 
-    if (productoEncontrado) {
-      setProducto(productoEncontrado);
-    } else {
-      alert("Producto no encontrado");
-      navigate("/admin/inventario");
-    }
+      if (productoEncontrado) {
+        setProducto(productoEncontrado);
+      } else {
+        alert("Producto no encontrado");
+        navigate("/admin/inventario");
+      }
 
-    // Cargar categorías únicas
-    const categoriasUnicas = [...new Set(productos.map((p) => p.categoria))];
-    setCategorias(categoriasUnicas);
+      // Cargar categorías únicas
+      const categoriasUnicas = [...new Set(productos.map((p) => p.categoria))];
+      setCategorias(categoriasUnicas);
+    };
+
+    fetchProduct();
   }, [id, navigate]);
 
   if (!producto) {

@@ -1,24 +1,54 @@
 import { useLocation, Link } from "react-router-dom";
-import { getProductosFromStorage } from "../../utils/dataProductos";
+import { getProductNameById } from "../../services/ProductsService";
+import { useEffect, useState } from "react";
+
 const Breadcrumbs = () => {
   const location = useLocation();
-
   const pathnames = location.pathname.split("/").filter((path) => path);
+  const [productNames, setProductNames] = useState({});
+  const [loading, setLoading] = useState(false);
 
-  const getProductNameById = (id) => {
-    const productos = getProductosFromStorage();
-    const producto = productos.find((p) => p.id == id);
+  useEffect(() => {
+    const productIndex = pathnames.findIndex(
+      (path, index) =>
+        path === "productos" && /^\d+$/.test(pathnames[index + 1])
+    );
 
-    return producto ? producto.nombre : `Producto ${id}`;
-  };
+    if (productIndex !== -1) {
+      const productId = pathnames[productIndex + 1];
+
+      if (!productNames[productId] && !loading) {
+        setLoading(true);
+        getProductNameById( parseInt( productId ) )
+          .then((name) => {
+            if (name) {
+              setProductNames((prevNames) => ({
+                ...prevNames,
+                [productId]: name,
+              }));
+            } else {
+              setProductNames((prevNames) => ({
+                ...prevNames,
+                [productId]: `ID: ${productId}`,
+              }));
+            }
+          })
+          .catch(() => {
+            setProductNames((prevNames) => ({
+              ...prevNames,
+              [productId]: `Error ID: ${productId}`,
+            }));
+          })
+          .finally(() => setLoading(false));
+      }
+    }
+  }, [location.pathname, pathnames, productNames, loading]);
 
   const formatBreadcrumbName = (value, index, pathnames) => {
     const previousValue = pathnames[index - 1];
 
-    // regex para determinar digitos
     if (previousValue === "productos" && /^\d+$/.test(value)) {
-      const productName = getProductNameById(value);
-      return productName;
+      return productNames[value] || (loading ? "Cargando..." : `ID: ${value}`);
     }
 
     return value.charAt(0).toUpperCase() + value.slice(1).replace(/-/g, " ");

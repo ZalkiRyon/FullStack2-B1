@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
-import { getProductosFromStorage } from "../../utils/dataProductos";
+import {
+  deleteProductById,
+  getAllProducts,
+  getProductById,
+} from "../../services/ProductsService";
 
 const DeleteProduct = () => {
   const navigate = useNavigate();
@@ -11,43 +15,44 @@ const DeleteProduct = () => {
 
   // Cargar datos del producto
   useEffect(() => {
-    const productos = getProductosFromStorage();
-    const productoEncontrado = productos.find((p) => p.id === parseInt(id));
+    const fetchProducts = async () => {
+      const productoEncontrado = await getProductById(parseInt(id));
 
-    if (productoEncontrado) {
-      setProducto(productoEncontrado);
-    } else {
-      alert("Producto no encontrado");
-      navigate("/admin/inventario");
-    }
+      if (productoEncontrado) {
 
-    // Cargar categorías únicas
-    const categoriasUnicas = [...new Set(productos.map((p) => p.categoria))];
-    setCategorias(categoriasUnicas);
+        setProducto(productoEncontrado);
+        const productos = await getAllProducts();
+        // Cargar categorías únicas
+        const categoriasUnicas = [
+          ...new Set(productos.map((p) => p.categoria)),
+        ];
+        setCategorias(categoriasUnicas);
+    
+
+      } else {
+        alert("Producto no encontrado");
+        navigate("/admin/inventario");
+      }
+    };
+
+        fetchProducts();
+    
   }, [id, navigate]);
 
-  const handleEliminar = () => {
+  const handleEliminar = async () => {
     const confirmacion = window.confirm(
       `¿Está seguro que desea eliminar el producto?\n\nNombre: ${producto.nombre}\nCategoría: ${producto.categoria}\nPrecio: $${producto.precio}\n\nEsta acción no se puede deshacer.`
     );
 
     if (confirmacion) {
-      // Obtener productos actuales
-      const productos = getProductosFromStorage();
+      const isSuccesful = await deleteProductById(parseInt(id));
 
-      // Filtrar el producto a eliminar
-      const productosActualizados = productos.filter(
-        (p) => p.id !== parseInt(id)
-      );
-
-      // Guardar en localStorage
-      localStorage.setItem(
-        "ListaProductos",
-        JSON.stringify(productosActualizados)
-      );
-
-      alert("Producto eliminado exitosamente");
-      navigate("/admin/inventario");
+      if (isSuccesful) {
+        alert("Producto eliminado exitosamente");
+        navigate("/admin/inventario");
+      } else {
+        alert(`Error al eliminar producto con id ${id} `);
+      }
     }
   };
 

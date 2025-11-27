@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
-import { getProductosFromStorage } from "../../utils/dataProductos";
+import {
+  getAllProducts,
+  getProductById,
+  updateProductById,
+} from "../../services/ProductsService";
 
 const EditProduct = () => {
   const navigate = useNavigate();
@@ -19,33 +23,35 @@ const EditProduct = () => {
 
   // Cargar datos del producto
   useEffect(() => {
-    const productos = getProductosFromStorage();
-    const productoEncontrado = productos.find((p) => p.id === parseInt(id));
+    const fetchProducts = async () => {
+      const productoEncontrado = await getProductById(parseInt(id));
+      const productos = await getAllProducts();
+      if (productoEncontrado) {
+        setProductoOriginal(productoEncontrado);
 
-    if (productoEncontrado) {
-      setProductoOriginal(productoEncontrado);
+        // Extraer el nombre sin el código (después del " - ")
+        const nombreSinCodigo = productoEncontrado.nombre.includes(" - ")
+          ? productoEncontrado.nombre.split(" - ").slice(1).join(" - ")
+          : productoEncontrado.nombre;
 
-      // Extraer el nombre sin el código (después del " - ")
-      const nombreSinCodigo = productoEncontrado.nombre.includes(" - ")
-        ? productoEncontrado.nombre.split(" - ").slice(1).join(" - ")
-        : productoEncontrado.nombre;
+        setFormData({
+          nombre: nombreSinCodigo,
+          categoria: productoEncontrado.categoria,
+          precio: productoEncontrado.precio,
+          stock: productoEncontrado.stock,
+          imagen: productoEncontrado.imagen || "",
+          descripcion: productoEncontrado.descripcion || "",
+        });
+      } else {
+        alert("Producto no encontrado");
+        navigate("/admin/inventario");
+      }
+      // Cargar categorías únicas
+      const categoriasUnicas = [...new Set(productos.map((p) => p.categoria))];
+      setCategorias(categoriasUnicas);
+    };
 
-      setFormData({
-        nombre: nombreSinCodigo,
-        categoria: productoEncontrado.categoria,
-        precio: productoEncontrado.precio,
-        stock: productoEncontrado.stock,
-        imagen: productoEncontrado.imagen || "",
-        descripcion: productoEncontrado.descripcion || "",
-      });
-    } else {
-      alert("Producto no encontrado");
-      navigate("/admin/inventario");
-    }
-
-    // Cargar categorías únicas
-    const categoriasUnicas = [...new Set(productos.map((p) => p.categoria))];
-    setCategorias(categoriasUnicas);
+    fetchProducts();
   }, [id, navigate]);
 
   // Manejar cambios en los inputs
@@ -55,7 +61,7 @@ const EditProduct = () => {
   };
 
   // Manejar envío del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validaciones
@@ -79,17 +85,6 @@ const EditProduct = () => {
       return;
     }
 
-    // Obtener productos actuales
-    const productos = getProductosFromStorage();
-
-    // Encontrar el índice del producto a editar
-    const indiceProducto = productos.findIndex((p) => p.id === parseInt(id));
-
-    if (indiceProducto === -1) {
-      alert("Error: Producto no encontrado");
-      return;
-    }
-
     // Extraer el código del nombre original
     const codigoProducto = productoOriginal.nombre.includes(" - ")
       ? productoOriginal.nombre.split(" - ")[0]
@@ -108,14 +103,15 @@ const EditProduct = () => {
       descripcion: formData.descripcion || "",
     };
 
-    // Actualizar el producto en el array
-    productos[indiceProducto] = productoActualizado;
+    const res = await updateProductById(parseInt(id), productoActualizado);
 
-    // Guardar en localStorage
-    localStorage.setItem("ListaProductos", JSON.stringify(productos));
-
-    alert("Producto actualizado exitosamente");
-    navigate("/admin/inventario");
+    if (res) {
+      alert("Producto actualizado exitosamente");
+      navigate("/admin/inventario");
+    } else {
+      alert("Producto no es posible actualizar");
+    }
+    
   };
 
   if (!productoOriginal) {

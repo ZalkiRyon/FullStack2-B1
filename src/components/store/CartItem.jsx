@@ -1,4 +1,4 @@
-import { productImages } from "../../utils/dataProductos";
+import { productImages } from "../../utils/productUtils";
 
 export const CartItem = ({
   id,
