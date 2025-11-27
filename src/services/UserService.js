@@ -73,3 +73,25 @@ export const updateUserById = async (userId, user) => {
     throw error;
   }
 };
+
+// FUNCIOENS ESPECIALES
+export const getUserById = async (userId)  =>{
+    const url = `${API_BASE}/${userId}`;
+    try {
+    const response = await fetch(url);
+
+    if (response.status == 200) {
+      console.log(`Usuario ${userId} actualizadop con exito`);
+      return response.json();
+    }
+
+  } catch (error) {
+    if (error.response && error.response.status === 404) {
+      console.error(`Error 404, usuario ${userId} no existe`);
+      return null;
+    }
+
+    console.error("Error en updateUserById:", error);
+    throw error;
+  }
+}
