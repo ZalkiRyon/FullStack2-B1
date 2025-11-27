@@ -22,15 +22,15 @@ const UserTable = ({ usuarios, onVer, onEditar, onHistorial }) => {
                   <td>
                     <span
                       className={`categoriaBadge ${
-                        usuario.role === "admin"
+                        usuario.roleNombre === "admin"
                           ? "rolAdmin"
                           : usuario.role === "vendedor"
                           ? "rolVendedor"
                           : "rolCliente"
                       }`}
                     >
-                      {usuario.role.charAt(0).toUpperCase() +
-                        usuario.role.slice(1)}
+                      {usuario.roleNombre.charAt(0).toUpperCase() +
+                        usuario.roleNombre.slice(1)}
                     </span>
                   </td>
                   <td className="productoCodigo">{usuario.email}</td>

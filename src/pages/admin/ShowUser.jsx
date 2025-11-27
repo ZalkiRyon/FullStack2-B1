@@ -127,7 +127,7 @@ const ShowUser = () => {
               id="role"
               name="role"
               value={
-                usuario.role.charAt(0).toUpperCase() + usuario.role.slice(1)
+                usuario.roleNombre.charAt(0).toUpperCase() + usuario.roleNombre.slice(1)
               }
               disabled
             />

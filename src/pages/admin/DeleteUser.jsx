@@ -30,7 +30,7 @@ const DeleteUser = () => {
       `¿Está seguro de eliminar al usuario?\n\n` +
         `Nombre: ${usuario.nombre} ${usuario.apellido}\n` +
         `Correo: ${usuario.email}\n` +
-        `Rol: ${usuario.role}\n\n` +
+        `Rol: ${usuario.roleNombre}\n\n` +
         `Esta acción no se puede deshacer.`
     );
 
@@ -157,7 +157,7 @@ const DeleteUser = () => {
               id="role"
               name="role"
               value={
-                usuario.role.charAt(0).toUpperCase() + usuario.role.slice(1)
+                usuario.roleNombre.charAt(0).toUpperCase() + usuario.roleNombre.slice(1)
               }
               disabled
             />

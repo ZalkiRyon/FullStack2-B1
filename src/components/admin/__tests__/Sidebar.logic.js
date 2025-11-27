@@ -10,7 +10,7 @@ window.SidebarLogic = (() => {
    */
   const getUserDisplayInfo = (usuario) => {
     // La lógica de determinación del rol (idéntica al componente original)
-    const userRole = usuario?.role === "admin" ? "Admin" : "Usuario";
+    const userRole = usuario?.roleNombre === "admin" ? "Admin" : "Usuario";
 
     // La lógica de determinación del nombre (idéntica al componente original)
     const userName = usuario

@@ -18,12 +18,12 @@ describe("SidebarLogic", () => {
   const mockUserAdmin = {
     nombre: "Juan",
     apellido: "Pérez",
-    role: "admin",
+    roleNombre: "admin",
   };
   const mockUserStandard = {
     nombre: "Ana",
     apellido: "Gómez",
-    role: "user", // Rol no 'admin'
+    roleNombre: "user", // Rol no 'admin'
   };
 
   // =========================================================================

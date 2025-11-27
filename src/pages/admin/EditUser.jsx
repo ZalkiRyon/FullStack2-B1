@@ -19,7 +19,7 @@ const EditUser = () => {
     apellido: "",
     run: "",
     fechaNacimiento: "",
-    role: "",
+    roleNombre: "",
     email: "",
     telefono: "",
     region: "",
@@ -38,7 +38,7 @@ const EditUser = () => {
           apellido: usuarioEncontrado.apellido,
           run: usuarioEncontrado.run,
           fechaNacimiento: usuarioEncontrado.fechaNacimiento || "",
-          role: usuarioEncontrado.role,
+          roleNombre: usuarioEncontrado.roleNombre,
           email: usuarioEncontrado.email,
           telefono: usuarioEncontrado.telefono || "",
           region: usuarioEncontrado.region,
@@ -125,7 +125,7 @@ const EditUser = () => {
         apellido: formData.apellido,
         run: formData.run,
         fechaNacimiento: formData.fechaNacimiento,
-        role: formData.role,
+        roleNombre: formData.roleNombre,
         email: formData.email,
         telefono: formData.telefono,
         region: formData.region,
@@ -239,7 +239,7 @@ const EditUser = () => {
               className="formInputAdmin formSelectAdmin"
               id="role"
               name="role"
-              value={formData.role}
+              value={formData.roleNombre}
               onChange={handleInputChange}
               required
             >

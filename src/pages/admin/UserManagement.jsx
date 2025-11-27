@@ -38,14 +38,14 @@ const UserManagement = () => {
 
     // Filtro por rol
     if (rolFilter !== "todos") {
-      resultado = resultado.filter((usuario) => usuario.role === rolFilter);
+      resultado = resultado.filter((usuario) => usuario.roleNombre === rolFilter);
     }
 
     setFilteredUsuarios(resultado);
   }, [searchTerm, rolFilter, usuarios]);
 
   // Obtener roles únicos
-  const roles = [...new Set(usuarios.map((u) => u.role))];
+  const roles = [...new Set(usuarios.map((u) => u.roleNombre))];
 
   // Limpiar filtros
   const limpiarFiltros = () => {
