@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
-import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
 import { regionesYComunas } from "../../utils/dataRegiones";
+import { getUserById } from "../../services/UserService";
 
 const ShowUser = () => {
   const navigate = useNavigate();
@@ -11,15 +11,18 @@ const ShowUser = () => {
 
   // Cargar datos del usuario
   useEffect(() => {
-    const usuarios = getUsuariosFromStorage();
-    const usuarioEncontrado = usuarios.find((u) => u.id === parseInt(id));
+    const fecthUser = async () => {
+      const usuarioEncontrado = await getUserById(parseInt(id));
 
-    if (usuarioEncontrado) {
-      setUsuario(usuarioEncontrado);
-    } else {
-      alert("Usuario no encontrado");
-      navigate("/admin/usuarios");
-    }
+      if (usuarioEncontrado) {
+        setUsuario(usuarioEncontrado);
+      } else {
+        alert("Usuario no encontrado");
+        navigate("/admin/usuarios");
+      }
+    };
+
+    fecthUser();
   }, [id, navigate]);
 
   // Obtener nombre de la región

@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
-import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
+
 import { getOrdenesByCliente } from "../../utils/dataOrdenes";
+import { getUserById } from "../../services/UserService";
 
 const UserPurchaseHistory = () => {
   const navigate = useNavigate();
@@ -12,19 +13,22 @@ const UserPurchaseHistory = () => {
 
   // Cargar datos del usuario y sus órdenes
   useEffect(() => {
-    const usuarios = getUsuariosFromStorage();
-    const usuarioEncontrado = usuarios.find((u) => u.id === parseInt(id));
+    const fectchUser = async () => {
+      const usuarioEncontrado = await getUserById(parseInt(id));
 
-    if (usuarioEncontrado) {
-      setUsuario(usuarioEncontrado);
+      if (usuarioEncontrado) {
+        setUsuario(usuarioEncontrado);
 
-      // Cargar órdenes del cliente
-      const ordenesCliente = getOrdenesByCliente(parseInt(id));
-      setOrdenes(ordenesCliente);
-    } else {
-      alert("Usuario no encontrado");
-      navigate("/admin/usuarios");
-    }
+        // Cargar órdenes del cliente
+        const ordenesCliente = getOrdenesByCliente(parseInt(id));
+        setOrdenes(ordenesCliente);
+      } else {
+        alert("Usuario no encontrado");
+        navigate("/admin/usuarios");
+      }
+    };
+
+    fectchUser();
   }, [id, navigate]);
 
   const handleVerDetalle = (ordenId) => {

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import UserFilters from "../../components/admin/UserFilters";
 import UserTable from "../../components/admin/UserTable";
+import { getAllUsers } from "../../services/UserService";
 
 const UserManagement = () => {
   const navigate = useNavigate();
@@ -12,34 +12,13 @@ const UserManagement = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [rolFilter, setRolFilter] = useState("todos");
 
-  // Función para cargar usuarios
-  const cargarUsuarios = () => {
-    const usuariosStorage = getUsuariosFromStorage();
-    setUsuarios(usuariosStorage);
-    setFilteredUsuarios(usuariosStorage);
-  };
-
-  // Cargar usuarios al montar el componente
   useEffect(() => {
+    const cargarUsuarios = async () => {
+      const usuariosStorage = await getAllUsers();
+      setUsuarios(usuariosStorage);
+      setFilteredUsuarios(usuariosStorage);
+    };
     cargarUsuarios();
-  }, []);
-
-  // Recargar usuarios cuando la página vuelva a estar visible
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (!document.hidden) {
-        cargarUsuarios();
-      }
-    };
-
-    // Escuchar cuando volvemos a esta página
-    window.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("focus", cargarUsuarios);
-
-    return () => {
-      window.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("focus", cargarUsuarios);
-    };
   }, []);
 
   // Aplicar filtros

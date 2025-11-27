@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
-import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
 import { regionesYComunas } from "../../utils/dataRegiones";
+import { deleteUserById, getUserById } from "../../services/UserService";
 
 const DeleteUser = () => {
   const navigate = useNavigate();
@@ -11,19 +11,21 @@ const DeleteUser = () => {
 
   // Cargar datos del usuario
   useEffect(() => {
-    const usuarios = getUsuariosFromStorage();
-    const usuarioEncontrado = usuarios.find((u) => u.id === parseInt(id));
+    const fetchUser = async () => {
+      const usuarioEncontrado = await getUserById(parseInt(id));
+      if (usuarioEncontrado) {
+        setUsuario(usuarioEncontrado);
+      } else {
+        alert("Usuario no encontrado");
+        navigate("/admin/usuarios");
+      }
+    };
 
-    if (usuarioEncontrado) {
-      setUsuario(usuarioEncontrado);
-    } else {
-      alert("Usuario no encontrado");
-      navigate("/admin/usuarios");
-    }
+    fetchUser();
   }, [id, navigate]);
 
   // Función para eliminar usuario
-  const handleEliminar = () => {
+  const handleEliminar = async () => {
     const confirmar = window.confirm(
       `¿Está seguro de eliminar al usuario?\n\n` +
         `Nombre: ${usuario.nombre} ${usuario.apellido}\n` +
@@ -35,23 +37,13 @@ const DeleteUser = () => {
     if (confirmar) {
       try {
         // Obtener usuarios del localStorage
-        const usuarios = getUsuariosFromStorage();
-
-        // Filtrar el usuario a eliminar
-        const usuariosActualizados = usuarios.filter(
-          (u) => u.id !== parseInt(id)
-        );
-
-        // Guardar en localStorage
-        localStorage.setItem(
-          "ListaUsuarios",
-          JSON.stringify(usuariosActualizados)
-        );
-
-        alert(
-          `Usuario eliminado exitosamente\n\nEl usuario ${usuario.nombre} ${usuario.apellido} ha sido eliminado del sistema.`
-        );
-        navigate("/admin/usuarios");
+        const res = await deleteUserById(parseInt(id));
+        if (res) {
+          alert(
+            `Usuario eliminado exitosamente\n\nEl usuario ${usuario.nombre} ${usuario.apellido} ha sido eliminado del sistema.`
+          );
+          navigate("/admin/usuarios");
+        }
       } catch (error) {
         alert(`Error al eliminar usuario\n\nDetalle: ${error.message}`);
       }

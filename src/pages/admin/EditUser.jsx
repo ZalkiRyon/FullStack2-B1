@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
-import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
 import { regionesYComunas } from "../../utils/dataRegiones";
 import {
   validarEmailUnico,
   validarRunUnico,
 } from "../../validators/usuarioValidators";
+import { getUserById, updateUserById } from "../../services/UserService";
 
 const EditUser = () => {
   const navigate = useNavigate();
@@ -30,30 +30,32 @@ const EditUser = () => {
 
   // Cargar datos del usuario
   useEffect(() => {
-    const usuarios = getUsuariosFromStorage();
-    const usuarioEncontrado = usuarios.find((u) => u.id === parseInt(id));
+    const fetchUser = async () => {
+      const usuarioEncontrado = await getUserById(parseInt(id));
+      if (usuarioEncontrado) {
+        setFormData({
+          nombre: usuarioEncontrado.nombre,
+          apellido: usuarioEncontrado.apellido,
+          run: usuarioEncontrado.run,
+          fechaNacimiento: usuarioEncontrado.fechaNacimiento || "",
+          role: usuarioEncontrado.role,
+          email: usuarioEncontrado.email,
+          telefono: usuarioEncontrado.telefono || "",
+          region: usuarioEncontrado.region,
+          comuna: usuarioEncontrado.comuna,
+          direccion: usuarioEncontrado.direccion,
+          comentario: usuarioEncontrado.comentario || "",
+        });
+        setSelectedRegion(usuarioEncontrado.region);
+        setEmailOriginal(usuarioEncontrado.email);
+        setRunOriginal(usuarioEncontrado.run);
+      } else {
+        alert("Usuario no encontrado");
+        navigate("/admin/usuarios");
+      }
+    };
 
-    if (usuarioEncontrado) {
-      setFormData({
-        nombre: usuarioEncontrado.nombre,
-        apellido: usuarioEncontrado.apellido,
-        run: usuarioEncontrado.run,
-        fechaNacimiento: usuarioEncontrado.fechaNacimiento || "",
-        role: usuarioEncontrado.role,
-        email: usuarioEncontrado.email,
-        telefono: usuarioEncontrado.telefono || "",
-        region: usuarioEncontrado.region,
-        comuna: usuarioEncontrado.comuna,
-        direccion: usuarioEncontrado.direccion,
-        comentario: usuarioEncontrado.comentario || "",
-      });
-      setSelectedRegion(usuarioEncontrado.region);
-      setEmailOriginal(usuarioEncontrado.email);
-      setRunOriginal(usuarioEncontrado.run);
-    } else {
-      alert("Usuario no encontrado");
-      navigate("/admin/usuarios");
-    }
+    fetchUser();
   }, [id, navigate]);
 
   // Manejar cambio de región para actualizar comunas
@@ -70,7 +72,7 @@ const EditUser = () => {
   };
 
   // Manejar envío del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validaciones
@@ -114,19 +116,11 @@ const EditUser = () => {
 
     try {
       // Obtener usuarios del localStorage
-      const usuarios = getUsuariosFromStorage();
-
-      // Encontrar el índice del usuario a actualizar
-      const indice = usuarios.findIndex((u) => u.id === parseInt(id));
-
-      if (indice === -1) {
-        alert("Usuario no encontrado");
-        return;
-      }
+      const usuarios = await getUserById(parseInt(id));
 
       // Actualizar el usuario manteniendo id, password y fechaRegistro
-      usuarios[indice] = {
-        ...usuarios[indice],
+      usuarios[parseInt(id)] = {
+        ...usuarios[parseInt(id)],
         nombre: formData.nombre,
         apellido: formData.apellido,
         run: formData.run,
@@ -140,13 +134,12 @@ const EditUser = () => {
         comentario: formData.comentario,
       };
 
-      // Guardar en localStorage
-      localStorage.setItem("ListaUsuarios", JSON.stringify(usuarios));
-
+      const res = await updateUserById(parseInt(id), usuarios);
       alert(
         `Usuario actualizado exitosamente\n\nLos datos de ${formData.nombre} ${formData.apellido} han sido actualizados.`
       );
       navigate("/admin/usuarios");
+
     } catch (error) {
       alert(`Error al actualizar usuario\n\nDetalle: ${error.message}`);
     }

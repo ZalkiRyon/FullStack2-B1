@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/common/PrimaryButton";
-import { saveUsuarioToStorage } from "../../utils/dataUsuarios";
 import { regionesYComunas } from "../../utils/dataRegiones";
 import {
   validarEmailUnico,
   validarRunUnico,
 } from "../../validators/usuarioValidators";
+import { createUser } from "../../services/UserService";
 
 const NewUser = () => {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ const NewUser = () => {
   };
 
   // Manejar envío del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validaciones
@@ -81,11 +81,12 @@ const NewUser = () => {
     }
 
     // Guardar usuario
-    const resultado = saveUsuarioToStorage(formData);
+    const resultado = await createUser(formData)
 
-    if (resultado.success) {
+    if (resultado) {
       alert(`Usuario creado exitosamente`);
       navigate("/admin/usuarios");
+
     } else {
       alert(`Error al crear usuario: ${resultado.error}`);
     }

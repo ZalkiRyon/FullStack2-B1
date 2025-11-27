@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logoEmpresa from "../../assets/img/logoEmpresa.jpg";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import { useAuth } from "../../context/AuthContext";
-import { getUsuariosFromStorage } from "../../utils/dataUsuarios";
+import { getAllUsers } from "../../services/UserService";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -13,14 +13,23 @@ const LoginPage = () => {
     password: "",
   });
   const [error, setError] = useState("");
+  const [usuarios, setUsuarios] = useState(null);
 
+  useEffect(() => {
+    const fecthUsers = async () => {
+      const allUsers = await getAllUsers();
+      setUsuarios(allUsers);
+    };
+
+    fecthUsers();
+  }, []);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
     setError(""); // Limpiar error al escribir
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
@@ -29,9 +38,6 @@ const LoginPage = () => {
       setError("Por favor, complete todos los campos");
       return;
     }
-
-    // Obtener usuarios del localStorage
-    const usuarios = getUsuariosFromStorage();
 
     // Buscar usuario con el correo ingresado
     const usuario = usuarios.find((u) => u.email === formData.correo);
@@ -49,9 +55,9 @@ const LoginPage = () => {
 
     // Login exitoso
     login(usuario);
-
+    console.log(usuario);
     // Redirigir según el rol
-    if (usuario.role === "admin") {
+    if (usuario.roleNombre === "admin") {
       navigate("/admin");
     } else {
       navigate("/"); // Redirigir a la tienda para clientes

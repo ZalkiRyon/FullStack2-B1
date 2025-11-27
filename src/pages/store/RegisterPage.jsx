@@ -1,13 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import Modal from "../../components/common/Modal";
-import { saveUsuarioToStorage } from "../../utils/dataUsuarios";
 import { regionesYComunas } from "../../utils/dataRegiones";
 import {
   validarEmailUnico,
   validarRunUnico,
 } from "../../validators/usuarioValidators";
+import { createUser } from "../../services/UserService";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -30,7 +30,6 @@ const RegisterPage = () => {
   const [isModalSucessOpen, setIsModalSucessOpen] = useState(false);
   const [modalText, setModalText] = useState("");
   const [modalSucessText, setModalSucessText] = useState("");
-
   // Manejar cambio de región para actualizar comunas
   const handleRegionChange = (e) => {
     const region = e.target.value;
@@ -45,7 +44,7 @@ const RegisterPage = () => {
   };
 
   // Manejar envío del formulario
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Validaciones
@@ -96,15 +95,21 @@ const RegisterPage = () => {
     };
 
     // Guardar usuario
-    const resultado = saveUsuarioToStorage(datosUsuario);
-
-    if (resultado.success) {
+    try {
+      const resultado = await createUser(datosUsuario);
       setModalSucessText(
         `¡Registro exitoso! Bienvenido ${resultado.usuario.nombre}`
       );
       setIsModalSucessOpen(true);
-    } else {
-      setModalText(`Error al registrar usuario: ${resultado.error}`);
+    } catch (error) {
+      let errorMessage = `Error al registrar el usuario`;
+
+      if (error.response) {
+        errorMessage =
+          error.response.data.message ||
+          `Error del servidor (${error.response.status})`;
+      }
+      setModalText(errorMessage);
       setIsModalOpen(true);
     }
   };
