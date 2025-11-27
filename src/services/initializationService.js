@@ -9,12 +9,6 @@ import { repairOrdenesInStorage } from "../utils/repairOrdenes";
 /**
  * Inicializa los usuarios en localStorage si no existen
  */
-const initializeUsuarios = () => {
-  if (!localStorage.getItem("ListaUsuarios")) {
-    console.log("Inicializando usuarios en localStorage...");
-    localStorage.setItem("ListaUsuarios", JSON.stringify(usuarios));
-  }
-};
 
 
 /**
@@ -31,7 +25,6 @@ const initializeOrdenes = () => {
  * Función principal que inicializa toda la aplicación
  */
 export const initializeApp = () => {
-  initializeUsuarios();
   initializeOrdenes();
   // Reparar órdenes existentes que puedan tener subtotales incorrectos
   repairOrdenesInStorage();
