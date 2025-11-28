@@ -45,6 +45,7 @@ export const deleteUserById = async (userId) => {
       console.log(`Usuario ${userId} eliminado con exito`);
       return true;
     }
+    return true;
   } catch (error) {
     console.error("Error en deleteUserById:", error);
     throw error;

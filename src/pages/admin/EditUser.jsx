@@ -32,6 +32,7 @@ const EditUser = () => {
   useEffect(() => {
     const fetchUser = async () => {
       const usuarioEncontrado = await getUserById(parseInt(id));
+
       if (usuarioEncontrado) {
         setFormData({
           nombre: usuarioEncontrado.nombre,
@@ -45,7 +46,9 @@ const EditUser = () => {
           comuna: usuarioEncontrado.comuna,
           direccion: usuarioEncontrado.direccion,
           comentario: usuarioEncontrado.comentario || "",
+          password: usuarioEncontrado.password,
         });
+
         setSelectedRegion(usuarioEncontrado.region);
         setEmailOriginal(usuarioEncontrado.email);
         setRunOriginal(usuarioEncontrado.run);
@@ -69,6 +72,12 @@ const EditUser = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const ROLE_NAME_TO_ID = {
+    admin: 1,
+    cliente: 2,
+    vendedor: 3,
   };
 
   // Manejar envío del formulario
@@ -115,17 +124,20 @@ const EditUser = () => {
     }
 
     try {
-      // Obtener usuarios del localStorage
-      const usuarios = await getUserById(parseInt(id));
+      const roleIdToSend = ROLE_NAME_TO_ID[formData.roleNombre];
 
-      // Actualizar el usuario manteniendo id, password y fechaRegistro
-      usuarios[parseInt(id)] = {
-        ...usuarios[parseInt(id)],
+      if (!roleIdToSend) {
+        alert("Error: Tipo de usuario no válido.");
+        return;
+      }
+
+      const userNew = {
+        ...formData,
         nombre: formData.nombre,
         apellido: formData.apellido,
         run: formData.run,
         fechaNacimiento: formData.fechaNacimiento,
-        roleNombre: formData.roleNombre,
+        role_id: roleIdToSend,
         email: formData.email,
         telefono: formData.telefono,
         region: formData.region,
@@ -134,12 +146,16 @@ const EditUser = () => {
         comentario: formData.comentario,
       };
 
-      const res = await updateUserById(parseInt(id), usuarios);
-      alert(
-        `Usuario actualizado exitosamente\n\nLos datos de ${formData.nombre} ${formData.apellido} han sido actualizados.`
-      );
-      navigate("/admin/usuarios");
+      const res = await updateUserById(parseInt(id), userNew);
 
+      if (res) {
+        alert(
+          `Usuario actualizado exitosamente\n\nLos datos de ${formData.nombre} ${formData.apellido} han sido actualizados.`
+        );
+        navigate("/admin/usuarios");
+      } else {
+        alert("Errorno se pudo actualizar el usuario");
+      }
     } catch (error) {
       alert(`Error al actualizar usuario\n\nDetalle: ${error.message}`);
     }
@@ -237,8 +253,8 @@ const EditUser = () => {
             </label>
             <select
               className="formInputAdmin formSelectAdmin"
-              id="role"
-              name="role"
+              id="roleNombre"
+              name="roleNombre"
               value={formData.roleNombre}
               onChange={handleInputChange}
               required

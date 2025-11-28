@@ -16,8 +16,8 @@ const NewUser = () => {
     apellido: "",
     run: "",
     fechaNacimiento: "",
-    tipoUsuario: "",
-    correo: "",
+    roleNombre: "",
+    email: "",
     telefono: "",
     password: "",
     confirmarPassword: "",
@@ -38,6 +38,12 @@ const NewUser = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const ROLE_NAME_TO_ID = {
+    admin: 1,
+    cliente: 2,
+    vendedor: 3,
   };
 
   // Manejar envío del formulario
@@ -80,15 +86,39 @@ const NewUser = () => {
       return;
     }
 
-    // Guardar usuario
-    const resultado = await createUser(formData)
+    const roleIdToSend = ROLE_NAME_TO_ID[formData.roleNombre];
 
-    if (resultado) {
-      alert(`Usuario creado exitosamente`);
-      navigate("/admin/usuarios");
+    if (!roleIdToSend) {
+      alert("Error: Tipo de usuario no válido.");
+      return;
+    }
 
-    } else {
-      alert(`Error al crear usuario: ${resultado.error}`);
+    const userPayload = {
+      nombre: formData.nombre,
+      apellido: formData.apellido,
+      run: formData.run,
+      fechaNacimiento: formData.fechaNacimiento || null,
+      telefono: formData.telefono || null,
+      region: formData.region,
+      comuna: formData.comuna,
+      direccion: formData.direccion,
+      comentario: formData.comentario || null,
+      email: formData.correo,
+      password: formData.password,
+      role_id: roleIdToSend,
+    };
+
+    try {
+      const resultado = await createUser(userPayload);
+
+      if (resultado) {
+        alert(`Usuario creado exitosamente`);
+        navigate("/admin/usuarios");
+      } else {
+        alert(`Error al crear usuario: ${resultado.error}`);
+      }
+    } catch (error) {
+      alert(`Error al crear usuario\n\nDetalle: ${error.message}`);
     }
   };
 
@@ -179,14 +209,14 @@ const NewUser = () => {
 
           {/* Tipo de Usuario */}
           <div className="formGroupAdmin">
-            <label className="labelFormAdmin" htmlFor="tipoUsuario">
+            <label className="labelFormAdmin" htmlFor="roleNombre">
               TIPO DE USUARIO
             </label>
             <select
               className="formInputAdmin formSelectAdmin"
-              id="tipoUsuario"
-              name="tipoUsuario"
-              value={formData.tipoUsuario}
+              id="roleNombre"
+              name="roleNombre"
+              value={formData.roleNombre}
               onChange={handleInputChange}
               required
             >
