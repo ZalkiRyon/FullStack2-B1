@@ -96,14 +96,14 @@ const EditUser = () => {
     }
 
     // Validar dominio del correo
-    const dominiosPermitidos = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
+    const dominiosPermitidos = ["@duocuc.cl", "@profesor.duoc.cl"];
     const emailValido = dominiosPermitidos.some((dominio) =>
       formData.email.toLowerCase().endsWith(dominio)
     );
 
     if (!emailValido) {
       alert(
-        "El correo debe terminar en @duoc.cl, @profesor.duoc.cl o @gmail.com"
+        "El correo debe terminar en @duocuc.cl, @profesor.duoc.cl"
       );
       return;
     }
@@ -276,7 +276,7 @@ const EditUser = () => {
               className="formInputAdmin"
               id="email"
               name="email"
-              placeholder="Solo correos con @duoc.cl, @profesor.duoc.cl y @gmail.com"
+              placeholder="Solo correos con @duocuc.cl, @profesor.duoc.cl"
               value={formData.email}
               onChange={handleInputChange}
               required

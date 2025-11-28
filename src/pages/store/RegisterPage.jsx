@@ -61,14 +61,14 @@ const RegisterPage = () => {
     }
 
     // Validar dominio del correo
-    const dominiosPermitidos = ["@duoc.cl", "@profesor.duoc.cl", "@gmail.com"];
+    const dominiosPermitidos = ["@duocuc.cl", "@profesor.duoc.cl"];
     const emailValido = dominiosPermitidos.some((dominio) =>
       formData.correo.toLowerCase().endsWith(dominio)
     );
 
     if (!emailValido) {
       setModalText(
-        "El correo debe terminar en @duoc.cl, @profesor.duoc.cl o @gmail.com"
+        "El correo debe terminar en @duocuc.cl o @profesor.duoc.cl"
       );
       setIsModalOpen(true);
       return;
@@ -198,7 +198,7 @@ const RegisterPage = () => {
               className="formInputRegister"
               id="correo"
               name="correo"
-              placeholder="Solo correos con @duoc.cl, @profesor.duoc.cl y @gmail.com"
+              placeholder="Solo correos con @duocuc.cl o @profesor.duoc.cl"
               value={formData.correo}
               onChange={handleInputChange}
               required

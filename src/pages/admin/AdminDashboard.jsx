@@ -24,7 +24,6 @@ const AdminDashboard = () => {
       const productos = allProducts;
       const ordenes = getOrdenesFromStorage();
      
-
       // Calcular estadísticas
       const totalOrdenes = ordenes.length;
       const totalProductosDistintos = productos.length;
@@ -32,9 +31,7 @@ const AdminDashboard = () => {
         (sum, producto) => sum + producto.stock,
         0
       );
-      const totalUsuariosClientes = usuarios.filter(
-        (u) => u.role === "cliente"
-      ).length;
+      const totalUsuariosClientes = usuarios.filter((u) => u.roleNombre === "cliente").length;
 
       setStats({
         totalOrdenes,
@@ -75,7 +72,7 @@ const AdminDashboard = () => {
         }}
       >
         <DashboardStatCard
-          title="Compras"
+          title="Ordenes"
           value={stats.totalOrdenes}
           gradient="linear-gradient(135deg, #667eea 0%, #4f5bd5 100%)"
         />
@@ -86,7 +83,7 @@ const AdminDashboard = () => {
           gradient="linear-gradient(135deg, #48bb78 0%, #38a169 100%)"
         />
         <DashboardStatCard
-          title="Usuarios"
+          title="Clientes"
           value={stats.totalUsuariosClientes}
           gradient="linear-gradient(135deg, #f6ad55 0%, #ed8936 100%)"
         />
