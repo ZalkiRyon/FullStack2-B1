@@ -1,4 +1,4 @@
-const OrdenTable = ({ ordenes, onVer }) => {
+const OrdenTable = ({ ordenes, onVer, onEliminar }) => {
   const formatFecha = (fecha) => {
     const date = new Date(fecha);
     return date.toLocaleDateString("es-CL", {
@@ -61,6 +61,15 @@ const OrdenTable = ({ ordenes, onVer }) => {
                           title="Ver detalles"
                         >
                           👁
+                        </button>
+                      )}
+                      {onEliminar && (
+                        <button
+                          onClick={() => onEliminar(orden.id)}
+                          className="btnAccion btnEliminar"
+                          title="Eliminar"
+                        >
+                          🗑
                         </button>
                       )}
                     </div>

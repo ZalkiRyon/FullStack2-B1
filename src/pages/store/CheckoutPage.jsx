@@ -120,6 +120,19 @@ const CheckoutPage = () => {
   // Calcular el total final con el costo de envío
   const finalTotal = shippingCost !== null ? totalPrice + shippingCost : null;
 
+  // Verificar si el usuario es Admin o Vendedor
+  const isAdminOrVendedor = usuario?.roleNombre === "admin" || usuario?.roleNombre === "vendedor";
+  
+  // Determinar el texto del botón
+  const getButtonText = () => {
+    if (isAdminOrVendedor) {
+      return usuario.roleNombre === "admin" 
+        ? "Pago Deshabilitado para Administrador" 
+        : "Pago Deshabilitado para Vendedor";
+    }
+    return "Confirmar y pagar";
+  };
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -132,9 +145,9 @@ const CheckoutPage = () => {
           finalTotal={loadingShipping ? "Calculando..." : finalTotal}
         />
         <PrimaryButton 
-          text="Confirmar y pagar" 
+          text={getButtonText()} 
           type="submit"
-          disabled={loadingShipping}
+          disabled={loadingShipping || isAdminOrVendedor}
         />
       </div>
 

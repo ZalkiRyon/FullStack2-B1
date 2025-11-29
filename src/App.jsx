@@ -27,6 +27,7 @@ import DeleteProduct from "./pages/admin/DeleteProduct";
 import PerfilPage from "./pages/admin/PerfilPage";
 import OrderManagement from "./pages/admin/OrderManagement";
 import ShowOrden from "./pages/admin/ShowOrden";
+import DeleteOrden from "./pages/admin/DeleteOrden";
 import ReportesPage from "./pages/admin/ReportesPage";
 import NotFoundPage from "./pages/common/NotFoundPage";
 
@@ -40,6 +41,7 @@ import VendedorEditProduct from "./pages/vendedor/EditProduct";
 import VendedorDeleteProduct from "./pages/vendedor/DeleteProduct";
 import VendedorOrderManagement from "./pages/vendedor/OrderManagement";
 import VendedorShowOrden from "./pages/vendedor/ShowOrden";
+import VendedorDeleteOrden from "./pages/vendedor/DeleteOrden";
 import VendedorPerfilPage from "./pages/vendedor/PerfilPage";
 
 import { AuthProvider } from "./context/AuthContext";
@@ -170,6 +172,10 @@ const router = createBrowserRouter([
         element: <ShowOrden />,
       },
       {
+        path: "eliminar-orden/:id",
+        element: <DeleteOrden />,
+      },
+      {
         path: "reportes",
         element: <ReportesPage />,
       },
@@ -215,6 +221,10 @@ const router = createBrowserRouter([
       {
         path: "orden/:id",
         element: <VendedorShowOrden />,
+      },
+      {
+        path: "eliminar-orden/:id",
+        element: <VendedorDeleteOrden />,
       },
       {
         path: "perfil",

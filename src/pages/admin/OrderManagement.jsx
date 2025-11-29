@@ -124,6 +124,11 @@ const OrderManagement = () => {
     navigate(`/admin/orden/${id}`);
   };
 
+  // Función para eliminar orden
+  const handleEliminar = (id) => {
+    navigate(`/admin/eliminar-orden/${id}`);
+  };
+
   return (
     <div className="inventarioContainer">
       {/* Header */}
@@ -158,7 +163,7 @@ const OrderManagement = () => {
         {loading ? (
           <div className="text-center p-5">Cargando órdenes...</div>
         ) : (
-          <OrdenTable ordenes={filteredOrdenes} onVer={handleVer} />
+          <OrdenTable ordenes={filteredOrdenes} onVer={handleVer} onEliminar={handleEliminar} />
         )}
       </div>
     </div>
