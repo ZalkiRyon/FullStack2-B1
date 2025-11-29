@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getOrdenesFromStorage } from "../../utils/dataOrdenes";
+import { getAllOrders } from "../../services/OrderService";
 import OrdenTable from "../../components/admin/OrdenTable";
 import OrdenFilters from "../../components/admin/OrdenFilters";
 
@@ -12,12 +12,33 @@ const OrderManagement = () => {
   const [clienteFilter, setClienteFilter] = useState("");
   const [estadoFilter, setEstadoFilter] = useState("todos");
   const [montoFilter, setMontoFilter] = useState("todos");
+  const [loading, setLoading] = useState(true);
 
-  // Función para cargar órdenes
-  const cargarOrdenes = () => {
-    const ordenesStorage = getOrdenesFromStorage();
-    setOrdenes(ordenesStorage);
-    setFilteredOrdenes(ordenesStorage);
+  // Función para cargar órdenes desde el backend
+  const cargarOrdenes = async () => {
+    try {
+      setLoading(true);
+      const ordenesBackend = await getAllOrders();
+      
+      // Mapear los datos del backend al formato que espera la tabla
+      const ordenesMapeadas = ordenesBackend.map(orden => ({
+        id: orden.id,
+        numeroOrden: orden.numeroOrden,
+        fecha: orden.fecha,
+        clienteNombre: orden.nombreClienteSnapshot,
+        estado: orden.estado,
+        monto: orden.montoTotal
+      }));
+      
+      setOrdenes(ordenesMapeadas);
+      setFilteredOrdenes(ordenesMapeadas);
+    } catch (error) {
+      console.error("Error al cargar órdenes:", error);
+      setOrdenes([]);
+      setFilteredOrdenes([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Cargar órdenes al montar el componente
@@ -134,7 +155,11 @@ const OrderManagement = () => {
         />
 
         {/* Tabla de órdenes */}
-        <OrdenTable ordenes={filteredOrdenes} onVer={handleVer} />
+        {loading ? (
+          <div className="text-center p-5">Cargando órdenes...</div>
+        ) : (
+          <OrdenTable ordenes={filteredOrdenes} onVer={handleVer} />
+        )}
       </div>
     </div>
   );

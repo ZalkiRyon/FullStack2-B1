@@ -1,23 +1,53 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
-import { getOrdenById } from "../../utils/dataOrdenes";
+import { getOrderById } from "../../services/OrderService";
 
 const ShowOrden = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [orden, setOrden] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Cargar datos de la orden
+  // Cargar datos de la orden desde el backend
   useEffect(() => {
-    const ordenEncontrada = getOrdenById(parseInt(id));
+    const cargarOrden = async () => {
+      try {
+        setLoading(true);
+        const ordenData = await getOrderById(parseInt(id));
 
-    if (ordenEncontrada) {
-      setOrden(ordenEncontrada);
-    } else {
-      alert("Orden no encontrada");
-      navigate("/admin/ordenes");
-    }
+        if (ordenData) {
+          // Mapear datos del backend
+          const ordenMapeada = {
+            id: ordenData.id,
+            numeroOrden: ordenData.numeroOrden,
+            fecha: ordenData.fecha,
+            clienteNombre: ordenData.nombreClienteSnapshot,
+            estado: ordenData.estado,
+            monto: ordenData.montoTotal,
+            costoEnvio: ordenData.costoEnvio,
+            detalles: ordenData.detalles.map(detalle => ({
+              productoNombre: detalle.nombreProductoSnapshot,
+              cantidad: detalle.cantidad,
+              precioUnitario: detalle.precioUnitarioSnapshot,
+              subtotal: detalle.subtotal
+            }))
+          };
+          setOrden(ordenMapeada);
+        } else {
+          alert("Orden no encontrada");
+          navigate("/admin/ordenes");
+        }
+      } catch (error) {
+        console.error("Error al cargar la orden:", error);
+        alert("Error al cargar la orden");
+        navigate("/admin/ordenes");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    cargarOrden();
   }, [id, navigate]);
 
   // Función para formatear el precio
@@ -44,20 +74,19 @@ const ShowOrden = () => {
     }
   };
 
-  if (!orden) {
+  if (loading || !orden) {
     return (
       <div className="inventarioContainer">
-        <p>Cargando...</p>
+        <p>Cargando orden...</p>
       </div>
     );
   }
 
-  // Calcular el subtotal de productos y el costo de envío
+  // Calcular el subtotal de productos (ya viene del backend)
   const subtotalProductos = orden.detalles.reduce(
     (sum, detalle) => sum + (detalle.subtotal || 0),
     0
   );
-  const costoEnvio = orden.monto - subtotalProductos;
 
   return (
     <div className="inventarioContainer">
@@ -154,7 +183,7 @@ const ShowOrden = () => {
                 className="formInputAdmin"
                 id="costoEnvio"
                 name="costoEnvio"
-                value={formatearPrecio(costoEnvio)}
+                value={formatearPrecio(orden.costoEnvio)}
                 disabled
               />
             </div>
@@ -198,13 +227,13 @@ const ShowOrden = () => {
                   {orden.detalles.map((detalle, index) => (
                     <tr key={index}>
                       <td style={{ textAlign: "left" }}>
-                        {detalle.productoNombre || detalle.nombre}
+                        {detalle.productoNombre}
                       </td>
                       <td style={{ textAlign: "center" }}>
                         {detalle.cantidad}
                       </td>
                       <td style={{ textAlign: "right" }}>
-                        {formatearPrecio(detalle.precioUnitario || detalle.precio)}
+                        {formatearPrecio(detalle.precioUnitario)}
                       </td>
                       <td style={{ textAlign: "right", fontWeight: "bold" }}>
                         {formatearPrecio(detalle.subtotal)}

@@ -3,37 +3,20 @@ import OrdenSummary from "../../components/store/OrdenSummary";
 import DeliveryForm from "../../components/store/DeliveryForm";
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
-import {
-  getOrdenesFromStorage,
-  saveOrdenToStorage,
-} from "../../utils/dataOrdenes";
+import { createOrder } from "../../services/OrderService";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "../../context/ToastContext";
-
-const generateRandomNumber = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-function generateRandomStatus() {
-  const estados = ["Enviado", "Pendiente", "Procesando", "Cancelado"];
-
-  const indiceAleatorio = Math.floor(Math.random() * estados.length);
-
-  return estados[indiceAleatorio];
-}
+import axios from "axios";
 
 const CheckoutPage = () => {
   const { usuario } = useAuth();
   const { showToast } = useToast();
   const { cartItems, totalPrice, cleanCart } = useCart();
   const navigate = useNavigate();
-  const [shippingCost, setShippingCost] = useState(0);
+  const [shippingCost, setShippingCost] = useState(null);
+  const [loadingShipping, setLoadingShipping] = useState(true);
 
-  const allOrders = getOrdenesFromStorage();
-  const ultimoElemento = allOrders.length;
-  const ultimaOrden = allOrders[ultimoElemento - 1].numeroOrden;
-  const nuevoCodigoOrden = parseInt(ultimaOrden.slice(2, 6)) + 1;
   const [formData, setFormData] = useState({
     name: usuario?.nombre || "",
     lastname: usuario?.apellido || "",
@@ -44,14 +27,6 @@ const CheckoutPage = () => {
     region: usuario?.region || "",
     comuna: usuario?.comuna || "",
     comment: "",
-  });
-
-  const [orderData, setOrderData] = useState({
-    id: ultimoElemento ? ultimoElemento + 1 : 1,
-    numeroOrden: "SO" + nuevoCodigoOrden,
-    fecha: new Date().toISOString().split("T")[0],
-    clienteId: usuario?.id || null,
-    estado: generateRandomStatus(),
   });
 
   useEffect(() => {
@@ -66,51 +41,71 @@ const CheckoutPage = () => {
         comuna: usuario.comuna || prevData.comuna,
         telefono: usuario.telefono || prevData.telefono,
       }));
-
-      setOrderData((prevMeta) => ({
-        clienteId: usuario.id || prevMeta.clienteId,
-      }));
     }
+  }, [usuario, formData.name]);
 
-    if (shippingCost == 0) {
-      const randomCost = generateRandomNumber(3000, 7000);
-      setShippingCost(randomCost);
-    }
-  }, [usuario, shippingCost]);
+  // Calcular costo de envío al cargar la página
+  useEffect(() => {
+    const fetchShippingCost = async () => {
+      try {
+        setLoadingShipping(true);
+        const response = await axios.get(
+          "http://localhost:8080/api/ordenes/calcular-envio",
+          {
+            params: {
+              region: usuario?.region || "",
+              comuna: usuario?.comuna || "",
+            },
+          }
+        );
+        setShippingCost(response.data.costoEnvio);
+      } catch (error) {
+        console.error("Error al calcular costo de envío:", error);
+        // Fallback: generar costo aleatorio en el frontend si el backend falla
+        const costoAleatorio = Math.floor(Math.random() * (7000 - 3000 + 1)) + 3000;
+        setShippingCost(costoAleatorio);
+      } finally {
+        setLoadingShipping(false);
+      }
+    };
+
+    fetchShippingCost();
+  }, [usuario]);
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const totalConEnvio = totalPrice + shippingCost;
-
-    // Mapear cartItems para agregar el subtotal calculado
-    const detallesConSubtotal = cartItems.map((item) => ({
-      ...item,
-      subtotal: item.precio * item.cantidad,
+    // Mapear cartItems al formato que espera el backend (solo productoId y cantidad)
+    const detalles = cartItems.map((item) => ({
+      productoId: item.id,
+      cantidad: item.cantidad,
     }));
 
     const nuevaOrden = {
-      ...orderData,
-      clienteNombre: formData.name + " " + formData.lastname,
-      monto: totalConEnvio,
-      departamento: formData.department,
-      comentario: formData.comment,
-      detalles: detallesConSubtotal,
+      clienteId: usuario?.id || null,
+      comentario: formData.comment || "",
+      detalles: detalles,
     };
 
-    const isSuccess = saveOrdenToStorage(nuevaOrden).success;
-
-    if (isSuccess) {
-      localStorage.setItem("UltimaOrdenId", nuevaOrden.id);
-      navigate("/resumen-compra");
-      cleanCart();
-    } else {
-      showToast("Error al guardar la orden", "error", 10000);
+    try {
+      const ordenCreada = await createOrder(nuevaOrden);
+      
+      if (ordenCreada) {
+        // Guardar la orden completa (con costoEnvio del backend) en localStorage
+        localStorage.setItem("UltimaOrdenCreada", JSON.stringify(ordenCreada));
+        localStorage.setItem("UltimaOrdenId", ordenCreada.id);
+        showToast("¡Orden creada exitosamente!", "success", 3000);
+        navigate("/resumen-compra");
+        cleanCart();
+      }
+    } catch (error) {
+      console.error("Error al crear la orden:", error);
+      showToast("Error al guardar la orden. Intente nuevamente.", "error", 10000);
     }
   };
 
@@ -122,6 +117,9 @@ const CheckoutPage = () => {
     );
   }
 
+  // Calcular el total final con el costo de envío
+  const finalTotal = shippingCost !== null ? totalPrice + shippingCost : null;
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -130,10 +128,14 @@ const CheckoutPage = () => {
       <div className="checkoutSummaryWrapper">
         <h2>Tu pedido</h2>
         <OrdenSummary
-          shippingCost={shippingCost}
-          finalTotal={totalPrice + shippingCost}
+          shippingCost={loadingShipping ? "Calculando..." : shippingCost}
+          finalTotal={loadingShipping ? "Calculando..." : finalTotal}
         />
-        <PrimaryButton text="Confirmar y pagar" type="submit" />
+        <PrimaryButton 
+          text="Confirmar y pagar" 
+          type="submit"
+          disabled={loadingShipping}
+        />
       </div>
 
       <div className="checkoutFormWrapper">

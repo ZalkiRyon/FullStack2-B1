@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
-
-import { getOrdenesByCliente } from "../../utils/dataOrdenes";
+import { getAllOrders } from "../../services/OrderService";
 import { getUserById } from "../../services/UserService";
 
 const UserPurchaseHistory = () => {
@@ -19,9 +18,23 @@ const UserPurchaseHistory = () => {
       if (usuarioEncontrado) {
         setUsuario(usuarioEncontrado);
 
-        // Cargar órdenes del cliente
-        const ordenesCliente = getOrdenesByCliente(parseInt(id));
-        setOrdenes(ordenesCliente);
+        // Cargar órdenes del cliente desde el backend
+        const todasLasOrdenes = await getAllOrders();
+        const ordenesCliente = todasLasOrdenes.filter(
+          orden => orden.nombreClienteSnapshot && 
+          orden.nombreClienteSnapshot.includes(usuarioEncontrado.nombre)
+        );
+        
+        // Mapear al formato esperado por la tabla
+        const ordenesMapeadas = ordenesCliente.map(orden => ({
+          id: orden.id,
+          numeroOrden: orden.numeroOrden,
+          fecha: orden.fecha,
+          estado: orden.estado,
+          monto: orden.montoTotal
+        }));
+        
+        setOrdenes(ordenesMapeadas);
       } else {
         alert("Usuario no encontrado");
         navigate("/admin/usuarios");

@@ -1,6 +1,6 @@
 import { useAuth } from "../../context/AuthContext";
 import { useState, useEffect } from "react";
-import { getOrdenesFromStorage } from "../../utils/dataOrdenes";
+import { getAllOrders } from "../../services/OrderService";
 import DashboardStatCard from "../../components/admin/DashboardStatCard";
 import DashboardActionCard from "../../components/admin/DashboardActionCard";
 import { getAllProducts } from "../../services/ProductsService";
@@ -19,10 +19,10 @@ const AdminDashboard = () => {
     const fetchProducts = async () => {
       const allProducts = await getAllProducts();
       const usuarios = await getAllUsers();
+      const ordenes = await getAllOrders();
 
-      // Cargar datos desde API/ local
+      // Cargar datos desde API
       const productos = allProducts;
-      const ordenes = getOrdenesFromStorage();
      
       // Calcular estadísticas
       const totalOrdenes = ordenes.length;

@@ -59,9 +59,11 @@ const OrdenSummary = ({ shippingCost, finalTotal }) => {
           <tr className="summaryTableRow">
             <td>Envío:</td>
             <td style={{ textAlign: "right" }}>
-              {shippingCost === 0
-                ? "GRATIS"
-                : `$${shippingCost.toLocaleString("es-CL")}`}
+              {typeof shippingCost === "number"
+                ? shippingCost === 0
+                  ? "GRATIS"
+                  : `$${shippingCost.toLocaleString("es-CL")}`
+                : shippingCost}
             </td>
           </tr>
         </tbody>
@@ -71,7 +73,9 @@ const OrdenSummary = ({ shippingCost, finalTotal }) => {
         <span>Total a Pagar:</span>
 
         <span className="totalAmount">
-          ${finalTotal.toLocaleString("es-CL")}
+          {typeof finalTotal === "number"
+            ? `$${finalTotal.toLocaleString("es-CL")}`
+            : finalTotal}
         </span>
       </div>
     </div>
