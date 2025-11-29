@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/store/HomePage";
 import StoreLayout from "./layouts/StoreLayout";
@@ -33,7 +33,6 @@ import NotFoundPage from "./pages/common/NotFoundPage";
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { ToastProvider } from "./context/ToastContext";
-import { initializeApp } from "./services/initializationService";
 import OrdenSummaryPage from "./pages/store/OrdenSummaryPage";
 import DiscountProductPage from "./pages/store/DiscountProductPage";
 
@@ -176,10 +175,6 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  useEffect(() => {
-    initializeApp();
-  }, []);
-
   return (
     <AuthProvider>
       <CartProvider>
