@@ -30,6 +30,18 @@ import ShowOrden from "./pages/admin/ShowOrden";
 import ReportesPage from "./pages/admin/ReportesPage";
 import NotFoundPage from "./pages/common/NotFoundPage";
 
+// Vendedor imports
+import VendedorLayout from "./layouts/VendedorLayout";
+import VendedorDashboard from "./pages/vendedor/VendedorDashboard";
+import VendedorInventarioPage from "./pages/vendedor/InventarioPage";
+import VendedorNewProduct from "./pages/vendedor/NewProduct";
+import VendedorShowProduct from "./pages/vendedor/ShowProduct";
+import VendedorEditProduct from "./pages/vendedor/EditProduct";
+import VendedorDeleteProduct from "./pages/vendedor/DeleteProduct";
+import VendedorOrderManagement from "./pages/vendedor/OrderManagement";
+import VendedorShowOrden from "./pages/vendedor/ShowOrden";
+import VendedorPerfilPage from "./pages/vendedor/PerfilPage";
+
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { ToastProvider } from "./context/ToastContext";
@@ -164,6 +176,49 @@ const router = createBrowserRouter([
       {
         path: "perfil",
         element: <PerfilPage />,
+      },
+    ],
+  },
+  // Rutas del vendedor
+  {
+    path: "vendedor",
+    element: <VendedorLayout />,
+    children: [
+      {
+        index: true,
+        element: <VendedorDashboard />,
+      },
+      {
+        path: "inventario",
+        element: <VendedorInventarioPage />,
+      },
+      {
+        path: "nuevo-producto",
+        element: <VendedorNewProduct />,
+      },
+      {
+        path: "producto/:id",
+        element: <VendedorShowProduct />,
+      },
+      {
+        path: "editar-producto/:id",
+        element: <VendedorEditProduct />,
+      },
+      {
+        path: "eliminar-producto/:id",
+        element: <VendedorDeleteProduct />,
+      },
+      {
+        path: "ordenes",
+        element: <VendedorOrderManagement />,
+      },
+      {
+        path: "orden/:id",
+        element: <VendedorShowOrden />,
+      },
+      {
+        path: "perfil",
+        element: <VendedorPerfilPage />,
       },
     ],
   },

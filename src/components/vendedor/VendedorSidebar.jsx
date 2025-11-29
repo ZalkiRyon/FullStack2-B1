@@ -2,12 +2,12 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import icono from "../../assets/img/icono.png";
 
-const Sidebar = () => {
+const VendedorSidebar = () => {
   const navigate = useNavigate();
   const { usuario, logout } = useAuth();
 
   // Obtener datos del usuario o usar placeholder
-  const userRole = usuario?.roleNombre === "admin" ? "Super Administrador" : "Usuario";
+  const userRole = usuario?.roleNombre === "vendedor" ? "Vendedor" : "Usuario";
   const userName = usuario
     ? `${usuario.nombre} ${usuario.apellido}`
     : "{Nombre Usuario}";
@@ -36,7 +36,7 @@ const Sidebar = () => {
         <ul className="sidebarMenu">
           <li className="sidebarMenuItem">
             <NavLink
-              to="/admin"
+              to="/vendedor"
               end
               className={({ isActive }) =>
                 isActive ? "sidebarLink sidebarLinkActive" : "sidebarLink"
@@ -47,7 +47,7 @@ const Sidebar = () => {
           </li>
           <li className="sidebarMenuItem">
             <NavLink
-              to="/admin/inventario"
+              to="/vendedor/inventario"
               className={({ isActive }) =>
                 isActive ? "sidebarLink sidebarLinkActive" : "sidebarLink"
               }
@@ -57,32 +57,12 @@ const Sidebar = () => {
           </li>
           <li className="sidebarMenuItem">
             <NavLink
-              to="/admin/usuarios"
-              className={({ isActive }) =>
-                isActive ? "sidebarLink sidebarLinkActive" : "sidebarLink"
-              }
-            >
-              <span className="sidebarText">Usuarios</span>
-            </NavLink>
-          </li>
-          <li className="sidebarMenuItem">
-            <NavLink
-              to="/admin/ordenes"
+              to="/vendedor/ordenes"
               className={({ isActive }) =>
                 isActive ? "sidebarLink sidebarLinkActive" : "sidebarLink"
               }
             >
               <span className="sidebarText">Ordenes</span>
-            </NavLink>
-          </li>
-          <li className="sidebarMenuItem">
-            <NavLink
-              to="/admin/reportes"
-              className={({ isActive }) =>
-                isActive ? "sidebarLink sidebarLinkActive" : "sidebarLink"
-              }
-            >
-              <span className="sidebarText">Reportes</span>
             </NavLink>
           </li>
         </ul>
@@ -93,7 +73,7 @@ const Sidebar = () => {
         <ul className="sidebarMenuFooter">
           <li className="sidebarMenuItem">
             <NavLink
-              to="/admin/perfil"
+              to="/vendedor/perfil"
               className={({ isActive }) =>
                 isActive ? "sidebarLink sidebarLinkActive" : "sidebarLink"
               }
@@ -120,4 +100,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default VendedorSidebar;

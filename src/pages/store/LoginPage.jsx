@@ -59,6 +59,8 @@ const LoginPage = () => {
     // Redirigir según el rol
     if (usuario.roleNombre === "admin") {
       navigate("/admin");
+    } else if (usuario.roleNombre === "vendedor") {
+      navigate("/vendedor");
     } else {
       navigate("/"); // Redirigir a la tienda para clientes
     }
