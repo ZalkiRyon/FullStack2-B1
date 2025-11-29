@@ -3,11 +3,11 @@ import OrdenSummary from "../../components/store/OrdenSummary";
 import DeliveryForm from "../../components/store/DeliveryForm";
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
-import { createOrder } from "../../services/OrderService";
+import {  createOrder } from "../../services/OrderService";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "../../context/ToastContext";
-import axios from "axios";
+import { getSimulatedShippingCost } from "../../utils/functions";
 
 const CheckoutPage = () => {
   const { usuario } = useAuth();
@@ -46,31 +46,22 @@ const CheckoutPage = () => {
 
   // Calcular costo de envío al cargar la página
   useEffect(() => {
-    const fetchShippingCost = async () => {
-      try {
+    const simulateShippingCost = () => {
+      if (formData.region && formData.comuna) {
         setLoadingShipping(true);
-        const response = await axios.get(
-          "http://localhost:8080/api/ordenes/calcular-envio",
-          {
-            params: {
-              region: usuario?.region || "",
-              comuna: usuario?.comuna || "",
-            },
-          }
-        );
-        setShippingCost(response.data.costoEnvio);
-      } catch (error) {
-        console.error("Error al calcular costo de envío:", error);
-        // Fallback: generar costo aleatorio en el frontend si el backend falla
-        const costoAleatorio = Math.floor(Math.random() * (7000 - 3000 + 1)) + 3000;
-        setShippingCost(costoAleatorio);
-      } finally {
-        setLoadingShipping(false);
+
+        setTimeout(() => {
+          const cost = getSimulatedShippingCost();
+          setShippingCost(cost);
+          setLoadingShipping(false);
+        }, 1000);
+      } else {
+        setShippingCost(null);
       }
     };
 
-    fetchShippingCost();
-  }, [usuario]);
+    simulateShippingCost();
+  }, [formData.region, formData.comuna]);
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
@@ -79,6 +70,15 @@ const CheckoutPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (shippingCost === null || loadingShipping) {
+      showToast(
+        "Aún estamos calculando el costo de envío. Intente de nuevo.",
+        "warning",
+        3000
+      );
+      return;
+    }
 
     // Mapear cartItems al formato que espera el backend (solo productoId y cantidad)
     const detalles = cartItems.map((item) => ({
@@ -90,22 +90,24 @@ const CheckoutPage = () => {
       clienteId: usuario?.id || null,
       comentario: formData.comment || "",
       detalles: detalles,
+      costoEnvio: shippingCost,
     };
 
     try {
       const ordenCreada = await createOrder(nuevaOrden);
-      
+
       if (ordenCreada) {
-        // Guardar la orden completa (con costoEnvio del backend) en localStorage
-        localStorage.setItem("UltimaOrdenCreada", JSON.stringify(ordenCreada));
-        localStorage.setItem("UltimaOrdenId", ordenCreada.id);
         showToast("¡Orden creada exitosamente!", "success", 3000);
         navigate("/resumen-compra");
         cleanCart();
       }
     } catch (error) {
       console.error("Error al crear la orden:", error);
-      showToast("Error al guardar la orden. Intente nuevamente.", "error", 10000);
+      showToast(
+        "Error al guardar la orden. Intente nuevamente.",
+        "error",
+        10000
+      );
     }
   };
 
@@ -129,12 +131,16 @@ const CheckoutPage = () => {
         <h2>Tu pedido</h2>
         <OrdenSummary
           shippingCost={loadingShipping ? "Calculando..." : shippingCost}
-          finalTotal={loadingShipping ? "Calculando..." : finalTotal}
+          finalTotal={
+            loadingShipping || finalTotal === null
+              ? "Calculando..."
+              : finalTotal
+          }
         />
-        <PrimaryButton 
-          text="Confirmar y pagar" 
+        <PrimaryButton
+          text="Confirmar y pagar"
           type="submit"
-          disabled={loadingShipping}
+          disabled={loadingShipping || shippingCost === null}
         />
       </div>
 

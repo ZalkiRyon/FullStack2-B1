@@ -14,7 +14,11 @@ export const createOrder = async (order) => {
   } catch (error) {
     if (error.response) {
       console.error(`Error al crear orden:`, error.response.data);
-      throw new Error(`Fallo en la creación: ${error.response.data.message || 'Error desconocido'}`);
+      throw new Error(
+        `Fallo en la creación: ${
+          error.response.data.message || "Error desconocido"
+        }`
+      );
     }
     console.error("Error en createOrder:", error.message);
     throw error;
