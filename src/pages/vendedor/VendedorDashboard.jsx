@@ -1,8 +1,8 @@
 import { useAuth } from "../../context/AuthContext";
 import { useState, useEffect } from "react";
 import { getAllOrders } from "../../services/OrderService";
-import DashboardStatCard from "../../components/vendedor/DashboardStatCard";
-import DashboardActionCard from "../../components/vendedor/DashboardActionCard";
+import DashboardStatCard from "../../components/admin/DashboardStatCard";
+import DashboardActionCard from "../../components/admin/DashboardActionCard";
 import { getAllProducts } from "../../services/ProductsService";
 
 const VendedorDashboard = () => {

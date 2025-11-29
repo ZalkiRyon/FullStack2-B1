@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import ProductFilters from "../../components/common/ProductFilters";
-import ProductTable from "../../components/vendedor/ProductTable";
+import ProductTable from "../../components/admin/ProductTable";
 import { getAllProducts } from "../../services/ProductsService";
 
 const InventarioPage = () => {

@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAllOrders } from "../../services/OrderService";
-import OrdenTable from "../../components/vendedor/OrdenTable";
-import OrdenFilters from "../../components/vendedor/OrdenFilters";
+import OrdenTable from "../../components/admin/OrdenTable";
+import OrdenFilters from "../../components/admin/OrdenFilters";
 
 const OrderManagement = () => {
   const navigate = useNavigate();
