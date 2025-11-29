@@ -27,8 +27,10 @@ function CatalogPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       const res = await getAllProducts();
-      setProductos(res);
-      setFilteredProductos(res);
+      // Filtrar productos con stock > 0
+      const productosConStock = res.filter(p => p.stock > 0);
+      setProductos(productosConStock);
+      setFilteredProductos(productosConStock);
     };
 
     fetchProducts()

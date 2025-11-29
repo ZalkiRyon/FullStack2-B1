@@ -11,7 +11,9 @@ const HomePage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const res = await getAllProducts();
-      setProductos(res.slice(0, 3));
+      // Filtrar productos con stock > 0 y tomar los primeros 3
+      const productosConStock = res.filter(p => p.stock > 0);
+      setProductos(productosConStock.slice(0, 3));
     };
     fetchProducts();
   }, []);

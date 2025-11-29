@@ -14,7 +14,9 @@ const DiscountProductPage = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       const res = await getAllProducts();
-      setProductos(res.filter((p) => p.id % 2 !== 0).slice(0, 6));
+      // Filtrar productos con stock > 0, luego aplicar filtro de ofertas
+      const productosConStock = res.filter((p) => p.stock > 0 && p.id % 2 !== 0);
+      setProductos(productosConStock.slice(0, 6));
     };
     fetchProducts()
   }, []);

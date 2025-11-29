@@ -88,17 +88,26 @@ const RegisterPage = () => {
       return;
     }
 
-    // Preparar datos del usuario (siempre como cliente)
+    // Preparar datos del usuario (siempre como cliente con role_id = 2)
     const datosUsuario = {
-      ...formData,
-      tipoUsuario: "cliente", // Siempre crear como cliente
+      email: formData.correo, // Mapear correo -> email
+      password: formData.password,
+      nombre: formData.nombre,
+      apellido: formData.apellido,
+      run: formData.run,
+      telefono: formData.telefono || "",
+      region: formData.region,
+      comuna: formData.comuna,
+      direccion: formData.direccion,
+      comentario: "", // Registro no tiene comentario
+      role_id: 2, // 2 = cliente (según la base de datos)
     };
 
     // Guardar usuario
     try {
       const resultado = await createUser(datosUsuario);
       setModalSucessText(
-        `¡Registro exitoso! Bienvenido ${resultado.usuario.nombre}`
+        `¡Registro exitoso! Bienvenido ${resultado.nombre} ${resultado.apellido}`
       );
       setIsModalSucessOpen(true);
     } catch (error) {
