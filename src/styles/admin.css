@@ -658,6 +658,33 @@
   transform: translateY(-1px);
 }
 
+/* Order Items List */
+.orderItemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.orderItemCard {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #495057;
+}
+
+.orderItemCard div {
+  margin-bottom: 0.25rem;
+}
+
+.orderItemCard div:last-child {
+  margin-bottom: 0;
+  font-weight: 600;
+  color: var(--emerald);
+}
+
 .btnGuardarCambios {
   padding: 0.75rem 2rem;
   background-color: #ffc107;

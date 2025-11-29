@@ -11,6 +11,7 @@ import "../../styles/common.css";
 // type -> tipo de botón (button, submit, reset) - por defecto "button"
 
 // color -> default(esmeralda), error(rojo), none(gris)
+// disabled -> deshabilita el botón
 const PrimaryButton = ({
   to,
   onClick,
@@ -18,7 +19,8 @@ const PrimaryButton = ({
   width = "100%",
   height = "auto",
   type = "button",
-  color = "default"
+  color = "default",
+  disabled = false
 }) => {
   
   const dynamicStyles = {
@@ -26,14 +28,16 @@ const PrimaryButton = ({
     height: height,
   };
 
+  const buttonClass = `primaryButton primaryButton-${color} ${disabled ? 'primaryButton-disabled' : ''}`;
+
   if (to) {
     return (
       <Link
         to={to}
         type={type}
-        onClick={onClick}
+        onClick={disabled ? (e) => e.preventDefault() : onClick}
         style={dynamicStyles}
-        className={`primaryButton primaryButton-${color}`}
+        className={buttonClass}
       >
         {text}
       </Link>
@@ -43,8 +47,9 @@ const PrimaryButton = ({
     <button
       onClick={onClick}
       type={type}
+      disabled={disabled}
       style={dynamicStyles}
-      className={`primaryButton primaryButton-${color}`}
+      className={buttonClass}
     >
       {text}
     </button>

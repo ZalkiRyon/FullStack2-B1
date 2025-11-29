@@ -3,7 +3,7 @@ import OrdenSummary from "../../components/store/OrdenSummary";
 import DeliveryForm from "../../components/store/DeliveryForm";
 import { useAuth } from "../../context/AuthContext";
 import { useCart } from "../../context/CartContext";
-import {  createOrder } from "../../services/OrderService";
+import { createOrder } from "../../services/OrderService";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "../../context/ToastContext";
@@ -122,6 +122,20 @@ const CheckoutPage = () => {
   // Calcular el total final con el costo de envío
   const finalTotal = shippingCost !== null ? totalPrice + shippingCost : null;
 
+  // Verificar si el usuario es Admin o Vendedor
+  const isAdminOrVendedor =
+    usuario?.roleNombre === "admin" || usuario?.roleNombre === "vendedor";
+
+  // Determinar el texto del botón
+  const getButtonText = () => {
+    if (isAdminOrVendedor) {
+      return usuario.roleNombre === "admin"
+        ? "Pago Deshabilitado para Administrador"
+        : "Pago Deshabilitado para Vendedor";
+    }
+    return "Confirmar y pagar";
+  };
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -138,9 +152,11 @@ const CheckoutPage = () => {
           }
         />
         <PrimaryButton
-          text="Confirmar y pagar"
+          text={(getButtonText())}
           type="submit"
-          disabled={loadingShipping || shippingCost === null}
+          disabled={
+            loadingShipping || shippingCost === null || isAdminOrVendedor
+          }
         />
       </div>
 

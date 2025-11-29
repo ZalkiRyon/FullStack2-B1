@@ -121,12 +121,12 @@ const OrderManagement = () => {
 
   // Función para ver detalles de orden
   const handleVer = (id) => {
-    navigate(`/admin/orden/${id}`);
+    navigate(`/vendedor/orden/${id}`);
   };
 
   // Función para eliminar orden
   const handleEliminar = (id) => {
-    navigate(`/admin/eliminar-orden/${id}`);
+    navigate(`/vendedor/eliminar-orden/${id}`);
   };
 
   return (
