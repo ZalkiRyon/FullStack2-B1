@@ -55,7 +55,7 @@ const PerfilPage = () => {
             <strong>Dirección:</strong> {usuario.direccion}
           </div>
           <div style={{ marginBottom: "15px" }}>
-            <strong>Rol:</strong> {usuario.roleNombre}
+            <strong>Rol:</strong> {usuario.rolNombre}
           </div>
           {usuario.comentario && (
             <div style={{ marginBottom: "15px" }}>

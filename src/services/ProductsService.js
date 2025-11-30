@@ -1,12 +1,9 @@
-import axios from "axios";
-
-const API_BASE = "http://localhost:8080/api/productos";
-// TODO: ARREGLAR LOS CATCH Y ELSES
+import api from "../config/axiosConfig";
 
 // POST / CREATE: product
 export const createProduct = async (product) => {
   try {
-    const response = await axios.post(API_BASE, product);
+    const response = await api.post("/productos", product);
 
     if (response.status == 201) {
       console.log(`Producto ${product} creado con exito`);
@@ -26,7 +23,7 @@ export const createProduct = async (product) => {
 // GET / READ: products
 export const getAllProducts = async () => {
   try {
-    const response = await axios.get(API_BASE);
+    const response = await api.get("/productos");
 
     if (response.status == 200) {
       return response.data;
@@ -42,9 +39,9 @@ export const getAllProducts = async () => {
 
 // DELETE / DELETE: product
 export const deleteProductById = async (productId) => {
-   const url = `${API_BASE}/${productId}`;
+  const url = `/productos/${productId}`;
   try {
-    const response = await axios.delete(url);
+    const response = await api.delete(url);
 
     if (response.status == 204) {
       console.log(`Producto con id ${productId} eliminado con exito`);
@@ -61,10 +58,10 @@ export const deleteProductById = async (productId) => {
 
 // PUT / UPDATE: product
 export const updateProductById = async (productId, product) => {
-  const url = `${API_BASE}/${productId}`;
+  const url = `/productos/${productId}`;
 
   try {
-    const response = await axios.put(url, product);
+    const response = await api.put(url, product);
 
     if (response.status == 200) {
       console.log(`Producto con id ${productId} actualizadop con exito`);
@@ -83,47 +80,43 @@ export const updateProductById = async (productId, product) => {
 
 // FUNCTIONS SPECIALS products
 export const getProductNameById = async (productId) => {
-  const url = `${API_BASE}/${productId}/nombre`;
+  const url = `/productos/${productId}/nombre`;
   try {
-    const response = await fetch(url);
+    const response = await api.get(url);
 
-    if (response.status === 404) {
+    return response.data;
+  } catch (error) {
+    if (error.response && error.response.status === 404) {
       console.error(`Error: Producto de id ${productId} no encontrado`);
       return null;
     }
-
-    if (!response.ok) {
-      throw new Error(`HTTP error estado: ${response.status}`);
-    }
-
-    const productName = await response.text();
-
-    return productName;
-  } catch (error) {
     console.error("Error en getProductNameById:", error);
     return null;
   }
 };
 
 export const getProductById = async (productId) => {
-  const url = `${API_BASE}/${productId}`;
+  const url = `/productos/${productId}`;
   try {
-    const response = await fetch(url);
+    const response = await api.get(url);
 
-    if (response.status === 404) {
-      console.error(`Error: Producto de id ${productId} no encontrado`);
-      return null;
-    }
-
-    if (!response.ok) {
-      throw new Error(`HTTP error estado: ${response.status}`);
-    }
-
-    const product = await response.json();
+    const product = await response.data;
 
     return product;
   } catch (error) {
+    if (error.response) {
+      if (error.response.status === 404) {
+        console.error(`Error 404: Producto de id ${productId} no encontrado`);
+        return null;
+      }
+      console.error(
+        `Error ${error.response.status} al obtener producto:`,
+        error.response.data
+      );
+    }
+
     console.error("Error en getProductById:", error);
-    return null;
+
+    throw error;
   }
 };

@@ -7,7 +7,7 @@ const Sidebar = () => {
   const { usuario, logout } = useAuth();
 
   // Obtener datos del usuario o usar placeholder
-  const userRole = usuario?.roleNombre === "admin" ? "Super Administrador" : "Usuario";
+  const userRole = usuario?.rolNombre === "admin" ? "Super Administrador" : "Usuario";
   const userName = usuario
     ? `${usuario.nombre} ${usuario.apellido}`
     : "{Nombre Usuario}";

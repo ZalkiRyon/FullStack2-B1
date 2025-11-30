@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import logoEmpresa from "../../assets/img/logoEmpresa.jpg";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import { useAuth } from "../../context/AuthContext";
-import { getAllUsers } from "../../services/UserService";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -13,16 +12,7 @@ const LoginPage = () => {
     password: "",
   });
   const [error, setError] = useState("");
-  const [usuarios, setUsuarios] = useState(null);
 
-  useEffect(() => {
-    const fecthUsers = async () => {
-      const allUsers = await getAllUsers();
-      setUsuarios(allUsers);
-    };
-
-    fecthUsers();
-  }, []);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -39,30 +29,34 @@ const LoginPage = () => {
       return;
     }
 
-    // Buscar usuario con el correo ingresado
-    const usuario = usuarios.find((u) => u.email === formData.correo);
+    try {
+      await login(formData.correo, formData.password);
 
-    if (!usuario) {
-      setError("Correo electrónico no registrado");
-      return;
-    }
+      const loggedInUser = JSON.parse(localStorage.getItem("userData"));
 
-    // Verificar contraseña
-    if (usuario.password !== formData.password) {
-      setError("Contraseña incorrecta");
-      return;
-    }
+      if (loggedInUser && loggedInUser.rolNombre) {
+        const role = loggedInUser.rolNombre.toLowerCase();
+        if (role === "admin") {
+          navigate("/admin");
+        } else if (role === "vendedor") {
+          navigate("/vendedor");
+        } else {
+          navigate("/");
+        }
+      } else {
+        navigate("/");
+      }
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message ||
+        "Error al iniciar sesion, revise sus credenciales y conexion";
 
-    // Login exitoso
-    login(usuario);
-    console.log(usuario);
-    // Redirigir según el rol
-    if (usuario.roleNombre === "admin") {
-      navigate("/admin");
-    } else if (usuario.roleNombre === "vendedor") {
-      navigate("/vendedor");
-    } else {
-      navigate("/"); // Redirigir a la tienda para clientes
+      if (error.response && error.response.status === 401) {
+        setError("Correo o contrasena incorrectos");
+      } else {
+        setError(errorMessage);
+      }
+      console.error("Error en login Page: ", error);
     }
   };
 
