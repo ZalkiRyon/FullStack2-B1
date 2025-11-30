@@ -93,7 +93,7 @@ const router = createBrowserRouter([
         element: <CheckoutPage />,
       },
       {
-        path: "resumen-compra",
+        path: "resumen-compra/:id",
         element: <OrdenSummaryPage />,
       },
       {

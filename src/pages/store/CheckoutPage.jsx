@@ -98,7 +98,7 @@ const CheckoutPage = () => {
 
       if (ordenCreada) {
         showToast("¡Orden creada exitosamente!", "success", 3000);
-        navigate("/resumen-compra");
+        navigate(`/resumen-compra/${ordenCreada.id}`);
         cleanCart();
       }
     } catch (error) {
@@ -152,7 +152,7 @@ const CheckoutPage = () => {
           }
         />
         <PrimaryButton
-          text={(getButtonText())}
+          text={getButtonText()}
           type="submit"
           disabled={
             loadingShipping || shippingCost === null || isAdminOrVendedor
