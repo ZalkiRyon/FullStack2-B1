@@ -6,12 +6,6 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const { usuario, logout } = useAuth();
 
-  // Obtener datos del usuario o usar placeholder
-  const userRole = usuario?.rolNombre === "admin" ? "Super Administrador" : "Usuario";
-  const userName = usuario
-    ? `${usuario.nombre} ${usuario.apellido}`
-    : "{Nombre Usuario}";
-
   const handleCerrarSesion = () => {
     const confirmacion = window.confirm(
       "¿Está seguro que desea cerrar sesión?"
@@ -107,8 +101,8 @@ const Sidebar = () => {
         <div className="sidebarUser">
           <div className="sidebarUserInfo">
             <div className="sidebarUserDetails">
-              <span className="sidebarUserRole">{userRole}:</span>
-              <span className="sidebarUserName">{userName}</span>
+              <span className="sidebarUserRole">Administrador:</span>
+              <span className="sidebarUserName">{`${usuario.nombre} ${usuario.apellido}`}</span>
             </div>
           </div>
           <button className="btnCerrarSesion" onClick={handleCerrarSesion}>

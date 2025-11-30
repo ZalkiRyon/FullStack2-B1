@@ -19,11 +19,9 @@ const DetailProductPage = () => {
     const fetchProduct = async () => {
       const productoDetail = await getProductById(id);
       setProducto(productoDetail);
-      console.log(productoDetail)
     };
 
     fetchProduct();
-
   }, [id]);
 
   const handleIncrement = () => setQuantity((prev) => prev + 1);

@@ -60,7 +60,7 @@ const NewProduct = () => {
 
     // Guardar producto
     const resultado = await createProduct(formData);
-    console.log(resultado)
+
     if (resultado) {
       const mensaje = `Producto creado exitosamente`;
       alert(mensaje);

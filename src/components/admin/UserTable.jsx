@@ -1,4 +1,4 @@
-const UserTable = ({ usuarios, onVer, onEditar, onHistorial }) => {
+const UserTable = ({ usuarios, onVer, onEditar, onHistorial, onEliminar }) => {
   return (
     <div className="tableContainer">
       <table className="productosTable">
@@ -64,6 +64,16 @@ const UserTable = ({ usuarios, onVer, onEditar, onHistorial }) => {
                           📋
                         </button>
                       )}
+                      {onEliminar && (
+                        <button
+                          onClick={() => onEliminar(usuario.id)}
+                          className="btnAccion btnEliminar"
+                          title="Eliminar"
+                        >
+                          🗑
+                        </button>
+                      )}
+                      
                     </div>
                   </td>
                 </tr>

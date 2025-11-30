@@ -32,8 +32,6 @@ const Header = () => {
     }
   };
 
-  console.log(usuario)
-
   return (
     <>
       <header className="header">
