@@ -69,16 +69,6 @@ const Sidebar = () => {
               <span className="sidebarText">Ordenes</span>
             </NavLink>
           </li>
-          <li className="sidebarMenuItem">
-            <NavLink
-              to="/admin/reportes"
-              className={({ isActive }) =>
-                isActive ? "sidebarLink sidebarLinkActive" : "sidebarLink"
-              }
-            >
-              <span className="sidebarText">Reportes</span>
-            </NavLink>
-          </li>
         </ul>
       </nav>
 

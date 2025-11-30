@@ -28,7 +28,7 @@ import PerfilPage from "./pages/admin/PerfilPage";
 import OrderManagement from "./pages/admin/OrderManagement";
 import ShowOrden from "./pages/admin/ShowOrden";
 import DeleteOrden from "./pages/admin/DeleteOrden";
-import ReportesPage from "./pages/admin/ReportesPage";
+
 import NotFoundPage from "./pages/common/NotFoundPage";
 
 // Vendedor imports
@@ -174,10 +174,6 @@ const router = createBrowserRouter([
       {
         path: "eliminar-orden/:id",
         element: <DeleteOrden />,
-      },
-      {
-        path: "reportes",
-        element: <ReportesPage />,
       },
       {
         path: "perfil",
