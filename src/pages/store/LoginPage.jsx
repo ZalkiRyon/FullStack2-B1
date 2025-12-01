@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logoEmpresa from "../../assets/img/logoEmpresa.jpg";
 import PrimaryButton from "../../components/common/PrimaryButton";

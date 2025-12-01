@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import Footer from "../../components/store/Footer";
-
 import ProductCard from "../../components/store/ProductCard";
 import { getAllProducts } from "../../services/ProductsService";
 
