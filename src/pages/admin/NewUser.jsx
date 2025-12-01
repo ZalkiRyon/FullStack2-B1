@@ -2,11 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import { regionesYComunas } from "../../utils/dataRegiones";
-import {
-  validarEmailUnico,
-  validarRunUnico,
-} from "../../validators/usuarioValidators";
+import { validarFormatoRun } from "../../validators/usuarioValidators";
 import { createUser } from "../../services/UserService";
+import { validateEmail } from "../../services/RegisterService";
 
 const NewUser = () => {
   const navigate = useNavigate();
@@ -68,21 +66,15 @@ const NewUser = () => {
     );
 
     if (!emailValido) {
-      alert(
-        "El correo debe terminar en @duocuc.cl o @profesor.duoc.cl"
-      );
+      alert("El correo debe terminar en @duocuc.cl o @profesor.duoc.cl");
       return;
     }
 
     // Validar que el email sea único
-    if (!validarEmailUnico(formData.correo)) {
-      alert("Este correo ya está registrado");
-      return;
-    }
-
-    // Validar que el RUN sea único
-    if (!validarRunUnico(formData.run)) {
-      alert("Este RUN ya está registrado");
+    if (formData.run && !validarFormatoRun(formData.run)) {
+      alert(
+        "El formato del RUN es incorrecto. Debe ser XX.XXX.XXX-X o X.XXX.XXX-X"
+      );
       return;
     }
 
@@ -92,23 +84,37 @@ const NewUser = () => {
       alert("Error: Tipo de usuario no válido.");
       return;
     }
-
-    const userPayload = {
-      nombre: formData.nombre,
-      apellido: formData.apellido,
-      run: formData.run,
-      fechaNacimiento: formData.fechaNacimiento || null,
-      telefono: formData.telefono || null,
-      region: formData.region,
-      comuna: formData.comuna,
-      direccion: formData.direccion,
-      comentario: formData.comentario || null,
-      email: formData.correo,
-      password: formData.password,
-      role_id: roleIdToSend,
-    };
-
     try {
+      const emailValidationResult = await validateEmail(formData.correo);
+      if (emailValidationResult.valid === false) {
+        alert(emailValidationResult.message || "Error de formato de correo.");
+
+        return;
+      }
+
+      if (emailValidationResult.available === false) {
+        alert(
+          emailValidationResult.message || "Este correo ya está registrado."
+        );
+
+        return;
+      }
+
+      const userPayload = {
+        nombre: formData.nombre,
+        apellido: formData.apellido,
+        run: formData.run,
+        fechaNacimiento: formData.fechaNacimiento || null,
+        telefono: formData.telefono || null,
+        region: formData.region,
+        comuna: formData.comuna,
+        direccion: formData.direccion,
+        comentario: formData.comentario || null,
+        email: formData.correo,
+        password: formData.password,
+        role_id: roleIdToSend,
+      };
+
       const resultado = await createUser(userPayload);
 
       if (resultado) {

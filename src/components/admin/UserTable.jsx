@@ -24,7 +24,7 @@ const UserTable = ({ usuarios, onVer, onEditar, onHistorial, onEliminar }) => {
                       className={`categoriaBadge ${
                         usuario.roleNombre === "admin"
                           ? "rolAdmin"
-                          : usuario.role === "vendedor"
+                          : usuario.roleNombre === "vendedor"
                           ? "rolVendedor"
                           : "rolCliente"
                       }`}

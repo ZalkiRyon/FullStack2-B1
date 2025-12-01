@@ -26,12 +26,12 @@ const ShowOrden = () => {
             estado: ordenData.estado,
             monto: ordenData.montoTotal,
             costoEnvio: ordenData.costoEnvio,
-            detalles: ordenData.detalles.map(detalle => ({
+            detalles: ordenData.detalles.map((detalle) => ({
               productoNombre: detalle.nombreProductoSnapshot,
               cantidad: detalle.cantidad,
               precioUnitario: detalle.precioUnitarioSnapshot,
-              subtotal: detalle.subtotal
-            }))
+              subtotal: detalle.subtotal,
+            })),
           };
           setOrden(ordenMapeada);
         } else {
@@ -213,14 +213,14 @@ const ShowOrden = () => {
               Productos Comprados
             </label>
 
-            <div className="tableResponsive">
-              <table className="table">
+            <div>
+              <table className="table" style={{ width: "100%" }}>
                 <thead>
                   <tr>
                     <th style={{ textAlign: "left" }}>Producto</th>
+                    <th style={{ textAlign: "center" }}> </th>
                     <th style={{ textAlign: "center" }}>Cantidad</th>
                     <th style={{ textAlign: "right" }}>Precio Unitario</th>
-                    <th style={{ textAlign: "right" }}>Subtotal</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -229,14 +229,12 @@ const ShowOrden = () => {
                       <td style={{ textAlign: "left" }}>
                         {detalle.productoNombre}
                       </td>
+                      <td style={{ textAlign: "left" }}></td>
                       <td style={{ textAlign: "center" }}>
                         {detalle.cantidad}
                       </td>
                       <td style={{ textAlign: "right" }}>
                         {formatearPrecio(detalle.precioUnitario)}
-                      </td>
-                      <td style={{ textAlign: "right", fontWeight: "bold" }}>
-                        {formatearPrecio(detalle.subtotal)}
                       </td>
                     </tr>
                   ))}
@@ -248,20 +246,42 @@ const ShowOrden = () => {
                       style={{
                         textAlign: "right",
                         fontWeight: "bold",
-                        fontSize: "1.1rem",
+                        fontSize: "1rem",
                       }}
                     >
-                      Total:
+                      Subtotal:
                     </td>
                     <td
                       style={{
                         textAlign: "right",
                         fontWeight: "bold",
-                        fontSize: "1.1rem",
+                        fontSize: "1rem",
+                      }}
+                    >
+                      {formatearPrecio(subtotalProductos)}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      colSpan="3"
+                      style={{
+                        textAlign: "right",
+                        fontWeight: "bold",
+                        fontSize: "1.2rem",
+                      }}
+                    >
+                      Total:
+                    </td>
+                    <td
+                      colSpan="3"
+                      style={{
+                        textAlign: "right",
+                        fontWeight: "bold",
+                        fontSize: "1.2rem",
                         color: "#2c5f2d",
                       }}
                     >
-                      {formatearPrecio(orden.monto)}
+                      {formatearPrecio(orden.costoEnvio + orden.monto)}
                     </td>
                   </tr>
                 </tfoot>

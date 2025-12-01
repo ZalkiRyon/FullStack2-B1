@@ -2,11 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BackButton from "../../components/common/BackButton";
 import { regionesYComunas } from "../../utils/dataRegiones";
-import {
-  validarEmailUnico,
-  validarRunUnico,
-} from "../../validators/usuarioValidators";
+import { validarFormatoRun } from "../../validators/usuarioValidators";
 import { getUserById, updateUserById } from "../../services/UserService";
+import { validateEmail } from "../../services/RegisterService";
 
 const EditUser = () => {
   const navigate = useNavigate();
@@ -102,32 +100,37 @@ const EditUser = () => {
     );
 
     if (!emailValido) {
+      alert("El correo debe terminar en @duocuc.cl, @profesor.duoc.cl");
+      return;
+    }
+
+    // Validar que el email sea único
+    if (formData.run && !validarFormatoRun(formData.run)) {
       alert(
-        "El correo debe terminar en @duocuc.cl, @profesor.duoc.cl"
+        "El formato del RUN es incorrecto. Debe ser XX.XXX.XXX-X o X.XXX.XXX-X"
       );
       return;
     }
 
-    // Validar que el email sea único (excepto si es el mismo)
-    if (
-      formData.email !== emailOriginal &&
-      !validarEmailUnico(formData.email)
-    ) {
-      alert("Este correo ya está registrado");
-      return;
-    }
+    const roleIdToSend = ROLE_NAME_TO_ID[formData.roleNombre];
 
-    // Validar que el RUN sea único (excepto si es el mismo)
-    if (formData.run !== runOriginal && !validarRunUnico(formData.run)) {
-      alert("Este RUN ya está registrado");
+    if (!roleIdToSend) {
+      alert("Error: Tipo de usuario no válido.");
       return;
     }
 
     try {
-      const roleIdToSend = ROLE_NAME_TO_ID[formData.roleNombre];
+      const emailValidationResult = await validateEmail(formData.email);
 
-      if (!roleIdToSend) {
-        alert("Error: Tipo de usuario no válido.");
+      if (emailValidationResult.valid === false) {
+        alert(emailValidationResult.message || "Error de formato de correo.");
+        return;
+      }
+
+      if (emailValidationResult.available === false) {
+        alert(
+          emailValidationResult.message || "Este correo ya está registrado."
+        );
         return;
       }
 
@@ -154,7 +157,7 @@ const EditUser = () => {
         );
         navigate("/admin/usuarios");
       } else {
-        alert("Errorno se pudo actualizar el usuario");
+        alert("Error no se pudo actualizar el usuario");
       }
     } catch (error) {
       alert(`Error al actualizar usuario\n\nDetalle: ${error.message}`);
