@@ -119,14 +119,9 @@ const OrderManagement = () => {
     setMontoFilter("todos");
   };
 
-  // Función para ver detalles de orden
+  // Función para ver detalles de orden (solo lectura)
   const handleVer = (id) => {
     navigate(`/vendedor/orden/${id}`);
-  };
-
-  // Función para eliminar orden
-  const handleEliminar = (id) => {
-    navigate(`/vendedor/eliminar-orden/${id}`);
   };
 
   return (
@@ -163,7 +158,7 @@ const OrderManagement = () => {
         {loading ? (
           <div className="text-center p-5">Cargando órdenes...</div>
         ) : (
-          <OrdenTable ordenes={filteredOrdenes} onVer={handleVer} onEliminar={handleEliminar} />
+          <OrdenTable ordenes={filteredOrdenes} onVer={handleVer} onEliminar={null} />
         )}
       </div>
     </div>
