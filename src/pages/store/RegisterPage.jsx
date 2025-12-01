@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PrimaryButton from "../../components/common/PrimaryButton";
 import Modal from "../../components/common/Modal";
 import { regionesYComunas } from "../../utils/dataRegiones";
+import { validarFormatoRun } from "../../validators/usuarioValidators";
 import {
-  validarEmailUnico,
-  validarRunUnico,
-} from "../../validators/usuarioValidators";
-import { createUser } from "../../services/UserService";
+  createUserRegister,
+  validateEmail,
+} from "../../services/RegisterService";
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -30,6 +30,7 @@ const RegisterPage = () => {
   const [isModalSucessOpen, setIsModalSucessOpen] = useState(false);
   const [modalText, setModalText] = useState("");
   const [modalSucessText, setModalSucessText] = useState("");
+
   // Manejar cambio de región para actualizar comunas
   const handleRegionChange = (e) => {
     const region = e.target.value;
@@ -60,6 +61,12 @@ const RegisterPage = () => {
       return;
     }
 
+    if (formData.run && !validarFormatoRun(formData.run)) {
+        setModalText("El formato del RUN es incorrecto. Debe ser XX.XXX.XXX-X o X.XXX.XXX-X");
+        setIsModalOpen(true);
+        return;
+    }
+
     // Validar dominio del correo
     const dominiosPermitidos = ["@duocuc.cl", "@profesor.duoc.cl"];
     const emailValido = dominiosPermitidos.some((dominio) =>
@@ -67,57 +74,54 @@ const RegisterPage = () => {
     );
 
     if (!emailValido) {
-      setModalText(
-        "El correo debe terminar en @duocuc.cl o @profesor.duoc.cl"
-      );
+      setModalText("El correo debe terminar en @duocuc.cl o @profesor.duoc.cl");
       setIsModalOpen(true);
       return;
     }
 
-    // Validar que el email sea único
-    if (!validarEmailUnico(formData.correo)) {
-      setModalText("Este correo ya está registrado");
-      setIsModalOpen(true);
-      return;
-    }
-
-    // Validar que el RUN sea único
-    if (!validarRunUnico(formData.run)) {
-      setModalText("Este RUN ya está registrado");
-      setIsModalOpen(true);
-      return;
-    }
-
-    // Preparar datos del usuario (siempre como cliente con role_id = 2)
-    const datosUsuario = {
-      email: formData.correo, // Mapear correo -> email
-      password: formData.password,
-      nombre: formData.nombre,
-      apellido: formData.apellido,
-      run: formData.run,
-      telefono: formData.telefono || "",
-      region: formData.region,
-      comuna: formData.comuna,
-      direccion: formData.direccion,
-      comentario: "", // Registro no tiene comentario
-      role_id: 2, // 2 = cliente (según la base de datos)
-    };
-
-    // Guardar usuario
     try {
-      const resultado = await createUser(datosUsuario);
+      const emailValidationResult = await validateEmail(formData.correo);
+
+      if (emailValidationResult.valid === false) {
+        setModalText(
+          emailValidationResult.message || "Error de formato de correo."
+        );
+        setIsModalOpen(true);
+        return;
+      }
+
+      if (emailValidationResult.available === false) {
+        setModalText(
+          emailValidationResult.message || "Este correo ya está registrado."
+        );
+        setIsModalOpen(true);
+        return;
+      }
+
+      // Preparar datos del usuario (siempre como cliente con role_id = 2)
+      const datosUsuario = {
+        email: formData.correo, // Mapear correo -> email
+        password: formData.password,
+        nombre: formData.nombre,
+        apellido: formData.apellido,
+        run: formData.run,
+        fechaNacimiento: formData.fechaNacimiento,
+        telefono: formData.telefono || "",
+        region: formData.region,
+        comuna: formData.comuna,
+        direccion: formData.direccion,
+        comentario: "", // Registro no tiene comentario
+        role_id: 2, // 2 = cliente (según la base de datos)
+      };
+
+      const resultado = await createUserRegister(datosUsuario);
       setModalSucessText(
         `¡Registro exitoso! Bienvenido ${resultado.nombre} ${resultado.apellido}`
       );
       setIsModalSucessOpen(true);
     } catch (error) {
       let errorMessage = `Error al registrar el usuario`;
-
-      if (error.response) {
-        errorMessage =
-          error.response.data.message ||
-          `Error del servidor (${error.response.status})`;
-      }
+      errorMessage = error.message || "Error desconocido del servidor.";
       setModalText(errorMessage);
       setIsModalOpen(true);
     }
@@ -136,7 +140,7 @@ const RegisterPage = () => {
           {/* Nombre */}
           <div className="formGroup">
             <label className="labelFormRegister" htmlFor="nombre">
-              NOMBRE
+              NOMBRE *
             </label>
             <input
               type="text"
@@ -152,7 +156,7 @@ const RegisterPage = () => {
           {/* Apellido */}
           <div className="formGroup">
             <label className="labelFormRegister" htmlFor="apellido">
-              APELLIDO
+              APELLIDO *
             </label>
             <input
               type="text"
@@ -168,7 +172,7 @@ const RegisterPage = () => {
           {/* RUN */}
           <div className="formGroup">
             <label className="labelFormRegister" htmlFor="run">
-              RUN
+              RUN *
             </label>
             <input
               type="text"
@@ -200,7 +204,7 @@ const RegisterPage = () => {
           {/* Correo */}
           <div className="formGroup">
             <label className="labelFormRegister" htmlFor="correo">
-              CORREO
+              CORREO *
             </label>
             <input
               type="email"
@@ -234,7 +238,7 @@ const RegisterPage = () => {
           {/* Contraseña */}
           <div className="formGroup">
             <label className="labelFormRegister" htmlFor="password">
-              CONTRASEÑA
+              CONTRASEÑA *
             </label>
             <input
               type="password"
@@ -251,7 +255,7 @@ const RegisterPage = () => {
           {/* Confirmar Contraseña */}
           <div className="formGroup">
             <label className="labelFormRegister" htmlFor="confirmarPassword">
-              CONFIRMAR CONTRASEÑA
+              CONFIRMAR CONTRASEÑA *
             </label>
             <input
               type="password"
@@ -268,7 +272,7 @@ const RegisterPage = () => {
           <div className="formGroupRow">
             <div className="formGroup formGroupHalf">
               <label className="labelFormRegister" htmlFor="region">
-                REGIÓN
+                REGIÓN *
               </label>
               <select
                 className="formInputRegister formSelectRegister"
@@ -289,7 +293,7 @@ const RegisterPage = () => {
 
             <div className="formGroup formGroupHalf">
               <label className="labelFormRegister" htmlFor="comuna">
-                COMUNA
+                COMUNA *
               </label>
               <select
                 className="formInputRegister formSelectRegister"
@@ -313,7 +317,7 @@ const RegisterPage = () => {
           {/* Dirección */}
           <div className="formGroup">
             <label className="labelFormRegister" htmlFor="direccion">
-              DIRECCIÓN
+              DIRECCIÓN *
             </label>
             <input
               type="text"

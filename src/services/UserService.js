@@ -1,11 +1,9 @@
-import axios from "axios";
-
-const API_BASE = "http://localhost:8080/api/usuarios";
+import api from "../config/axiosConfig";
 
 // POST / CREATE: user
 export const createUser = async (user) => {
   try {
-    const response = await axios.post(API_BASE, user);
+    const response = await api.post("/usuarios", user);
 
     if (response.status == 201) {
       console.log(`Usuario ${user} creado con exito`);
@@ -24,11 +22,12 @@ export const createUser = async (user) => {
 // GET / READ: users
 export const getAllUsers = async () => {
   try {
-    const response = await axios.get(API_BASE);
+    const response = await api.get("/usuarios");
 
     if (response.status == 200) {
       return response.data;
     }
+    
   } catch (error) {
     console.error("Error en getAllUsers:", error);
     return [];
@@ -37,9 +36,9 @@ export const getAllUsers = async () => {
 
 // DELETE / DELETE: user
 export const deleteUserById = async (userId) => {
-  const url = `${API_BASE}/${userId}`;
+  const url = `/usuarios/${userId}`;
   try {
-    const response = await axios.delete(url);
+    const response = await api.delete(url);
 
     if (response.status == 204) {
       console.log(`Usuario ${userId} eliminado con exito`);
@@ -54,16 +53,15 @@ export const deleteUserById = async (userId) => {
 
 // PUT / UPDATE: user
 export const updateUserById = async (userId, user) => {
-  const url = `${API_BASE}/${userId}`;
+  const url = `/usuarios/${userId}`;
 
   try {
-    const response = await axios.put(url, user);
+    const response = await api.put(url, user);
 
     if (response.status == 200) {
       console.log(`Usuario ${userId} actualizadop con exito`);
       return response.data;
     }
-
   } catch (error) {
     if (error.response && error.response.status === 404) {
       console.error(`Error 404, usuario ${userId} no existe`);
@@ -76,23 +74,22 @@ export const updateUserById = async (userId, user) => {
 };
 
 // FUNCIOENS ESPECIALES
-export const getUserById = async (userId)  =>{
-    const url = `${API_BASE}/${userId}`;
-    try {
-    const response = await fetch(url);
+export const getUserById = async (userId) => {
+  try {
+    const response = await api.get(`/usuarios/${userId}`);
 
-    if (response.status == 200) {
-      console.log(`Usuario ${userId} actualizadop con exito`);
-      return response.json();
-    }
-
+    return response.data;
   } catch (error) {
-    if (error.response && error.response.status === 404) {
-      console.error(`Error 404, usuario ${userId} no existe`);
-      return null;
+    if (error.response) {
+      if (error.response.status === 404) {
+        console.error(`Error 404: Usuario ${userId} no existe.`);
+        return null;
+      }
+      console.error(
+        `Error ${error.response.status} al obtener usuario:`,
+        error.response.data
+      );
     }
-
-    console.error("Error en updateUserById:", error);
     throw error;
   }
-}
+};

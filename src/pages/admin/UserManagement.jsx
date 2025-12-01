@@ -38,7 +38,9 @@ const UserManagement = () => {
 
     // Filtro por rol
     if (rolFilter !== "todos") {
-      resultado = resultado.filter((usuario) => usuario.roleNombre === rolFilter);
+      resultado = resultado.filter(
+        (usuario) => usuario.roleNombre === rolFilter
+      );
     }
 
     setFilteredUsuarios(resultado);
@@ -64,6 +66,10 @@ const UserManagement = () => {
 
   const handleHistorial = (id) => {
     navigate(`/admin/usuario/${id}/historial-compras`);
+  };
+
+  const handleEliminar = (id) => {
+    navigate(`/admin/eliminar-usuario/${id}`);
   };
 
   return (
@@ -103,6 +109,7 @@ const UserManagement = () => {
           onVer={handleVer}
           onEditar={handleEditar}
           onHistorial={handleHistorial}
+          onEliminar={handleEliminar}
         />
       </div>
     </div>

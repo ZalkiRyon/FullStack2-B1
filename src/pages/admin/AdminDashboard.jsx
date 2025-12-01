@@ -119,11 +119,6 @@ const AdminDashboard = () => {
           route="/admin/usuarios"
         />
         <DashboardActionCard
-          title="Reportes"
-          description="Generación de informes detallados sobre las operaciones del sistema."
-          route="/admin/reportes"
-        />
-        <DashboardActionCard
           title="Perfil"
           description="Información personal y configuraciones de cuenta."
           route="/admin/perfil"

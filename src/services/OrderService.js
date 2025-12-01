@@ -1,11 +1,9 @@
-import axios from "axios";
-
-const API_BASE = "http://localhost:8080/api/ordenes";
+import api from "../config/axiosConfig";
 
 // POST / CREATE: orden
 export const createOrder = async (order) => {
   try {
-    const response = await axios.post(API_BASE, order);
+    const response = await api.post("/ordenes", order);
 
     if (response.status === 201) {
       console.log(`Orden creada con éxito:`, response.data);
@@ -28,7 +26,7 @@ export const createOrder = async (order) => {
 // GET / READ: orders
 export const getAllOrders = async () => {
   try {
-    const response = await axios.get(API_BASE);
+    const response = await api.get("/ordenes");
 
     if (response.status === 200) {
       return response.data;
@@ -41,9 +39,9 @@ export const getAllOrders = async () => {
 
 // GET / READ: order by id
 export const getOrderById = async (orderId) => {
-  const url = `${API_BASE}/${orderId}`;
+  const url = `/ordenes/${orderId}`;
   try {
-    const response = await axios.get(url);
+    const response = await api.get(url);
 
     if (response.status === 200) {
       console.log(`Orden ${orderId} obtenida con éxito`);
@@ -62,9 +60,9 @@ export const getOrderById = async (orderId) => {
 
 // DELETE / DELETE: order
 export const deleteOrderById = async (orderId) => {
-  const url = `${API_BASE}/${orderId}`;
+  const url = `/ordenes/${orderId}`;
   try {
-    const response = await axios.delete(url);
+    const response = await api.delete(url);
 
     if (response.status === 204) {
       console.log(`Orden ${orderId} eliminada con éxito`);
