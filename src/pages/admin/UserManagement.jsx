@@ -4,9 +4,11 @@ import PrimaryButton from "../../components/common/PrimaryButton";
 import UserFilters from "../../components/admin/UserFilters";
 import UserTable from "../../components/admin/UserTable";
 import { getAllUsers } from "../../services/UserService";
+import { useAuth } from "../../context/AuthContext";
 
 const UserManagement = () => {
   const navigate = useNavigate();
+  const { usuario } = useAuth();
   const [usuarios, setUsuarios] = useState([]);
   const [filteredUsuarios, setFilteredUsuarios] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,7 +17,12 @@ const UserManagement = () => {
   useEffect(() => {
     const cargarUsuarios = async () => {
       const usuariosStorage = await getAllUsers();
-      setUsuarios(usuariosStorage);
+
+      const usersListFiltered = usuariosStorage.filter(
+        (user) => user.id !== usuario.id
+      );
+
+      setUsuarios(usersListFiltered);
       setFilteredUsuarios(usuariosStorage);
     };
     cargarUsuarios();
