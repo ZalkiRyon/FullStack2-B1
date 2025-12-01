@@ -34,13 +34,9 @@ import NotFoundPage from "./pages/common/NotFoundPage";
 import VendedorLayout from "./layouts/VendedorLayout";
 import VendedorDashboard from "./pages/vendedor/VendedorDashboard";
 import VendedorInventarioPage from "./pages/vendedor/InventarioPage";
-import VendedorNewProduct from "./pages/vendedor/NewProduct";
 import VendedorShowProduct from "./pages/vendedor/ShowProduct";
-import VendedorEditProduct from "./pages/vendedor/EditProduct";
-import VendedorDeleteProduct from "./pages/vendedor/DeleteProduct";
 import VendedorOrderManagement from "./pages/vendedor/OrderManagement";
 import VendedorShowOrden from "./pages/vendedor/ShowOrden";
-import VendedorDeleteOrden from "./pages/vendedor/DeleteOrden";
 import VendedorPerfilPage from "./pages/vendedor/PerfilPage";
 
 import { AuthProvider } from "./context/AuthContext";
@@ -194,20 +190,8 @@ const router = createBrowserRouter([
         element: <VendedorInventarioPage />,
       },
       {
-        path: "nuevo-producto",
-        element: <VendedorNewProduct />,
-      },
-      {
         path: "producto/:id",
         element: <VendedorShowProduct />,
-      },
-      {
-        path: "editar-producto/:id",
-        element: <VendedorEditProduct />,
-      },
-      {
-        path: "eliminar-producto/:id",
-        element: <VendedorDeleteProduct />,
       },
       {
         path: "ordenes",
@@ -216,10 +200,6 @@ const router = createBrowserRouter([
       {
         path: "orden/:id",
         element: <VendedorShowOrden />,
-      },
-      {
-        path: "eliminar-orden/:id",
-        element: <VendedorDeleteOrden />,
       },
       {
         path: "perfil",

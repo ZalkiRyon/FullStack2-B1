@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import PrimaryButton from "../../components/common/PrimaryButton";
 import ProductFilters from "../../components/common/ProductFilters";
 import ProductTable from "../../components/admin/ProductTable";
 import { getAllProducts } from "../../services/ProductsService";
@@ -69,17 +68,9 @@ const InventarioPage = () => {
     setStockFilter("todos");
   };
 
-  // Funciones para acciones de productos
+  // Funciones para acciones de productos (solo lectura)
   const handleVer = (id) => {
     navigate(`/vendedor/producto/${id}`);
-  };
-
-  const handleEditar = (id) => {
-    navigate(`/vendedor/editar-producto/${id}`);
-  };
-
-  const handleEliminar = (id) => {
-    navigate(`/vendedor/eliminar-producto/${id}`);
   };
 
   return (
@@ -89,14 +80,9 @@ const InventarioPage = () => {
         <div className="inventarioTitleSection">
           <h1 className="inventarioTitle">Gestión de Inventario</h1>
           <p className="inventarioSubtitle">
-            Administra el inventario de productos de Huerto Hogar
+            Consulta el inventario de productos de Huerto Hogar
           </p>
         </div>
-        <PrimaryButton
-          text="NUEVO PRODUCTO"
-          width="auto"
-          onClick={() => navigate("/vendedor/nuevo-producto")}
-        />
       </div>
 
       {/* Sección de la tabla */}
@@ -119,8 +105,8 @@ const InventarioPage = () => {
         <ProductTable
           productos={filteredProductos}
           onVer={handleVer}
-          onEditar={handleEditar}
-          onEliminar={handleEliminar}
+          onEditar={null}
+          onEliminar={null}
         />
       </div>
     </div>

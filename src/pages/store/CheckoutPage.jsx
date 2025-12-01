@@ -124,12 +124,12 @@ const CheckoutPage = () => {
 
   // Verificar si el usuario es Admin o Vendedor
   const isAdminOrVendedor =
-    usuario?.roleNombre === "admin" || usuario?.roleNombre === "vendedor";
+    usuario?.rolNombre === "admin" || usuario?.rolNombre === "vendedor";
 
   // Determinar el texto del botón
   const getButtonText = () => {
     if (isAdminOrVendedor) {
-      return usuario.roleNombre === "admin"
+      return usuario.rolNombre === "admin"
         ? "Pago Deshabilitado para Administrador"
         : "Pago Deshabilitado para Vendedor";
     }

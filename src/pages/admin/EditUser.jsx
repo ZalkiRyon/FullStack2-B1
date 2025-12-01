@@ -120,18 +120,21 @@ const EditUser = () => {
     }
 
     try {
-      const emailValidationResult = await validateEmail(formData.email);
+      // Solo validar disponibilidad del email si cambió
+      if (formData.email.toLowerCase() !== emailOriginal.toLowerCase()) {
+        const emailValidationResult = await validateEmail(formData.email);
 
-      if (emailValidationResult.valid === false) {
-        alert(emailValidationResult.message || "Error de formato de correo.");
-        return;
-      }
+        if (emailValidationResult.valid === false) {
+          alert(emailValidationResult.message || "Error de formato de correo.");
+          return;
+        }
 
-      if (emailValidationResult.available === false) {
-        alert(
-          emailValidationResult.message || "Este correo ya está registrado."
-        );
-        return;
+        if (emailValidationResult.available === false) {
+          alert(
+            emailValidationResult.message || "Este correo ya está registrado."
+          );
+          return;
+        }
       }
 
       const userNew = {
