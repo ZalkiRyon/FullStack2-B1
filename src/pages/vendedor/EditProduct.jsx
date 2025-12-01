@@ -239,6 +239,7 @@ const EditProduct = () => {
               <option value="miel.jpg">miel.jpg</option>
               <option value="quinoa.jpg">quinoa.jpg</option>
               <option value="leche.jpg">leche.jpg</option>
+              <option value="queso.jpg">queso.jpg</option>
               <option value="img-principal.jpg">img-principal.jpg</option>
             </select>
             <small className="formHelperText">

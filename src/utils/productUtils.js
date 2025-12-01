@@ -7,6 +7,7 @@ import pimenton from "../assets/img/pimenton.jpg";
 import miel from "../assets/img/miel.jpg";
 import quinoa from "../assets/img/quinoa.jpg";
 import leche from "../assets/img/leche.jpg";
+import queso from "../assets/img/queso.jpg";
 import defaultImage from "../assets/img/img-principal.jpg";
 
 export const productImages = {
@@ -19,5 +20,6 @@ export const productImages = {
   "miel.jpg": miel,
   "quinoa.jpg": quinoa,
   "leche.jpg": leche,
+  "queso.jpg": queso,
   default: defaultImage,
 };
