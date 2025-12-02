@@ -58,10 +58,12 @@ src/
 ├── components/       # Componentes reutilizables
 │   ├── admin/       # Componentes del panel administrativo
 │   ├── store/       # Componentes de la tienda
+│   ├── vendedor/    # Componentes del panel vendedores
 │   └── common/      # Componentes compartidos
 ├── pages/           # Páginas principales
 │   ├── admin/       # Vistas administrativas
 │   ├── store/       # Vistas de la tienda
+│   ├── vendedor/    # Vistas vendedores
 │   └── common/      # Páginas comunes (404, etc.)
 ├── services/        # Servicios de API
 ├── context/         # Context API (AuthContext)
