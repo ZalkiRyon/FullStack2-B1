@@ -26,6 +26,7 @@ Huerto Hogar es una plataforma e-commerce que conecta a los productores del camp
 
 
 ## Instalar dependencias
+```bash
 npm install
 ```
 
