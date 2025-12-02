@@ -20,7 +20,7 @@ Huerto Hogar es una plataforma e-commerce que conecta a los productores del camp
 
 - **Node.js** >= 16.x
 - **npm** >= 8.x
-- **Backend**: API REST en Spring Boot (ver `/BACK/huertohogar`)
+- **Backend**: API REST en Spring Boot
 
 ## Instalación
 
@@ -41,12 +41,6 @@ El frontend está configurado para conectarse al backend en `http://localhost:80
 npm start
 ```
 La aplicación se abrirá automáticamente en `http://localhost:3000`
-
-### Producción
-```bash
-npm run build
-```
-Los archivos optimizados se generarán en la carpeta `/build`
 
 ## Testing
 
@@ -101,17 +95,10 @@ El sistema implementa autenticación JWT con las siguientes características:
 - Redirección automática al login en caso de token expirado
 - Context API para manejo global del estado de autenticación
 
-## Scripts Disponibles
-
-```bash
-npm start          # Inicia servidor de desarrollo
-npm run build      # Genera build de producción
-npm test           # Ejecuta pruebas unitarias
-```
 
 ## Autores
 
-Desarrollado con mucho amor y sudor por:
+Desarrollado con mucho amor, sudor y café por:
 - [Sebastián Valdivia](https://github.com/ZalkiRyon)
 - [Paula Frías](https://github.com/paufriasest)
 
