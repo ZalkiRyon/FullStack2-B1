@@ -44,6 +44,8 @@ import { CartProvider } from "./context/CartContext";
 import { ToastProvider } from "./context/ToastContext";
 import OrdenSummaryPage from "./pages/store/OrdenSummaryPage";
 import DiscountProductPage from "./pages/store/DiscountProductPage";
+import { ErrorBoundaryPage } from "./pages/common/ErrorBoundaryPage";
+import ProtectedRoute from "./components/common/ProtectedRoute";
 
 // Ocuparemos un createBrowserRouter de react-router-dom para mantener un orden dentro del archivo
 const router = createBrowserRouter([
@@ -52,6 +54,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <StoreLayout />,
+    ErrorBoundary: ErrorBoundaryPage,
     // Todo lo de children es lo que se mostrara denmtro del layout
     children: [
       {
@@ -107,103 +110,115 @@ const router = createBrowserRouter([
   },
   // Rutas del admin
   {
-    path: "admin",
-    element: <AdminLayout />,
+    element: <ProtectedRoute requiredRole="ADMIN" />,
+    ErrorBoundary: ErrorBoundaryPage,
     children: [
       {
-        index: true,
-        element: <AdminDashboard />,
-      },
-      {
-        path: "inventario",
-        element: <InventarioPage />,
-      },
-      {
-        path: "nuevo-producto",
-        element: <NewProduct />,
-      },
-      {
-        path: "producto/:id",
-        element: <ShowProduct />,
-      },
-      {
-        path: "editar-producto/:id",
-        element: <EditProduct />,
-      },
-      {
-        path: "eliminar-producto/:id",
-        element: <DeleteProduct />,
-      },
-      {
-        path: "usuarios",
-        element: <UserManagement />,
-      },
-      {
-        path: "usuario/:id",
-        element: <ShowUser />,
-      },
-      {
-        path: "editar-usuario/:id",
-        element: <EditUser />,
-      },
-      {
-        path: "eliminar-usuario/:id",
-        element: <DeleteUser />,
-      },
-      {
-        path: "usuario/:id/historial-compras",
-        element: <UserPurchaseHistory />,
-      },
-      {
-        path: "nuevo-usuario",
-        element: <NewUser />,
-      },
-      {
-        path: "ordenes",
-        element: <OrderManagement />,
-      },
-      {
-        path: "orden/:id",
-        element: <ShowOrden />,
-      },
-      {
-        path: "eliminar-orden/:id",
-        element: <DeleteOrden />,
-      },
-      {
-        path: "perfil",
-        element: <PerfilPage />,
+        path: "admin",
+        element: <AdminLayout />,
+        children: [
+          {
+            index: true,
+            element: <AdminDashboard />,
+          },
+          {
+            path: "inventario",
+            element: <InventarioPage />,
+          },
+          {
+            path: "nuevo-producto",
+            element: <NewProduct />,
+          },
+          {
+            path: "producto/:id",
+            element: <ShowProduct />,
+          },
+          {
+            path: "editar-producto/:id",
+            element: <EditProduct />,
+          },
+          {
+            path: "eliminar-producto/:id",
+            element: <DeleteProduct />,
+          },
+          {
+            path: "usuarios",
+            element: <UserManagement />,
+          },
+          {
+            path: "usuario/:id",
+            element: <ShowUser />,
+          },
+          {
+            path: "editar-usuario/:id",
+            element: <EditUser />,
+          },
+          {
+            path: "eliminar-usuario/:id",
+            element: <DeleteUser />,
+          },
+          {
+            path: "usuario/:id/historial-compras",
+            element: <UserPurchaseHistory />,
+          },
+          {
+            path: "nuevo-usuario",
+            element: <NewUser />,
+          },
+          {
+            path: "ordenes",
+            element: <OrderManagement />,
+          },
+          {
+            path: "orden/:id",
+            element: <ShowOrden />,
+          },
+          {
+            path: "eliminar-orden/:id",
+            element: <DeleteOrden />,
+          },
+          {
+            path: "perfil",
+            element: <PerfilPage />,
+          },
+        ],
       },
     ],
   },
   // Rutas del vendedor
   {
-    path: "vendedor",
-    element: <VendedorLayout />,
+    element: <ProtectedRoute requiredRole="VENDEDOR" />,
+    ErrorBoundary: ErrorBoundaryPage,
     children: [
       {
-        index: true,
-        element: <VendedorDashboard />,
-      },
-      {
-        path: "inventario",
-        element: <VendedorInventarioPage />,
-      },
-      {
-        path: "producto/:id",
-        element: <VendedorShowProduct />,
-      },
-      {
-        path: "ordenes",
-        element: <VendedorOrderManagement />,
-      },
-      {
-        path: "orden/:id",
-        element: <VendedorShowOrden />,
-      },
-      {
-        path: "perfil",
-        element: <VendedorPerfilPage />,
+        path: "vendedor",
+        element: <VendedorLayout />,
+        children: [
+          {
+            index: true,
+            element: <VendedorDashboard />,
+          },
+          {
+            path: "inventario",
+            element: <VendedorInventarioPage />,
+          },
+          {
+            path: "producto/:id",
+            element: <VendedorShowProduct />,
+          },
+          {
+            path: "ordenes",
+            element: <VendedorOrderManagement />,
+          },
+          {
+            path: "orden/:id",
+            element: <VendedorShowOrden />,
+          },
+          {
+            path: "perfil",
+            element: <VendedorPerfilPage />,
+          },
+        ],
       },
     ],
   },
@@ -211,6 +226,7 @@ const router = createBrowserRouter([
   {
     path: "*",
     element: <NotFoundPage />,
+    ErrorBoundary: ErrorBoundaryPage,
   },
 ]);
 

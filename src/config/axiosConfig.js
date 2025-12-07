@@ -46,7 +46,7 @@ api.interceptors.response.use(
         // Tratar como un error de autenticación (401/403 no manejado)
         localStorage.removeItem("userToken");
         localStorage.removeItem("userData");
-        window.location.href = "/login";
+        window.location.href = "/inicio-sesion";
 
         // Devolver una nueva Promesa de error o simplemente no devolver nada para evitar el parseo.
         return Promise.reject(
@@ -59,7 +59,7 @@ api.interceptors.response.use(
         // ... (Tu lógica de logout y redirección existente para el 401) ...
         localStorage.removeItem("userToken");
         localStorage.removeItem("userData");
-        window.location.href = "/login";
+        window.location.href = "/inicio-sesion";
       }
     }
 
